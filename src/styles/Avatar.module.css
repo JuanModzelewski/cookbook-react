@@ -1,0 +1,6 @@
+.Avatar {
+    border-radius: 50%;
+    margin: 0px 8px 0px 8px;
+    clip-path: inset(0 0 0 0 round 50%); /* Crop to a square */
+    object-fit: cover; /* Ensure the image covers the clipped area */
+}

@@ -1,0 +1,53 @@
+.Navbar {
+    background-color: white;
+    border: 1px solid lightgrey;
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.10);
+}
+
+.NavLink {
+    padding: 5px;
+    text-decoration: none;
+}
+
+.NavLink:hover {
+    color: #ffa600;
+    cursor: pointer;
+    transition: color ease-in-out 0.4s;
+}
+
+.NavLink {
+    color: #555555;
+    transition: color ease-in-out 0.4s;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+}
+
+a:hover {
+    color: #ffa600;
+    text-decoration: none;
+}
+
+a:hover i {
+    color: #ffa600;
+    transition: color ease-in-out 0.4s;
+}
+
+
+i {
+    color: #cad26dac;
+    font-size: 1.6rem;
+    padding: 7px;
+    margin-right: 7px;
+    vertical-align: middle;
+    transition: color ease-in-out 0.4s;
+}
+
+i:hover {
+    cursor: pointer;
+    transition: color ease-in-out 0.4s;
+    color: #ffa600;
+}
