@@ -2,6 +2,16 @@
     background: url("../assets/cookbook-signup.jpg") no-repeat center center/cover;
     height: 30vh;
     max-height: 400px;
+    min-height: 300px;
+    width: 100vw;
+    margin-top: 117px;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
+.SignInFormCoverImage {
+    background: url("../assets/cookbook-signin.jpg") no-repeat center right/cover;
+    height: 30vh;
+    max-height: 400px;
     width: 100vw;
     margin-top: 117px;
     box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
@@ -23,7 +33,7 @@
     background-color: white;
     border-radius: 10px;
     box-shadow: rgba(17, 17, 26, 0.05) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
-    margin-top: 10%;
+    margin-top: 5%;
 }
 
 .Content {
@@ -71,4 +81,11 @@
     text-align: center;
     display: block;
     margin: auto;
+}
+
+@media screen and (max-width: 760px) {
+    .FormContainer {
+        margin-top: 10%;
+    }
+    
 }
