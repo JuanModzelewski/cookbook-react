@@ -15,6 +15,31 @@
   border: 1px solid #dadadf;
 }
 
+input[type="file"] {
+  display: none;
+}
+
+
+* {
+  box-sizing: border-box;
+}
+
+.HeroImage {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+}
+
+.Image {
+  max-height: 40vh;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+figure {
+  text-align: center;
+  display: inline-block;
+}
 
 /* scrollbar */
 *::-webkit-scrollbar {
