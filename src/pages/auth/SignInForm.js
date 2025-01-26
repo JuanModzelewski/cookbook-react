@@ -2,10 +2,12 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Alert, Button, Container, Form } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
+import { useSetCurrentUser } from "../../contexts/CurrentUserContext";
 import btnStyles from "../../styles/Button.module.css";
 import styles from "../../styles/SignInUpForm.module.css";
 
 const SignInForm = () => {
+    const setCurrentUser = useSetCurrentUser()
 
     const [signInData, setSignInData] = useState({
         username: "",
@@ -28,7 +30,9 @@ const SignInForm = () => {
     const handleSubmit = async (event) => {
         event.preventDefault()
         try {
-            await axios.post("/dj-rest-auth/login/", signInData)
+            const { data } = await axios.post("/dj-rest-auth/login/", signInData)
+            setCurrentUser(data)
+            console.log(data)
             navigate("/")
         } catch (error) {
             setErrors(error.response?.data)
@@ -74,7 +78,7 @@ const SignInForm = () => {
                     ))}
 
                     <Button className={`${btnStyles.Button} ${btnStyles.Wide} ${btnStyles.Bright}`} type="submit">
-                        SignUp
+                        SignIn
                     </Button>
                     {errors.non_field_errors?.map((message, idx) => (
                         <Alert key={idx} variant="warning" className="mt-3">

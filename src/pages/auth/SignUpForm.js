@@ -37,8 +37,9 @@ const SignUpForm = () => {
     };
 
     return (
-        <div className={styles.SignUpFormCoverImage}>
-            <div className={styles.PageContainer}>
+        <div className={styles.PageContainer}>
+            <div className={styles.SignUpFormCoverImage}>
+            
             <Container className={`${styles.FormContainer} p-4 `}>
                 <h1 className={styles.Header}>sign up</h1>
                 <hr className={styles.Divider} />
