@@ -45,8 +45,8 @@ const NavBar = () => {
   )
   const loggedOutIcons = (
     <>
-      <NavLink to="/signin" eventKey="/signin" className={styles.NavLink}><i className="fa-solid fa-right-to-bracket"></i>Sign In</NavLink>
-      <NavLink to="/signup" eventKey="/signup" className={styles.NavLink}><i className="fa-solid fa-user-plus"></i>Sign Up</NavLink>
+      <NavLink to="/signin" className={styles.NavLink}><i className="fa-solid fa-right-to-bracket"></i>Sign In</NavLink>
+      <NavLink to="/signup" className={styles.NavLink}><i className="fa-solid fa-user-plus"></i>Sign Up</NavLink>
     </>
   );
 
