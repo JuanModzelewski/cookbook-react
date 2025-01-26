@@ -5,6 +5,7 @@ import './api/axiosDefaults';
 import NavBar from './components/NavBar';
 import SignInForm from './pages/auth/SignInForm';
 import SignUpForm from './pages/auth/SignUpForm';
+import RecipeCreateForm from './pages/recipes/RecipeCreateForm';
 
 
 function App() {
@@ -15,7 +16,9 @@ function App() {
         <Routes>
           <Route path="/signup" element={<SignUpForm />} />
           <Route path="/signin" element={<SignInForm />} />
-          <Route path="/" element={<Container className="py-4"><h1>Home</h1></Container>} />
+          <Route path="/recipe/create" element={<RecipeCreateForm />} />
+          <Route path="/" element={<Container className={styles.Main}><h1>Home</h1></Container>} />
+          <Route path="*" element={<Container className={styles.Main}><h1>Not Found</h1></Container>} />
         </Routes>
       </div>
     </div>
