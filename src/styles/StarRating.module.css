@@ -6,22 +6,34 @@
 .StarFilled {
     color: #ffd700;
     font-size: 1.75rem;
-    padding: 5px;
+    padding: 5px 5px 5px 0;
 }
 
 .StarHalf {
     color: #ffd700;
     font-size: 1.75rem;
-    padding: 5px;
+    padding: 5px 5px 5px 0;
 }
 
 .StarEmpty {
     color: #ccc;
     font-size: 1.75rem;
-    padding: 5px;
+    padding: 5px 5px 5px 0;
 }
 
 .ReviewCount {
     margin-left: 8px;
     font-size: 1.25rem;
+}
+
+@media screen and (max-width: 1200px) {
+    .StarFilled,
+    .StarHalf,
+    .StarEmpty {
+        font-size: 1.25rem;
+    }
+    
+    .ReviewCount {
+        font-size: 1rem;
+    }
 }

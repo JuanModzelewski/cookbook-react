@@ -80,45 +80,40 @@ const RecipeCard = (props) => {
                     </div>
                 </div>
             </CardBody>
-
-            <Link to={`/recipes/${id}`}>
+            <div className={styles.ImageContainer}>
                 <CardImg src={recipe_image} alt={title} />
-            </Link>
-
+                <div className={styles.HeartIconContainer}>
+                    {is_owner ? (
+                        <OverlayTrigger
+                            placement="top"
+                            overlay={<Tooltip>You can't add your own recipe to your favorites!</Tooltip>}
+                        >
+                            <i className={`${styles.FavoriteIcon} fa-regular fa-heart`}></i>
+                        </OverlayTrigger>
+                    ) : favorite_id ? (
+                        <span onClick={() => handleRemoveFavorite()}>
+                            <i className={`${styles.FavoriteIcon} fa-solid fa-heart`} />
+                        </span>
+                    ) : currentUser ? (
+                        <span onClick={() => handleFavorite()}>
+                            <i className={`${styles.FavoriteIcon} fa-regular fa-heart`}></i>
+                        </span>
+                    ) : (
+                        <OverlayTrigger
+                            placement="top"
+                            overlay={<Tooltip>Sign in to add to favorites!</Tooltip>}
+                        >
+                            <i className={`${styles.FavoriteIcon} fa-regular fa-heart`}></i>
+                        </OverlayTrigger>
+                    )}
+                </div>
+            </div>
             <CardBody>
                 <div className={styles.TitleContainer}>
                     {title && <Card.Title className={styles.Title}>{title}</Card.Title>}
                     <StarRating rating={average_rating} reviewCount={review_count} />
                 </div>
                 {description && <Card.Text className="text-start pt-2">{description}</Card.Text>}
-                <div className='d-flex flex-row justify-content-end'>
-                    <div className="d-flex flex-row align-items-center">
-                        {is_owner ? (
-                            <OverlayTrigger
-                                placement="top"
-                                overlay={<Tooltip>You can't add your own recipe to your favorites!</Tooltip>}
-                            >
-                                <i className={`${styles.FavoriteIcon} fa-regular fa-heart`}></i>
-                            </OverlayTrigger>
-                        ) : favorite_id ? (
-                            <span onClick={() => handleRemoveFavorite()}>
-                                <i className={`${styles.Favorite} fa-solid fa-heart`} />
-                            </span>
-                        ) : currentUser ? (
-                            <span onClick={() => handleFavorite()}>
-                                <i className={`${styles.FavoriteIcon} fa-regular fa-heart`}></i>
-                            </span>
-                        ) : (
-                            <OverlayTrigger
-                                placement="top"
-                                overlay={<Tooltip>Sign in to add to favorites!</Tooltip>}
-                            >
-                                <i className={`${styles.FavoriteIcon} fa-regular fa-heart`}></i>
-                            </OverlayTrigger>
-                        )}
-                        <div className={styles.Count}>{favorite_count}</div>
-                    </div>
-                </div>
             </CardBody>
         </Card>
     );
