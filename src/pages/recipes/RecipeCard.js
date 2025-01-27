@@ -6,6 +6,7 @@ import CardImg from 'react-bootstrap/CardImg';
 import { Link } from 'react-router-dom';
 import { axiosRes } from '../../api/axiosDefaults';
 import Avatar from '../../components/Avatar';
+import StarRating from '../../components/StarRating';
 import { useCurrentUser } from '../../contexts/CurrentUserContext';
 import styles from '../../styles/Recipe.module.css';
 
@@ -48,7 +49,7 @@ const RecipeCard = (props) => {
         }
     };
 
-    const handleUnfavorite = async () => {
+    const handleRemoveFavorite = async () => {
         try {
             if (is_owner) return;
             await axiosRes.delete(`/favorites/${favorite_id}/`);
@@ -84,12 +85,13 @@ const RecipeCard = (props) => {
                 <CardImg src={recipe_image} alt={title} />
             </Link>
 
-            <CardBody className='d-flex flex-row justify-content-between'>
-                <div className="d-flex flex-column align-items-start">
+            <CardBody>
+                <div className={styles.TitleContainer}>
                     {title && <Card.Title className={styles.Title}>{title}</Card.Title>}
-                    {description && <Card.Text className="text-start">{description}</Card.Text>}
+                    <StarRating rating={average_rating} reviewCount={review_count} />
                 </div>
-                <div className='d-flex flex-column align-items-end'>
+                {description && <Card.Text className="text-start pt-2">{description}</Card.Text>}
+                <div className='d-flex flex-row justify-content-end'>
                     <div className="d-flex flex-row align-items-center">
                         {is_owner ? (
                             <OverlayTrigger
@@ -99,7 +101,7 @@ const RecipeCard = (props) => {
                                 <i className={`${styles.FavoriteIcon} fa-regular fa-heart`}></i>
                             </OverlayTrigger>
                         ) : favorite_id ? (
-                            <span onClick={() => handleUnfavorite()}>
+                            <span onClick={() => handleRemoveFavorite()}>
                                 <i className={`${styles.Favorite} fa-solid fa-heart`} />
                             </span>
                         ) : currentUser ? (

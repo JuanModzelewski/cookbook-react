@@ -75,10 +75,22 @@ h5 {
     padding: 1rem;
 }
 
+.TitleContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    gap : 0.5rem;
+}
+
 .Title {
     text-transform: capitalize;
     font-size: 2rem;
     font-weight: bold;
+    text-align: start;
+    margin: 0;
 }
 
 .Heading {
