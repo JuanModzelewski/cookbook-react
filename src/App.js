@@ -7,6 +7,7 @@ import { useCurrentUser } from './contexts/CurrentUserContext';
 import SignInForm from './pages/auth/SignInForm';
 import SignUpForm from './pages/auth/SignUpForm';
 import RecipeCreateForm from './pages/recipes/RecipeCreateForm';
+import RecipeDetails from './pages/recipes/RecipeDetails';
 import RecipesPage from './pages/recipes/RecipesPage';
 
 
@@ -36,6 +37,11 @@ function App() {
               <RecipesPage 
                 message="No recipes found, adjust your search criteria or add a recipe to your favorites."
                 filter={`favorites__owner__profile=${profile_id}`} />
+            </Container>
+          }/>
+          <Route path="/recipes/:id" element={
+            <Container className={styles.Container}>
+              <RecipeDetails/>
             </Container>
           }/>
           <Route path="*" element={<Container className={styles.Main}><h1>Not Found</h1></Container>} />

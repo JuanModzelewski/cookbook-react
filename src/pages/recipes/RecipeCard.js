@@ -8,7 +8,7 @@ import { axiosRes } from '../../api/axiosDefaults';
 import Avatar from '../../components/Avatar';
 import StarRating from '../../components/StarRating';
 import { useCurrentUser } from '../../contexts/CurrentUserContext';
-import styles from '../../styles/Recipe.module.css';
+import styles from '../../styles/RecipeCard.module.css';
 
 
 const RecipeCard = (props) => {
@@ -81,7 +81,9 @@ const RecipeCard = (props) => {
                 </div>
             </CardBody>
             <div className={styles.ImageContainer}>
-                <CardImg src={recipe_image} alt={title} />
+                <Link to={`/recipes/${id}`}>
+                    <CardImg src={recipe_image} alt={title} />
+                </Link>
                 <div className={styles.HeartIconContainer}>
                     {is_owner ? (
                         <OverlayTrigger
