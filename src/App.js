@@ -36,7 +36,7 @@ function App() {
             <Container className={styles.Container}>
               <RecipesPage 
                 message="No recipes found, adjust your search criteria or add a recipe to your favorites."
-                filter={`favorites__owner__profile=${profile_id}`} />
+                filter={`favorites__owner__profile=${profile_id}&ordering=-favorites__created_at&`} />
             </Container>
           }/>
           <Route path="/recipes/:id" element={
