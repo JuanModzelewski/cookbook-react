@@ -1,0 +1,103 @@
+.Recipe {
+    background-color: #ffffff;
+    border: 1px solid #dadadf;
+    border-radius: 2px;
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.RecipeBar {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    gap: 10px;
+    padding: 2rem;
+    max-width: 50%;
+}
+
+.RecipeImage {
+    width: 50%;    
+}
+
+.TitleContainer {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.Count {
+    font-size: x-large;
+    color: #7d7d7d;
+    margin-right: 1rem;
+}
+
+.Recipe figure,
+h5 {
+    margin: 0 0;
+}
+
+.FavoriteIcon,
+.CommentIcon {
+    font-size: xx-large;
+    color: #7d7d7d;
+}
+
+.Favorite {
+    font-size: xx-large;
+    color: #ff3636;
+}
+
+.IngredientContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    padding: 1rem;
+}
+
+.IngredientList {
+    margin-top: 1rem;
+}
+
+.Ingredient {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+
+.DisabledInput {
+    pointer-events: none;
+    background-color: #ffffff;
+}
+
+.InstructionsContainer {
+    padding: 1rem;
+}
+
+.Title {
+    text-transform: capitalize;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.Heading {
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: start;
+}
+
+@media screen and (max-width: 1200px) {
+    .TitleContainer {
+        flex-direction: column;
+    }
+    .RecipeBar {
+        width: 100%;
+        max-width: 100%;
+        padding: 1rem;
+    }
+    .RecipeImage {
+        width: 100%;
+    }
+    
+}

@@ -60,7 +60,7 @@ const NavBar = () => {
         <Navbar.Toggle ref={ref} onClick={() => setExpanded(!expanded)} aria-controls="basic-navbar-nav"/>
         <Navbar.Collapse id="basic-navbar-nav" className='justify-content-end'>
           <Nav className='align-items-end'>
-            <NavLink to="/browse" className={styles.NavLink}><i className="fa-solid fa-book"></i>Browse</NavLink>
+            <NavLink to="/" className={styles.NavLink}><i className="fa-solid fa-book"></i>Browse</NavLink>
             {currentUser ? loggedInIcons : loggedOutIcons}
           </Nav>
         </Navbar.Collapse>

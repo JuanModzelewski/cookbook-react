@@ -154,7 +154,7 @@ function RecipeCreateForm() {
             >
                 CANCEL
             </Button>
-            <Button 
+            <Button
                 className={`${btnStyles.Button} ${btnStyles.Bright} ${btnStyles.Wide}`}
                 type="submit"
             >
@@ -184,17 +184,17 @@ function RecipeCreateForm() {
                             placeholder="Quantity"
                         />
                         {ingredients.length > 1 && (
-                            <div 
+                            <div
                                 type="button"
                                 onClick={() => handleRemoveIngredient(index)}>
-                                    <i className={`${styles.IngredientIcons} fa-solid fa-circle-minus`}></i>
+                                <i className={`${styles.IngredientIcons} fa-solid fa-circle-minus`}></i>
                             </div>
                         )}
                         {index === ingredients.length - 1 && (
-                            <div 
+                            <div
                                 type="button"
                                 onClick={handleAddIngredient}>
-                                    <i className={`${styles.IngredientIcons} fa-solid fa-circle-plus`}></i>
+                                <i className={`${styles.IngredientIcons} fa-solid fa-circle-plus`}></i>
                             </div>
                         )}
                     </div>
@@ -204,74 +204,72 @@ function RecipeCreateForm() {
     )
 
     return (
-        <Container className={`${appStyles.Main}`}>
-            <Form onSubmit={handleSubmit}>
-                <Row>
-                    <Col className="py-2 p-0 p-md-2" lg={6}>
-                        <Container
-                            className={`${appStyles.Content} ${styles.Container} d-flex flex-column justify-content-center`}
-                        >
-                            <Form.Group className="text-center">
-                                {recipe_image ? (
-                                    <>
-                                        <figure>
-                                            <img
-                                                className={`${appStyles.Image} ${styles.Image}`}
-                                                src={recipe_image}
-                                            />
-                                        </figure>
-                                        <div>
-                                            <Form.Label
-                                                className={`${btnStyles.Button} ${btnStyles.Orange} btn`}
-                                                htmlFor="image-upload"
-                                            >CHANGE THE IMAGE
-                                            </Form.Label>
-                                        </div>
-                                    </>
-                                ) : (
-                                    <Form.Label
-                                        className="d-flex justify-content-center"
-                                        htmlFor="image-upload"
-                                    >
-                                        <Asset
-                                            src={Upload}
-                                            size={120}
-                                            message="Upload a photo"
+        <Form onSubmit={handleSubmit}>
+            <Row>
+                <Col className="py-2 p-0 p-md-2" lg={6}>
+                    <Container
+                        className={`${appStyles.Content} ${styles.Container} d-flex flex-column justify-content-center`}
+                    >
+                        <Form.Group className="text-center">
+                            {recipe_image ? (
+                                <>
+                                    <figure>
+                                        <img
+                                            className={`${appStyles.Image} ${styles.Image}`}
+                                            src={recipe_image}
                                         />
-                                    </Form.Label>
-                                )}
-                                <Form.Control
-                                    type="file"
-                                    id="image-upload"
-                                    accept="image/*"
-                                    onChange={handleChangeImage}
-                                    ref={imageInput}
-                                />
-                            </Form.Group>
-                            {errors?.recipe_image?.map((message, idx) => (
-                                <Alert variant="warning" key={idx}>
-                                    {message}
-                                </Alert>
-                            ))}
-                            <div className="d-md-none p-2 p-md-2">
-                                {textFields}
-                                {ingredientsFields}
-                                {submitFields}
-                            </div>
-                        </Container>
-                    </Col>
-                    <Col
-                        lg={6}
-                        className="d-none d-md-block p-2 p-md-2">
-                        <Container className={styles.Content}>
+                                    </figure>
+                                    <div>
+                                        <Form.Label
+                                            className={`${btnStyles.Button} ${btnStyles.Orange} btn`}
+                                            htmlFor="image-upload"
+                                        >CHANGE THE IMAGE
+                                        </Form.Label>
+                                    </div>
+                                </>
+                            ) : (
+                                <Form.Label
+                                    className="d-flex justify-content-center"
+                                    htmlFor="image-upload"
+                                >
+                                    <Asset
+                                        src={Upload}
+                                        size={120}
+                                        message="Upload a photo"
+                                    />
+                                </Form.Label>
+                            )}
+                            <Form.Control
+                                type="file"
+                                id="image-upload"
+                                accept="image/*"
+                                onChange={handleChangeImage}
+                                ref={imageInput}
+                            />
+                        </Form.Group>
+                        {errors?.recipe_image?.map((message, idx) => (
+                            <Alert variant="warning" key={idx}>
+                                {message}
+                            </Alert>
+                        ))}
+                        <div className="d-md-none p-2 p-md-2">
                             {textFields}
                             {ingredientsFields}
                             {submitFields}
-                        </Container>
-                    </Col>
-                </Row>
-            </Form>
-        </Container>
+                        </div>
+                    </Container>
+                </Col>
+                <Col
+                    lg={6}
+                    className="d-none d-md-block p-2 p-md-2">
+                    <Container className={styles.Content}>
+                        {textFields}
+                        {ingredientsFields}
+                        {submitFields}
+                    </Container>
+                </Col>
+            </Row>
+        </Form>
     );
 }
 

@@ -4,10 +4,10 @@ import styles from '../styles/Avatar.module.css'
 
 const Avatar = ({src, height, text, width}) => {
   return (
-    <div>
+    <span>
         <img className={styles.Avatar} src={src || Profile} alt='Avatar' height={height} width={width}/>
         {text}
-    </div>
+    </span>
   )
 }
 
