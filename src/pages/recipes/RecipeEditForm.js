@@ -1,11 +1,11 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Alert from "react-bootstrap/Alert";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
 import appStyles from "../../App.module.css";
 import Upload from "../../assets/upload.png";
@@ -13,7 +13,7 @@ import Asset from "../../components/Asset";
 import btnStyles from "../../styles/Button.module.css";
 import styles from "../../styles/RecipeCreateEditForm.module.css";
 
-function RecipeCreateForm() {
+function RecipeEditForm() {
 
     const [errors, setErrors] = useState({});
 
@@ -21,7 +21,7 @@ function RecipeCreateForm() {
         title: "",
         description: "",
         cooking_instructions: "",
-        ingredients: [ { name: "", quantity: "" } ],
+        ingredients: [{ name: '', quantity: '' }],
         recipe_image: "",
     });
 
@@ -29,6 +29,21 @@ function RecipeCreateForm() {
 
     const imageInput = useRef(null);
     const navigate = useNavigate();
+    const { id } = useParams();
+
+    useEffect(() => {
+        const handleMount = async () => {
+            try {
+                const { data } = await axiosReq.get(`/recipes/${id}`);
+                const { title, description, cooking_instructions, ingredients, recipe_image, owner } = data;
+                owner ? setRecipeData({ title, description, cooking_instructions, ingredients, recipe_image }) : navigate("/");
+            } catch (err) {
+                console.log(err);
+            }
+        };
+
+        handleMount();
+    }, [id, navigate]);
 
     const handleChange = (event) => {
         setRecipeData({
@@ -75,11 +90,13 @@ function RecipeCreateForm() {
         formData.append("description", description);
         formData.append("ingredients", JSON.stringify(ingredients));
         formData.append("cooking_instructions", cooking_instructions);
-        formData.append("recipe_image", imageInput.current.files[0]);
+        if (imageInput?.current?.files[0]){
+            formData.append("recipe_image", imageInput.current.files[0]);
+        }
 
         try {
-            const { data } = await axiosReq.post("/recipes/", formData);
-            navigate(`/recipes/${data.id}`);
+            await axiosReq.put(`/recipes/${id}/`, formData);
+            navigate(`/recipes/${id}`);
         } catch (err) {
             console.log(err);
             if (err.response?.status !== 401) {
@@ -159,7 +176,7 @@ function RecipeCreateForm() {
                 className={`${btnStyles.Button} ${btnStyles.Bright} ${btnStyles.Wide}`}
                 type="submit"
             >
-                CREATE
+                UPDATE
             </Button>
         </div>
     );
@@ -274,4 +291,4 @@ function RecipeCreateForm() {
     );
 }
 
-export default RecipeCreateForm;
+export default RecipeEditForm;

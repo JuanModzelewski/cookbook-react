@@ -9,10 +9,11 @@ const AvatarSection = (props) => {
     const {
         profile_id,
         profile_image,
-        owner, updated_at,
+        owner,
+        updated_at,
         is_owner,
         handleEdit,
-        handleDelete
+        handleDelete,
     } = props;
 
     const [showModal, setShowModal] = useState(false);
@@ -27,7 +28,7 @@ const AvatarSection = (props) => {
       </Link>
       <div className="d-flex align-items-center">
         <span className={styles.Date}>{updated_at}</span>
-        {is_owner && 
+        {is_owner && owner &&
           <EditDeleteDropdown
             handleEdit={handleEdit}
             handleDelete={handleShowModal} 

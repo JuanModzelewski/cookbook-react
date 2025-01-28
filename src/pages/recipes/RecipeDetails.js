@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { Card, CardBody, Container } from 'react-bootstrap';
 import { useNavigate, useParams } from 'react-router-dom';
 import { axiosReq, axiosRes } from '../../api/axiosDefaults';
+
 import appStyles from '../../App.module.css';
+import Asset from '../../components/Asset';
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import styles from '../../styles/RecipeDetails.module.css';
 
@@ -46,7 +48,7 @@ const RecipeDetails = () => {
     const handleRemoveFavoriteClick = () => handleRemoveFavorite(recipe, is_owner, setRecipe);
 
     const handleEdit = () => {
-        navigate(`/recipes/${id}/edit`);
+        navigate(`/recipe/${id}/edit`);
     };
 
     const handleDelete = async () => {
@@ -64,7 +66,7 @@ const RecipeDetails = () => {
         setRecipe({ ...recipe, ingredients: newIngredients });
     };
 
-    if (!recipe) return <div>Loading...</div>;
+    if (!recipe) return <Container className={appStyles.Container}><Asset spinner /></Container>;
 
     return (
         <Container className={appStyles.Container}>

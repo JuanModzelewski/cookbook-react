@@ -8,6 +8,7 @@ import SignInForm from './pages/auth/SignInForm';
 import SignUpForm from './pages/auth/SignUpForm';
 import RecipeCreateForm from './pages/recipes/RecipeCreateForm';
 import RecipeDetails from './pages/recipes/RecipeDetails';
+import RecipeEditForm from './pages/recipes/RecipeEditForm';
 import RecipesPage from './pages/recipes/RecipesPage';
 
 
@@ -25,6 +26,11 @@ function App() {
           <Route path="/recipe/create" element={
             <Container className={styles.Container}>
               <RecipeCreateForm />
+            </Container>
+          }/>
+          <Route path="/recipe/:id/edit" element={
+            <Container className={styles.Container}>
+              <RecipeEditForm/>
             </Container>
           }/>
           <Route path="/" element={

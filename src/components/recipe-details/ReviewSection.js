@@ -43,9 +43,9 @@ const ReviewSection = (props) => {
           next={() => fetchMoreData(reviews, setReviews)}
         />
       ) : currentUser ? (
-        <span>No comments yet, be the first to comment!</span>
+        <div className="text-muted m-3 me-auto">No reviews yet, be the first to leave a review!</div>
       ) : (
-        <span>No comments... yet</span>
+        <div className="text-muted m-3 ms-auto">No reviews yet, log in to leave a review!</div>
       )}
     </Container>
   );
