@@ -1,6 +1,6 @@
 import React from 'react';
 import { CardTitle, Col, Form, Row } from 'react-bootstrap';
-import styles from '../../styles/RecipeDetails.module.css';
+import styles from '../../styles/IngredientsSection.module.css';
 
 const IngredientList = (props) => {
     const {

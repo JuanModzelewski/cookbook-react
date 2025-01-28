@@ -1,0 +1,10 @@
+.InstructionsContainer {
+    padding: 1rem;
+}
+
+.Heading {
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: start;
+}
+

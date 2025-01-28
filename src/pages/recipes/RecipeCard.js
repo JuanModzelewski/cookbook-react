@@ -18,7 +18,6 @@ const RecipeCard = (props) => {
         description,
         recipe_image,
         setRecipe,
-        recipePage,
         owner,
         profile_id,
         profile_image,
@@ -74,10 +73,7 @@ const RecipeCard = (props) => {
                         <Avatar src={profile_image} height={55} width={55} />
                         {owner}
                     </Link>
-                    <div className="d-flex align-items-center">
-                        <span>{updated_at}</span>
-                        {is_owner && recipePage && "..."}
-                    </div>
+                    {updated_at}
                 </div>
             </CardBody>
             <div className={styles.ImageContainer}>

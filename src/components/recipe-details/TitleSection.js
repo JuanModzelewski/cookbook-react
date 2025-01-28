@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, CardImg, OverlayTrigger, Tooltip } from 'react-bootstrap';
-import styles from '../../styles/RecipeDetails.module.css';
+import styles from '../../styles/TitleSection.module.css';
 import StarRating from '../StarRating';
 
 const TitleSection = (props) => {

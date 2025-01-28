@@ -1,0 +1,28 @@
+.IngredientContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    padding: 1rem;
+}
+
+.IngredientList {
+    margin-top: 1rem;
+}
+
+.Ingredient {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+
+.DisabledInput {
+    pointer-events: none;
+    background-color: #ffffff;
+}
+
+.Heading {
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: start;
+}

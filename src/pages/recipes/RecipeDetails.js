@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Card, CardBody, Container } from 'react-bootstrap';
-import { useParams } from 'react-router-dom';
-import { axiosReq } from '../../api/axiosDefaults';
+import { useNavigate, useParams } from 'react-router-dom';
+import { axiosReq, axiosRes } from '../../api/axiosDefaults';
 import appStyles from '../../App.module.css';
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import styles from '../../styles/RecipeDetails.module.css';
@@ -10,7 +10,7 @@ import { handleFavorite } from '../../utils/handleFavorite';
 import { handleRemoveFavorite } from '../../utils/handleRemoveFavorite';
 
 import AvatarSection from '../../components/recipe-details/AvatarSection';
-import IngredientList from '../../components/recipe-details/IngredientsList';
+import IngredientsSection from '../../components/recipe-details/IngredientsSection';
 import InstructionsSection from '../../components/recipe-details/InstructionsSection';
 import ReviewSection from '../../components/recipe-details/ReviewSection';
 import TitleSection from '../../components/recipe-details/TitleSection';
@@ -23,6 +23,7 @@ const RecipeDetails = () => {
     const currentUser = useCurrentUser();
     const is_owner = currentUser?.username === recipe?.owner;
     const paragraphs = recipe?.cooking_instructions ? recipe.cooking_instructions.split('\n') : [];
+    const navigate = useNavigate();
 
     useEffect(() => {
         const handleMount = async () => {
@@ -44,6 +45,19 @@ const RecipeDetails = () => {
     const handleFavoriteClick = () => handleFavorite(id, is_owner, setRecipe);
     const handleRemoveFavoriteClick = () => handleRemoveFavorite(recipe, is_owner, setRecipe);
 
+    const handleEdit = () => {
+        navigate(`/recipes/${id}/edit`);
+    };
+
+    const handleDelete = async () => {
+        try {
+            await axiosRes.delete(`/recipes/${id}/`);
+            navigate(-1);
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
     const handleCheckboxChange = (index) => {
         const newIngredients = [...recipe.ingredients];
         newIngredients[index].selected = !newIngredients[index].selected;
@@ -62,6 +76,8 @@ const RecipeDetails = () => {
                         owner={recipe.owner}
                         updated_at={recipe.updated_at}
                         is_owner={is_owner}
+                        handleEdit={handleEdit}
+                        handleDelete={handleDelete}
                     />
                 </CardBody>
                 <CardBody>
@@ -74,7 +90,7 @@ const RecipeDetails = () => {
                         setRecipe={setRecipe}
                     />
                     <hr />
-                    <IngredientList
+                    <IngredientsSection
                         ingredients={recipe.ingredients}
                         handleCheckboxChange={handleCheckboxChange}
                     />
