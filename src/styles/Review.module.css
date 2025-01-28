@@ -1,0 +1,56 @@
+.Owner {
+    font-weight: bold;
+    color: #ff8c00;
+    margin-right: 8px;
+}
+
+.Date {
+    font-weight: lighter;
+    color: #c1c1c5;
+}
+
+.Reviews {
+    margin-top: 20px;
+}
+
+.Review {
+    margin-bottom: 15px;
+}
+
+.StarRating {
+    display: flex;
+    align-items: center;
+}
+
+.StarFilled {
+    color: #ffd700;
+    font-size: 1rem;
+    padding: 5px 5px 5px 0;
+    pointer-events: none;
+}
+
+.StarHalf {
+    color: #ffd700;
+    font-size: 1rem;
+    padding: 5px 5px 5px 0;
+    pointer-events: none;
+}
+
+.StarEmpty {
+    color: #ccc;
+    font-size: 1rem;
+    padding: 5px 5px 5px 0;
+    pointer-events: none;
+}
+
+.Rating {
+    margin-bottom: 0.75rem;
+    margin-top: 0.75rem;
+}
+
+.Owner {
+    font-weight: bold;
+    color: #ff8c00;
+    margin-right: 1rem;
+    font-size: 1rem;
+}

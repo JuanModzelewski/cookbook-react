@@ -9,9 +9,9 @@
 }
 
 .Container {
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
   padding-top: 1rem;
+  padding-bottom: 1rem;
+  min-height: 100vh;
 }
 
 .Content {

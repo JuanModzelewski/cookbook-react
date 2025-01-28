@@ -39,11 +39,7 @@ function App() {
                 filter={`favorites__owner__profile=${profile_id}&ordering=-favorites__created_at&`} />
             </Container>
           }/>
-          <Route path="/recipes/:id" element={
-            <Container className={styles.Container}>
-              <RecipeDetails/>
-            </Container>
-          }/>
+          <Route path="/recipes/:id" element={<RecipeDetails/>}/>
           <Route path="*" element={<Container className={styles.Main}><h1>Not Found</h1></Container>} />
         </Routes>
       </div>
