@@ -41,7 +41,7 @@ const ReviewSection = (props) => {
       <div className="d-flex align-items-center">
         <CardTitle className={`${styles.Heading}`}>Reviews</CardTitle>
         {hasReviewed && (
-          <span className="text-muted"> (You have reviewed this recipe)</span>
+          <span className={`${styles.HasReviewed}`}>(You have already reviewed this recipe)</span>
         )}
       </div>
       <hr />

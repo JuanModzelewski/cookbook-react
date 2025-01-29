@@ -53,11 +53,11 @@ const TitleSection = (props) => {
                         </div>
                     </div>
                     <StarRating rating={recipe.average_rating} reviewCount={recipe.review_count} />
-                    {recipe.description &&
-                        <Card.Text className="text-start">
-                            {paragraphDescription.map (
-                                (paragraphDescription, index) => <p key={index}>{paragraphDescription}</p>)}
-                        </Card.Text>}
+                    <div className="text-start">
+                        {paragraphDescription.map((paragraphDescription, index) => (
+                            <p key={index}>{paragraphDescription}</p>
+                        ))}
+                    </div>
                 </div>
                 <a href="#ingredients" className={styles.SectionLink}>
                     <i className="fa-solid fa-list-ul"></i>
