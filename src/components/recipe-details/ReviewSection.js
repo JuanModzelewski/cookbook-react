@@ -19,6 +19,7 @@ const ReviewSection = (props) => {
 
     const [hasReviewed, setHasReviewed] = useState(false);
     const [editingReviewId, setEditingReviewId] = useState(null);
+    const is_owner = currentUser?.username === recipe.owner;
 
     useEffect(() => {
         if (currentUser) {
@@ -37,9 +38,14 @@ const ReviewSection = (props) => {
 
   return (
     <Container className={`${styles.Content} p-3`}>
-      <CardTitle className={`${styles.Heading} p-3`}>Reviews</CardTitle>
+      <div className="d-flex align-items-center">
+        <CardTitle className={`${styles.Heading} p-3`}>Reviews</CardTitle>
+        {hasReviewed && (
+          <span className="text-muted"> (You have reviewed this recipe)</span>
+        )}
+      </div>
       <hr />
-      {currentUser && !hasReviewed && currentUser.username !== recipe.owner && (
+      {currentUser && !hasReviewed && !is_owner && (
         <ReviewCreateForm
           profile_id={currentUser.profile_id}
           profile_image={currentUser.profile_image}
