@@ -39,7 +39,7 @@ const ReviewSection = (props) => {
     <Container className={`${styles.Content} p-3`}>
       <CardTitle className={`${styles.Heading} p-3`}>Reviews</CardTitle>
       <hr />
-      {currentUser && !hasReviewed && (
+      {currentUser && !hasReviewed && currentUser.username !== recipe.owner && (
         <ReviewCreateForm
           profile_id={currentUser.profile_id}
           profile_image={currentUser.profile_image}
