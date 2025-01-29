@@ -21,8 +21,8 @@ const TitleSection = (props) => {
         <div className={styles.TitleContainer}>
             <CardImg src={recipe.recipe_image} alt={recipe.title} className={styles.RecipeImage} />
             <div className={styles.RecipeBar}>
-                <div className="d-flex flex-column align-items-start gap-3">
-                    <div className="d-flex flex-row align-items-center justify-content-between w-100">
+                <div className="d-flex flex-column align-items-start gap-3 w-100">
+                    <div className="d-flex flex-row no-wrap align-items-start gap-5 justify-content-between w-100">
                         {recipe.title && <Card.Title className={styles.Title}>{recipe.title}</Card.Title>}
                         <div className="d-flex flex-row align-items-center gap-3">
                             {is_owner ? (

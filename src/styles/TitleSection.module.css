@@ -30,7 +30,10 @@
 }
 
 .RecipeImage {
-    width: 50%;    
+    width: 50%;
+    max-height: 550px;
+    clip-path: content-box;
+    object-fit: cover;
 }
 
 .Count {
@@ -43,6 +46,7 @@
     color: #ff0000;
     cursor: pointer;
     margin: 0;
+    padding: 0;
     font-size: 2.5rem;
 }
 
@@ -72,6 +76,13 @@
     }
     .RecipeImage {
         width: 100%;
+    }
+    
+}
+
+@media screen and (max-width: 760px) {
+    .RecipeImage {
+        max-height: 400px;
     }
     
 }

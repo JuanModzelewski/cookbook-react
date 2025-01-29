@@ -24,6 +24,12 @@
     position: relative;
 }
 
+.RecipeImage {
+    max-height: 550px;
+    clip-path: content-box;
+    object-fit: cover;
+}
+
 .TitleContainer {
     display: flex;
     flex-direction: row;

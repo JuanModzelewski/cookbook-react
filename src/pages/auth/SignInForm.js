@@ -31,8 +31,9 @@ const SignInForm = () => {
         event.preventDefault()
         try {
             const { data } = await axios.post("/dj-rest-auth/login/", signInData)
-            setCurrentUser(data)
-            console.log(data)
+            const token = `${data.access}`;
+            localStorage.setItem("refreshTokenTimestamp", token);
+            setCurrentUser(data.user)
             navigate("/")
         } catch (error) {
             setErrors(error.response?.data)

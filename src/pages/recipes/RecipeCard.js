@@ -78,7 +78,7 @@ const RecipeCard = (props) => {
             </CardBody>
             <div className={styles.ImageContainer}>
                 <Link to={`/recipes/${id}`}>
-                    <CardImg src={recipe_image} alt={title} />
+                    <CardImg src={recipe_image} alt={title} className={styles.RecipeImage} />
                 </Link>
                 <div className={styles.HeartIconContainer}>
                     {is_owner ? (

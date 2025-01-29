@@ -4,13 +4,13 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { axiosReq, axiosRes } from '../../api/axiosDefaults';
 
 import appStyles from '../../App.module.css';
-import Asset from '../../components/Asset';
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import styles from '../../styles/RecipeDetails.module.css';
 
 import { handleFavorite } from '../../utils/handleFavorite';
 import { handleRemoveFavorite } from '../../utils/handleRemoveFavorite';
 
+import FullScreenSpinner from '../../components/FullScreenSpinner';
 import AvatarSection from '../../components/recipe-details/AvatarSection';
 import IngredientsSection from '../../components/recipe-details/IngredientsSection';
 import InstructionsSection from '../../components/recipe-details/InstructionsSection';
@@ -66,7 +66,7 @@ const RecipeDetails = () => {
         setRecipe({ ...recipe, ingredients: newIngredients });
     };
 
-    if (!recipe) return <Container className={appStyles.Container}><Asset spinner /></Container>;
+    if (!recipe) return <FullScreenSpinner />;
 
     return (
         <Container className={appStyles.Container}>
@@ -80,6 +80,7 @@ const RecipeDetails = () => {
                         is_owner={is_owner}
                         handleEdit={handleEdit}
                         handleDelete={handleDelete}
+                        recipeDetails
                     />
                 </CardBody>
                 <CardBody>

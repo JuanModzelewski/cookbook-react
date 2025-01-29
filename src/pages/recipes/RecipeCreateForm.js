@@ -10,6 +10,7 @@ import { axiosReq } from "../../api/axiosDefaults";
 import appStyles from "../../App.module.css";
 import Upload from "../../assets/upload.png";
 import Asset from "../../components/Asset";
+import FullScreenSpinner from "../../components/FullScreenSpinner";
 import btnStyles from "../../styles/Button.module.css";
 import styles from "../../styles/RecipeCreateEditForm.module.css";
 
@@ -29,6 +30,7 @@ function RecipeCreateForm() {
 
     const imageInput = useRef(null);
     const navigate = useNavigate();
+    const [ loading, setLoading ] = useState(false);
 
     const handleChange = (event) => {
         setRecipeData({
@@ -69,11 +71,15 @@ function RecipeCreateForm() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        setLoading(true);
         const formData = new FormData(event.target);
+
+        const filteredIngredients = ingredients.filter(
+            ingredient => ingredient.name.trim() !== '' && ingredient.quantity.trim() !== '');
 
         formData.append("title", title);
         formData.append("description", description);
-        formData.append("ingredients", JSON.stringify(ingredients));
+        formData.append("ingredients", JSON.stringify(filteredIngredients));
         formData.append("cooking_instructions", cooking_instructions);
         formData.append("recipe_image", imageInput.current.files[0]);
 
@@ -85,6 +91,8 @@ function RecipeCreateForm() {
             if (err.response?.status !== 401) {
                 setErrors(err.response?.data);
             }
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -206,6 +214,7 @@ function RecipeCreateForm() {
 
     return (
         <Form onSubmit={handleSubmit}>
+            {loading && <FullScreenSpinner />}
             <Row>
                 <Col className="py-2 p-0 p-md-2" lg={6}>
                     <Container

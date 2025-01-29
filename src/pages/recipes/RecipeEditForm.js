@@ -10,6 +10,7 @@ import { axiosReq } from "../../api/axiosDefaults";
 import appStyles from "../../App.module.css";
 import Upload from "../../assets/upload.png";
 import Asset from "../../components/Asset";
+import FullScreenSpinner from "../../components/FullScreenSpinner";
 import btnStyles from "../../styles/Button.module.css";
 import styles from "../../styles/RecipeCreateEditForm.module.css";
 
@@ -31,14 +32,19 @@ function RecipeEditForm() {
     const navigate = useNavigate();
     const { id } = useParams();
 
+    const [ loading, setLoading ] = useState(false); 
+
     useEffect(() => {
         const handleMount = async () => {
+            setLoading(true);
             try {
                 const { data } = await axiosReq.get(`/recipes/${id}`);
                 const { title, description, cooking_instructions, ingredients, recipe_image, owner } = data;
                 owner ? setRecipeData({ title, description, cooking_instructions, ingredients, recipe_image }) : navigate("/");
             } catch (err) {
                 console.log(err);
+            } finally {
+                setLoading(false);
             }
         };
 
@@ -84,11 +90,14 @@ function RecipeEditForm() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        setLoading(true);
         const formData = new FormData(event.target);
+        const filteredIngredients = ingredients.filter(
+            ingredient => ingredient.name.trim() !== '' && ingredient.quantity.trim() !== '');
 
         formData.append("title", title);
         formData.append("description", description);
-        formData.append("ingredients", JSON.stringify(ingredients));
+        formData.append("ingredients", JSON.stringify(filteredIngredients));
         formData.append("cooking_instructions", cooking_instructions);
         if (imageInput?.current?.files[0]){
             formData.append("recipe_image", imageInput.current.files[0]);
@@ -102,6 +111,8 @@ function RecipeEditForm() {
             if (err.response?.status !== 401) {
                 setErrors(err.response?.data);
             }
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -223,6 +234,7 @@ function RecipeEditForm() {
 
     return (
         <Form onSubmit={handleSubmit}>
+            {loading && <FullScreenSpinner />}
             <Row>
                 <Col className="py-2 p-0 p-md-2" lg={6}>
                     <Container

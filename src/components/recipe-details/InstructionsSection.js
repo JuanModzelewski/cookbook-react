@@ -1,6 +1,6 @@
 import React from 'react';
 import { CardTitle } from 'react-bootstrap';
-import styles from '../../styles/RecipeDetails.module.css';
+import styles from '../../styles/InstructionsSection.module.css';
 
 const InstructionsSection = ({ paragraphs }) => {
   return (
