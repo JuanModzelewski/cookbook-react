@@ -67,6 +67,10 @@ const TitleSection = (props) => {
                     <i className="fa-solid fa-utensils"></i>
                     Cooking Instructions
                 </a>
+                <a href="#reviews" className={styles.SectionLink}>
+                    <i className="fa-solid fa-star-half-stroke"></i>
+                    Reviews
+                </a>
             </div>
         </div>
     );

@@ -108,9 +108,9 @@ const RecipeDetails = () => {
             <ReviewSection
                 currentUser={currentUser}
                 reviews={reviews}
-                setRecipe={setRecipe}
                 setReviews={setReviews}
-                recipeId={recipe.id}
+                setRecipe={setRecipe}
+                recipe={recipe}
             />
         </Container>
     );

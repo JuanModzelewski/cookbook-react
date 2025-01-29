@@ -6,7 +6,12 @@ import Avatar from "../../components/Avatar";
 import styles from "../../styles/ReviewCreateEditForm.module.css";
 
 function ReviewCreateForm(props) {
-  const { recipe, profileImage, profile_id, setReviews } = props;
+  const {
+    recipe,
+    profileImage,
+    profile_id,
+    setReviews
+  } = props;
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
   const [errors, setErrors] = useState({});
