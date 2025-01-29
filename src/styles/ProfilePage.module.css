@@ -1,17 +1,37 @@
 .ProfileImage {
+  object-fit: cover;
+  height: 120px;
+  width: 120px;
+  margin: 4px;
+  clip-path: inset(0 0 0 0 round 50%);
+  /* Crop to a square */
+  object-fit: cover;
+  /* Ensure the image covers the clipped area */
+}
+
+.ProfileContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.Content {
+  background-color: #ffffff;
+  border-radius: 2px;
+  border: 1px solid #dadadf;
+  padding: 1.5rem;
+}
+
+@media screen and (max-width: 991px) {
+  .ProfileImage {
+    width: 250px;
+    height: 250px;
+    clip-path: inset(0 0 0 0 round 50%);
+    /* Crop to a square */
     object-fit: cover;
-    height: 120px;
-    width: 120px;
-    margin: 4px;
-    clip-path: inset(0 0 0 0 round 50%); /* Crop to a square */
-    object-fit: cover; /* Ensure the image covers the clipped area */
+    /* Ensure the image covers the clipped area */
   }
-  
-  @media screen and (max-width: 991px) {
-    .ProfileImage {
-      width: 250px;
-      height: 250px;
-      clip-path: inset(0 0 0 0 round 50%); /* Crop to a square */
-      object-fit: cover; /* Ensure the image covers the clipped area */
-    }
-  }
+}

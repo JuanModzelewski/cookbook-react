@@ -1,24 +1,12 @@
 .App {
   font-family: "DM Sans", sans-serif;
-  background-color: #f8f8f8;
+  background-color: #fbfbfb;
   min-height: 100vh;
 }
 
 .Main {
   margin-top: 127px;
-}
-
-.Container {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  min-height: 100vh;
-}
-
-.Content {
-  background-color: #ffffff;
-  padding: 10px;
-  border-radius: 2px;
-  border: 1px solid #dadadf;
+  padding-top: 2rem;
 }
 
 input[type="file"] {

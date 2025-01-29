@@ -1,8 +1,22 @@
-.SearchBar input {
-    border-radius: 20px;
-    color: #242a3d;
+.RecipesPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.SearchContainer {
+    width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.SearchInput {
+    border-radius: 10px;
+    color: #505050;
     padding-left: 40px;
-    margin-bottom: 16px;
+    padding-right: 40px;
+    width: 100%;
+    background-color: rgb(255, 255, 255);
 }
 
 .SearchIcon {

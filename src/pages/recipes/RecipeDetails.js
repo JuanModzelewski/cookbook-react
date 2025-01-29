@@ -103,15 +103,16 @@ const RecipeDetails = () => {
                     {recipe.cooking_instructions && (
                         <InstructionsSection paragraphInstructions={paragraphInstructions} />
                     )}
+                    <hr />
+                    <ReviewSection
+                        currentUser={currentUser}
+                        reviews={reviews}
+                        setReviews={setReviews}
+                        setRecipe={setRecipe}
+                        recipe={recipe}
+                    />
                 </CardBody>
             </Card>
-            <ReviewSection
-                currentUser={currentUser}
-                reviews={reviews}
-                setReviews={setReviews}
-                setRecipe={setRecipe}
-                recipe={recipe}
-            />
         </Container>
     );
 };

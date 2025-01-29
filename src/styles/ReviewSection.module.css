@@ -2,12 +2,13 @@
     font-weight: bold;
     text-transform: uppercase;
     text-align: start;
+    margin: 1rem 0 1rem 1rem;
 }
 
 .Content {
     background-color: #ffffff;
     padding: 10px;
-    border-radius: 2px;
+    border-radius: 5px;
     border: 1px solid #dadadf;
   }
   

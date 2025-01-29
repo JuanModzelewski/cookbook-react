@@ -37,9 +37,9 @@ const ReviewSection = (props) => {
     };
 
   return (
-    <Container className={`${styles.Content} p-3`}>
+    <Container className={`${styles.Content} p-3`} id="reviews">
       <div className="d-flex align-items-center">
-        <CardTitle className={`${styles.Heading} p-3`}>Reviews</CardTitle>
+        <CardTitle className={`${styles.Heading}`}>Reviews</CardTitle>
         {hasReviewed && (
           <span className="text-muted"> (You have reviewed this recipe)</span>
         )}

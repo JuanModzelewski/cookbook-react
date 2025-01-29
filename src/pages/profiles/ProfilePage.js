@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Col, Container, Image, Row } from "react-bootstrap";
+import { Col, Image, Row } from "react-bootstrap";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useParams } from "react-router";
 import { axiosReq } from "../../api/axiosDefaults";
-import appStyles from "../../App.module.css";
 import Asset from "../../components/Asset";
 import { EditDeleteDropdown } from "../../components/EditDeleteDropdown";
 import StarRating from "../../components/StarRating";
@@ -47,8 +46,8 @@ function ProfilePage() {
 
   const mainProfile = (
     <>
-    <div className="d-flex flex-row w-100">
-      <div className="d-flex flex-row align-items-center gap-3 w-100">
+    <div className={styles.ProfileContainer}>
+      <div className="d-flex flex-row align-items-center gap-3">
         <div className="d-flex flex-column">
           <Image
             className={styles.ProfileImage}
@@ -91,9 +90,15 @@ function ProfilePage() {
       <hr />
       {profileRecipes.results.length ? (
         <InfiniteScroll
-          children={profileRecipes.results.map((recipe) => (
-            <RecipeCard key={recipe.id} {...recipe} setRecipes={setProfileRecipes} />
-          ))}
+          children={
+            <Row className="gx-0">
+              {profileRecipes.results.map((recipe, index) => (
+                <Col md={6} className="p-2" key={recipe.id}>
+                  <RecipeCard key={recipe.id} {...recipe} setRecipes={setProfileRecipes} />
+                </Col>
+              ))}
+            </Row>
+          }
           dataLength={profileRecipes.results.length}
           loader={<Asset spinner />}
           hasMore={!!profileRecipes.next}
@@ -106,20 +111,21 @@ function ProfilePage() {
       )}
     </>
   );
+  
 
   return (
     <Row>
-      <Col className="py-2 p-0 p-lg-2" lg={8}>
-        <Container className={appStyles.Content}>
+      <Col className="py-2 p-0 p-lg-2">
           {hasLoaded ? (
             <>
+            <div className={styles.Content}>
               {mainProfile}
               {mainProfileRecipes}
+            </div>
             </>
           ) : (
             <Asset spinner />
           )}
-        </Container>
       </Col>
     </Row>
   );

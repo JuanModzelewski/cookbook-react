@@ -7,7 +7,7 @@ const InstructionsSection = ({ paragraphInstructions }) => {
     <div className={styles.InstructionsContainer} id="cooking-instructions">
       <CardTitle className={styles.Heading}>Cooking Instructions</CardTitle>
       {paragraphInstructions.map((paragraphInstructions, index) => (
-        <p className="text-start mt-4" key={index}>{paragraphInstructions}</p>
+        <div className="text-start mt-4" key={index}>{paragraphInstructions}</div>
       ))}
     </div>
   );

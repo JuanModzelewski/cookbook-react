@@ -1,5 +1,5 @@
 import React from 'react';
-import { OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { CardText, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import Card from 'react-bootstrap/Card';
 import CardBody from 'react-bootstrap/CardBody';
 import CardImg from 'react-bootstrap/CardImg';
@@ -113,10 +113,12 @@ const RecipeCard = (props) => {
                     <StarRating rating={average_rating} reviewCount={review_count} />
                 </div>
                 {description &&
-                        <Card.Text className="text-start">
-                            {paragraphDescription.map (
-                                (paragraphDescription, index) => <div key={index}>{paragraphDescription}</div>)}
-                        </Card.Text>}
+                        <CardText className="text-start">
+                        {paragraphDescription.map((paragraphDescription, index) => (
+                          <p key={index}>{paragraphDescription}</p>
+                        ))}
+                      </CardText>
+                }
             </CardBody>
         </Card>
     );

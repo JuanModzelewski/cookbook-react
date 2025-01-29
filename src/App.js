@@ -20,40 +20,24 @@ function App() {
   return (
     <div className={styles.App}>
       <NavBar />
-      <div className={styles.Main}>
+      <div className={styles.BackgroundImage}>
+      <Container className={styles.Main}>
         <Routes>
           <Route path="/signup" element={<SignUpForm />} />
           <Route path="/signin" element={<SignInForm />} />
-          <Route path="/recipe/create" element={
-            <Container className={styles.Container}>
-              <RecipeCreateForm />
-            </Container>
-          }/>
-          <Route path="/recipe/:id/edit" element={
-            <Container className={styles.Container}>
-              <RecipeEditForm/>
-            </Container>
-          }/>
-          <Route path="/" element={
-            <Container className={styles.Container}>
-              <RecipesPage message="No recipes found, adjust your search criteria." />
-            </Container>
-          }/>
+          <Route path="/recipe/create" element={<RecipeCreateForm />} />
+          <Route path="/recipe/:id/edit" element={<RecipeEditForm />} />
+          <Route path="/" element={<RecipesPage message="No recipes found, adjust your search criteria." />} />
           <Route path="/favorites" element={
-            <Container className={styles.Container}>
-              <RecipesPage 
-                message="No recipes found, adjust your search criteria or add a recipe to your favorites."
-                filter={`favorites__owner__profile=${profile_id}&ordering=-favorites__created_at&`} />
-            </Container>
-          }/>
-          <Route path="/recipes/:id" element={<RecipeDetails/>}/>
-          <Route path="/profiles/:id" element={
-            <Container className={styles.Container}>
-              <ProfilePage />
-            </Container>
-          }/>
-          <Route path="*" element={<Container className={styles.Main}><h1>Not Found</h1></Container>} />
+            <RecipesPage
+              message="No recipes found, adjust your search criteria or add a recipe to your favorites."
+              filter={`favorites__owner__profile=${profile_id}&ordering=-favorites__created_at&`} />
+          } />
+          <Route path="/recipes/:id" element={<RecipeDetails />} />
+          <Route path="/profiles/:id" element={<ProfilePage />} />
+          <Route path="*" element={<h1>Not Found</h1>} />
         </Routes>
+      </Container>
       </div>
     </div>
   );
