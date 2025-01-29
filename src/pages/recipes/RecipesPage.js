@@ -38,7 +38,7 @@ function RecipesPage({ message, filter="" }) {
     return (
         <Row className="h-100">
             <Col className="py-2 p-0 p-lg-2" lg={8}>
-                <p>Top Rated Recipes mobile</p>
+                <div>Top Rated Recipes mobile</div>
                 <i className={`fas fa-search ${styles.SearchIcon}`}></i>
                 <Form
                     className={styles.SearchBar}
@@ -77,7 +77,7 @@ function RecipesPage({ message, filter="" }) {
                 )}
             </Col>
             <Col md={4} className="d-none d-lg-block p-0 p-lg-2">
-                <p>Top Rated Recipes for desktop</p>
+                <div>Top Rated Recipes for desktop</div>
             </Col>
         </Row>
     );

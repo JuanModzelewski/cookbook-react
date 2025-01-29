@@ -40,7 +40,7 @@ const NavBar = () => {
     <>
       <NavLink to="/favorites" className={styles.NavLink}><i className="fa-regular fa-heart"></i>Favorites</NavLink>
       <NavLink to="/logout" onClick={handleSignOut} className={styles.NavLink}><i className="fa-solid fa-right-from-bracket"></i>Sign Out</NavLink>
-      <NavLink to="/profile" className={styles.NavLink}><Avatar src={currentUser?.profile_image} height={45} width={45} />Profile</NavLink>
+      <NavLink to={`/profiles/${currentUser?.profile_id}/`} className={styles.NavLink}><Avatar src={currentUser?.profile_image} height={45} width={45} />Profile</NavLink>
     </>
   )
   const loggedOutIcons = (

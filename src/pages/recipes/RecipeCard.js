@@ -115,7 +115,7 @@ const RecipeCard = (props) => {
                 {description &&
                         <Card.Text className="text-start">
                             {paragraphDescription.map (
-                                (paragraphDescription, index) => <p key={index}>{paragraphDescription}</p>)}
+                                (paragraphDescription, index) => <div key={index}>{paragraphDescription}</div>)}
                         </Card.Text>}
             </CardBody>
         </Card>
