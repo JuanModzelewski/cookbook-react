@@ -24,7 +24,8 @@ const RecipeDetails = () => {
     const [reviews, setReviews] = useState({ results: [], next: null });
     const currentUser = useCurrentUser();
     const is_owner = currentUser?.username === recipe?.owner;
-    const paragraphs = recipe?.cooking_instructions ? recipe.cooking_instructions.split('\n') : [];
+    const paragraphInstructions = recipe?.cooking_instructions ? recipe.cooking_instructions.split('\n') : [];
+    const paragraphDescription = recipe?.description ? recipe.description.split('\n') : [];
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -91,6 +92,7 @@ const RecipeDetails = () => {
                         handleRemoveFavorite={handleRemoveFavoriteClick}
                         currentUser={currentUser}
                         setRecipe={setRecipe}
+                        paragraphDescription={paragraphDescription}
                     />
                     <hr />
                     <IngredientsSection
@@ -99,7 +101,7 @@ const RecipeDetails = () => {
                     />
                     <hr />
                     {recipe.cooking_instructions && (
-                        <InstructionsSection paragraphs={paragraphs} />
+                        <InstructionsSection paragraphInstructions={paragraphInstructions} />
                     )}
                 </CardBody>
             </Card>

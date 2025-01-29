@@ -11,7 +11,8 @@ const TitleSection = (props) => {
         handleFavorite,
         handleRemoveFavorite,
         currentUser,
-        setRecipe
+        setRecipe,
+        paragraphDescription
     } = props;
 
     const onFavorite = () => handleFavorite(recipe.id, is_owner, setRecipe);
@@ -52,7 +53,11 @@ const TitleSection = (props) => {
                         </div>
                     </div>
                     <StarRating rating={recipe.average_rating} reviewCount={recipe.review_count} />
-                    {recipe.description && <Card.Text className="text-start">{recipe.description}</Card.Text>}
+                    {recipe.description &&
+                        <Card.Text className="text-start">
+                            {paragraphDescription.map (
+                                (paragraphDescription, index) => <p key={index}>{paragraphDescription}</p>)}
+                        </Card.Text>}
                 </div>
                 <a href="#ingredients" className={styles.SectionLink}>
                     <i className="fa-solid fa-list-ul"></i>

@@ -30,6 +30,7 @@ const RecipeCard = (props) => {
 
     const currentUser = useCurrentUser();
     const is_owner = currentUser?.username === owner;
+    const paragraphDescription = description ? description.split('\n') : [];
 
     const handleFavorite = async () => {
         try {
@@ -111,7 +112,11 @@ const RecipeCard = (props) => {
                     {title && <Card.Title className={styles.Title}>{title}</Card.Title>}
                     <StarRating rating={average_rating} reviewCount={review_count} />
                 </div>
-                {description && <Card.Text className="text-start pt-2">{description}</Card.Text>}
+                {description &&
+                        <Card.Text className="text-start">
+                            {paragraphDescription.map (
+                                (paragraphDescription, index) => <p key={index}>{paragraphDescription}</p>)}
+                        </Card.Text>}
             </CardBody>
         </Card>
     );
