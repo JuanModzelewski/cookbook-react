@@ -27,6 +27,7 @@ function ProfilePage() {
           axiosReq.get(`/profiles/${id}/`),
           axiosReq.get(`/recipes/?owner__profile=${id}`),
         ]);
+
         setProfileData({ results: [pageProfile] });
         setProfileRecipes(profileRecipes);
         setHasLoaded(true);
@@ -57,7 +58,7 @@ function ProfilePage() {
           <Image
             className={styles.ProfileImage}
             roundedCircle
-            src={profile?.profile_image}
+            src={profile?.image}
           />
         </div>
         <div className={styles.ProfileInfo}>

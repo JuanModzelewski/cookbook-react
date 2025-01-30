@@ -8,12 +8,12 @@ import Logo from '../assets/CookBook-Logo.png';
 import { useCurrentUser, useSetCurrentUser } from '../contexts/CurrentUserContext';
 import useClickOutsideToggle from '../hooks/useClickOutsideToggle';
 import styles from '../styles/NavBar.module.css';
+import { removeTokenTimestamp } from '../utils/utils';
 import Avatar from './Avatar';
 
 const NavBar = () => {
   const currentUser = useCurrentUser();
   const setCurrentUser = useSetCurrentUser();
-
   const navigate = useNavigate();
 
   const { expanded, setExpanded, ref } = useClickOutsideToggle();
@@ -26,10 +26,12 @@ const NavBar = () => {
       });
       setCurrentUser(null);
       navigate("/");
+      removeTokenTimestamp();
     } catch (err) {
       console.log(err);
     }
   };
+
 
   const createRecipeIcon = (
     <>
@@ -40,7 +42,7 @@ const NavBar = () => {
     <>
       <NavLink to="/favorites" className={styles.NavLink}><i className="fa-regular fa-heart"></i>Favorites</NavLink>
       <NavLink to="/logout" onClick={handleSignOut} className={styles.NavLink}><i className="fa-solid fa-right-from-bracket"></i>Sign Out</NavLink>
-      <NavLink to={`/profiles/${currentUser?.profile_id}/`} className={styles.NavLink}><Avatar src={currentUser?.profile_image} height={45} width={45} />Profile</NavLink>
+      <NavLink to={`/profiles/${currentUser?.profile_id}/`} className={styles.NavLink}><Avatar src={currentUser?.profile_image} height={45} width={45}/>Profile</NavLink>
     </>
   )
   const loggedOutIcons = (

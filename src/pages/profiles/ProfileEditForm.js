@@ -15,12 +15,12 @@ function ProfileEditForm() {
     const imageFile = useRef();
 
     const [profileData, setProfileData] = useState({
-        profile_image: "",
+        image: "",
         name: "",
         content: "",
     });
 
-    const { profile_image, name, content } = profileData;
+    const { image, name, content } = profileData;
 
     const [errors, setErrors] = useState({});
 
@@ -29,8 +29,8 @@ function ProfileEditForm() {
             if (currentUser?.profile_id?.toString() === id) {
             try {
                 const { data } = await axiosReq.get(`/profiles/${id}/`);
-                const { profile_image, name, content } = data;
-                setProfileData({profile_image, name, content});
+                const { image, name, content } = data;
+                setProfileData({image, name, content});
             } catch (err) {
                 console.log(err);
                 navigate("/");
@@ -55,7 +55,7 @@ function ProfileEditForm() {
         if (file) {
             setProfileData({
                 ...profileData,
-                profile_image: URL.createObjectURL(file),
+                image: URL.createObjectURL(file),
             });
         }
     };
@@ -67,12 +67,12 @@ function ProfileEditForm() {
         formData.append("content", content);
 
         if (imageFile.current.files[0]) {
-            formData.append("profile_image", imageFile.current.files[0]);
+            formData.append("image", imageFile.current.files[0]);
         }
 
         try {
             const { data } = await axiosReq.put(`/profiles/${id}/`, formData);
-            setCurrentUser({...currentUser, profile_image: data.profile_image});
+            setCurrentUser({...currentUser, image: data.image});
             navigate(`/profiles/${id}`);
         } catch (err) {
             console.log(err);
@@ -130,9 +130,9 @@ function ProfileEditForm() {
         <Form onSubmit={handleSubmit}>
             <Container>
                 <Form.Group>
-                    {profile_image && (
+                    {image && (
                         <figure>
-                            <img src={profile_image} fluid="true" />
+                            <img src={image} fluid="true" />
                         </figure>
                     )}
                     {errors?.image?.map((message, idx) => (
