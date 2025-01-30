@@ -47,19 +47,19 @@ const Review = (props) => {
         <Link to={`/profiles/${profile_id}`}>
           <Avatar src={profile_image} height={55} width={55} />
         </Link>
-        <div className="align-self-center ml-2 w-100">
-          <span className={styles.Owner}>{owner}</span>
-          <span className={styles.Date}>{updated_at}</span>
-              <div>
-                <div className={styles.Rating}><StarRating rating={rating} review /></div>
-                <div>{comment}</div>
-              </div>
+        <div className="d-flex flex-column align-items-start ms-3 w-100">
+          <div className="d-flex flex-row align-items-center">
+            <div className={styles.Owner}>{owner}</div>
+            <div className={styles.Rating}><StarRating rating={rating} review /></div>
+          </div>
+          <div className={styles.Date}>{updated_at}</div>
+          <div>{comment}</div>
         </div>
         <div className="d-flex align-items-start">
         {is_owner &&
           <EditDeleteDropdown
             handleEdit={() => handleEditClick(id)}
-            handleDelete={handleShowModal} 
+            handleDelete={handleShowModal}
           />}
           <DeleteConfirmationModal
               show={showModal}

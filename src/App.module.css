@@ -9,6 +9,10 @@
   padding-top: 2rem;
 }
 
+.SignInUpContainer {
+  margin-top: 127px;
+}
+
 input[type="file"] {
   display: none;
 }

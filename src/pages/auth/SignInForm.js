@@ -78,7 +78,7 @@ const SignInForm = () => {
                         </Alert>
                     ))}
 
-                    <Button className={`${btnStyles.Button} ${btnStyles.Wide} ${btnStyles.Bright}`} type="submit">
+                    <Button className={`${btnStyles.Button} ${btnStyles.Wide} ${btnStyles.Bright} ${btnStyles.SignInOutText}`} type="submit">
                         SignIn
                     </Button>
                     {errors.non_field_errors?.map((message, idx) => (

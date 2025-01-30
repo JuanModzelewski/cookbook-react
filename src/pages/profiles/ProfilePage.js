@@ -47,38 +47,35 @@ function ProfilePage() {
   const mainProfile = (
     <>
     <div className={styles.ProfileContainer}>
-      <div className="d-flex flex-row align-items-center gap-3">
+      <div className="d-flex flex-row no-wrap justify-content-center align-items-center gap-3 w-100">
         <div className="d-flex flex-column">
           <Image
             className={styles.ProfileImage}
             roundedCircle
             src={profile?.profile_image}
           />
-          <h3 className="text-center">{profile?.owner}</h3>
         </div>
-        <div className="d-flex flex-row align-items-center">
-
-          <div className="justify-content-center no-gutters">
-            <div className="d-flex flex-row align-items-center">
-              <div className="pe-3">Recipes</div>
-              <div>{profile?.recipes_count}</div>
+        <div className="d-flex flex-column align-items-start">
+        <h3 className="text-center fw-bold">{profile?.owner}</h3>
+            <div className="d-flex flex-row flex-wrap align-items-center">
+              <div className="pe-3 fs-5">Recipes:</div>
+              <div className="fs-4">{profile?.recipes_count}</div>
             </div>
-            <div className="d-flex flex-row align-items-center">
-              <div className="pe-3">Average Rating</div>
-              <StarRating rating={average_rating} />
+            <div className="d-flex flex-row flex-wrap align-items-start">
+              <div className="pe-3 fs-5 mb-1">Average Rating:</div>
+              <StarRating rating={average_rating}/>
             </div>
-          </div>
         </div>
         {profile?.content && <Col className="p-3">{profile.content}</Col>}
       </div>
+      <div className="align-self-start pe-3">
       {is_owner && (
-          <div className="align-self-start">
             <EditDeleteDropdown
               handleEdit={() => { }}
               handleDelete={() => { }}
-              className="align-self-start"
             />
-          </div>)}
+          )}
+      </div>
     </div>
     </>
   );
@@ -86,14 +83,14 @@ function ProfilePage() {
   const mainProfileRecipes = (
     <>
       <hr />
-      <div className="text-center">{profile?.owner}'s recipes</div>
+      <div className="text-center">{currentUser?.username === profile?.owner ? 'Your' : profile?.owner + "'s"} recipes</div>
       <hr />
       {profileRecipes.results.length ? (
         <InfiniteScroll
           children={
             <Row className="gx-0">
               {profileRecipes.results.map((recipe, index) => (
-                <Col md={6} className="p-2" key={recipe.id}>
+                <Col md={6} sm={12} className="p-2" key={recipe.id}>
                   <RecipeCard key={recipe.id} {...recipe} setRecipes={setProfileRecipes} />
                 </Col>
               ))}
@@ -115,7 +112,7 @@ function ProfilePage() {
 
   return (
     <Row>
-      <Col className="py-2 p-0 p-lg-2">
+      <Col className="ps-3 pe-3">
           {hasLoaded ? (
             <>
             <div className={styles.Content}>
