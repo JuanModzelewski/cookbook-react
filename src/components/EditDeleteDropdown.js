@@ -1,5 +1,6 @@
 import React from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
+import { useNavigate } from 'react-router-dom';
 import styles from '../styles/EditDeleteDropdown.module.css';
 
 
@@ -14,8 +15,9 @@ const ThreeDots = React.forwardRef(({ onClick }, ref) => (
   />
 ));
 
-export const EditDeleteDropdown = ({handleEdit, handleDelete}) => {
-    return (
+export const EditDeleteDropdown = ({handleEdit, handleDelete, id}) => {
+  const navigate = useNavigate();  
+  return (
       <Dropdown className="ml-auto" drop="start">
         <Dropdown.Toggle as={ThreeDots} className={styles.ThreeDots} />
   
@@ -25,7 +27,7 @@ export const EditDeleteDropdown = ({handleEdit, handleDelete}) => {
           <Dropdown.Item
             className={styles.DropdownItem}
             aria-label="edit"
-            onClick={handleEdit}
+            onClick={handleEdit? handleEdit : () => {navigate(`/profiles/${id}/edit`);}}
           >
             <i className={`${styles.DropdownIcon} fas fa-edit`} />
           </Dropdown.Item>

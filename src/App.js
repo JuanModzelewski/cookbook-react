@@ -6,6 +6,7 @@ import NavBar from './components/NavBar';
 import { useCurrentUser } from './contexts/CurrentUserContext';
 import SignInForm from './pages/auth/SignInForm';
 import SignUpForm from './pages/auth/SignUpForm';
+import ProfileEditForm from './pages/profiles/ProfileEditForm';
 import ProfilePage from './pages/profiles/ProfilePage';
 import RecipeCreateForm from './pages/recipes/RecipeCreateForm';
 import RecipeDetails from './pages/recipes/RecipeDetails';
@@ -61,6 +62,11 @@ function App() {
           <Route path="/profiles/:id" element={
             <Container className={styles.Main}>
               <ProfilePage />
+            </Container>
+          }/>
+          <Route path="/profiles/:id/edit" element={
+            <Container className={styles.Main}>
+              <ProfileEditForm />
             </Container>
           }/>
           <Route path="*" element={<h1>Not Found</h1>} />

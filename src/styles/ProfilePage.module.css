@@ -1,7 +1,7 @@
 .ProfileImage {
   object-fit: cover;
-  height: 200px;
-  width: 200px;
+  height: 175px;
+  width: 175px;
   margin: 4px;
   clip-path: inset(0 0 0 0 round 50%);
   /* Crop to a square */
@@ -22,10 +22,23 @@
   background-color: #ffffff;
   border-radius: 5px;
   border: 1px solid #f1f1f1;
-  padding: 1.5rem;
+  padding: 1rem;
 }
 
-@media screen and (max-width: 991px) {
+.ProfileInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+}
+
+.About {
+  max-width: 70%;
+  margin: auto;
+  margin-bottom: 2rem;
+}
+
+@media screen and (max-width: 960px) {
   .ProfileImage {
     width: 170px;
     height: 170px;
@@ -34,4 +47,15 @@
     object-fit: cover;
     /* Ensure the image covers the clipped area */
   }
+
+  .About {
+    max-width: 100%;
+  }
+}
+
+@media screen and (max-width: 770px) {
+  .ProfileInfo {
+    align-items: center;
+  }
+  
 }

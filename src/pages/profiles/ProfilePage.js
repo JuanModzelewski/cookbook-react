@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Col, Image, Row } from "react-bootstrap";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { axiosReq } from "../../api/axiosDefaults";
 import Asset from "../../components/Asset";
 import { EditDeleteDropdown } from "../../components/EditDeleteDropdown";
@@ -18,6 +18,7 @@ function ProfilePage() {
 
   const currentUser = useCurrentUser();
   const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,10 +27,6 @@ function ProfilePage() {
           axiosReq.get(`/profiles/${id}/`),
           axiosReq.get(`/recipes/?owner__profile=${id}`),
         ]);
-
-        console.log('Fetched Profile:', pageProfile); // Debug log
-        console.log('Fetched Recipes:', profileRecipes); // Debug log
-
         setProfileData({ results: [pageProfile] });
         setProfileRecipes(profileRecipes);
         setHasLoaded(true);
@@ -46,8 +43,16 @@ function ProfilePage() {
 
   const mainProfile = (
     <>
+    <div className="d-flex flex-row justify-content-end me-4">
+      {is_owner && (
+            <EditDeleteDropdown
+              handleEdit={() => navigate(`/profiles/${id}/edit`)}
+              handleDelete={() => { }}
+            />
+          )}
+      </div>
     <div className={styles.ProfileContainer}>
-      <div className="d-flex flex-row no-wrap justify-content-center align-items-center gap-3 w-100">
+      <div className="d-flex flex-row flex-wrap justify-content-center align-items-center gap-3 w-100">
         <div className="d-flex flex-column">
           <Image
             className={styles.ProfileImage}
@@ -55,35 +60,31 @@ function ProfilePage() {
             src={profile?.profile_image}
           />
         </div>
-        <div className="d-flex flex-column align-items-start">
-        <h3 className="text-center fw-bold">{profile?.owner}</h3>
-            <div className="d-flex flex-row flex-wrap align-items-center">
+        <div className={styles.ProfileInfo}>
+        <h3 className="text-center fw-bold mb-3">{profile?.name || profile?.owner}</h3>
+            <div className="d-flex flex-row flex-wrap align-self-start">
               <div className="pe-3 fs-5">Recipes:</div>
               <div className="fs-4">{profile?.recipes_count}</div>
             </div>
-            <div className="d-flex flex-row flex-wrap align-items-start">
+            <div className="d-flex flex-row flex-wrap align-self-start">
               <div className="pe-3 fs-5 mb-1">Average Rating:</div>
               <StarRating rating={average_rating}/>
             </div>
         </div>
-        {profile?.content && <Col className="p-3">{profile.content}</Col>}
-      </div>
-      <div className="align-self-start pe-3">
-      {is_owner && (
-            <EditDeleteDropdown
-              handleEdit={() => { }}
-              handleDelete={() => { }}
-            />
-          )}
       </div>
     </div>
+    {profile?.content && <div className={styles.About}>
+          <div className="fs-4 text-center">About {profile?.owner}</div>
+          <hr />
+            {profile.content}
+          </div>}
     </>
   );
 
   const mainProfileRecipes = (
     <>
       <hr />
-      <div className="text-center">{currentUser?.username === profile?.owner ? 'Your' : profile?.owner + "'s"} recipes</div>
+      <div className="text-center fs-4">{currentUser?.username === profile?.owner ? 'Your' : profile?.owner + "'s"} recipes</div>
       <hr />
       {profileRecipes.results.length ? (
         <InfiniteScroll
