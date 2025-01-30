@@ -72,6 +72,7 @@ const ReviewSection = (props) => {
                      setRecipe={setRecipe}
                      setReviews={setReviews}
                      handleEditClick={handleEditClick}
+                     profile_id={review.profile_id}
                  />
              )
          ))}

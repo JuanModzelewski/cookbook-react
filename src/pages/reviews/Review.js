@@ -18,7 +18,7 @@ const Review = (props) => {
     rating,
     id,
     setReviews,
-    handleEditClick
+    handleEditClick,
   } = props;
 
   const [showModal, setShowModal] = useState(false);
@@ -27,6 +27,8 @@ const Review = (props) => {
   
   const currentUser = useCurrentUser();
   const is_owner = currentUser?.username === owner;
+
+  console.log(profile_id, profile_image, owner, updated_at, comment, rating, id);
 
   const handleDelete = async () => {
     try {

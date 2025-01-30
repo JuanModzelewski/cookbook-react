@@ -128,7 +128,7 @@ function RecipeCreateForm() {
                 />
             </Form.Group>
             <hr className={styles.Divider} />
-            {errors?.content?.map((message, idx) => (
+            {errors?.description?.map((message, idx) => (
                 <Alert variant="warning" key={idx}>
                     {message}
                 </Alert>
@@ -145,12 +145,12 @@ function RecipeCreateForm() {
                     onChange={handleChange}
                 />
             </Form.Group>
-            <hr className={styles.Divider} />
-            {errors?.content?.map((message, idx) => (
+            {errors?.cooking_instructions?.map((message, idx) => (
                 <Alert variant="warning" key={idx}>
                     {message}
                 </Alert>
             ))}
+            <hr className={styles.Divider} />
         </div>
     );
 
@@ -214,11 +214,11 @@ function RecipeCreateForm() {
 
     return (
         <Form onSubmit={handleSubmit}>
-            {loading && <FullScreenSpinner />}
+            {loading && <FullScreenSpinner message="Creating your recipe..." />}
             <Row>
                 <Col className="py-2 p-0 p-md-2" lg={6}>
                     <Container
-                        className={`${appStyles.Content} ${styles.Container} d-flex flex-column justify-content-center`}
+                        className={`${styles.Content} ${styles.Container} d-flex flex-column justify-content-center`}
                     >
                         <Form.Group className="text-center">
                             {recipe_image ? (

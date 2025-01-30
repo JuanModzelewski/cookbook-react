@@ -234,7 +234,7 @@ function RecipeEditForm() {
 
     return (
         <Form onSubmit={handleSubmit}>
-            {loading && <FullScreenSpinner />}
+            {loading && <FullScreenSpinner message="Preparing your recipe" />}
             <Row>
                 <Col className="py-2 p-0 p-md-2" lg={6}>
                     <Container

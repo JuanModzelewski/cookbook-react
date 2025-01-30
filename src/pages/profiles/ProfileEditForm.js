@@ -1,7 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Alert, Button, Container, Form } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
+import styles from "../..//styles/ProfileEditForm.module.css";
 import { axiosReq } from "../../api/axiosDefaults";
+import FullScreenSpinner from "../../components/FullScreenSpinner";
 import { useCurrentUser, useSetCurrentUser } from "../../contexts/CurrentUserContext";
 import btnStyles from "../../styles/Button.module.css";
 
@@ -13,6 +15,7 @@ function ProfileEditForm() {
     const { id } = useParams();
     const navigate = useNavigate();
     const imageFile = useRef();
+    const [ loading, setLoading ] = useState(false); 
 
     const [profileData, setProfileData] = useState({
         image: "",
@@ -26,6 +29,7 @@ function ProfileEditForm() {
 
     useEffect(() => {
         const handleMount = async () => {
+            setLoading(true);
             if (currentUser?.profile_id?.toString() === id) {
             try {
                 const { data } = await axiosReq.get(`/profiles/${id}/`);
@@ -34,6 +38,8 @@ function ProfileEditForm() {
             } catch (err) {
                 console.log(err);
                 navigate("/");
+            } finally {
+                setLoading(false);
             }
         } else {
             navigate("/");
@@ -83,15 +89,15 @@ function ProfileEditForm() {
     const textFields = (
         <>
           <Form.Group>
-            <Form.Label>Name</Form.Label>
+            <Form.Label className="fs-5">Name</Form.Label>
             <Form.Control
               type="text"
               value={name}
               onChange={handleChange}
               name="name"
+              className="mb-4"
             />
           </Form.Group>
-
           {errors?.name?.map((message, idx) => (
             <Alert variant="warning" key={idx}>
               {message}
@@ -99,13 +105,14 @@ function ProfileEditForm() {
           ))}
 
           <Form.Group>
-            <Form.Label>Bio</Form.Label>
+            <Form.Label className="fs-5">Bio</Form.Label>
             <Form.Control
               as="textarea"
               value={content}
               onChange={handleChange}
               name="content"
               rows={7}
+              className="mb-4"
             />
           </Form.Group>
     
@@ -114,25 +121,32 @@ function ProfileEditForm() {
               {message}
             </Alert>
           ))}
+          <div className="d-flex flex-row">
           <Button
-            className={`${btnStyles.Button} ${btnStyles.Blue}`}
+            className={`${btnStyles.Button} ${btnStyles.Wide} p-2 me-3 ms-3 fs-6`}
+            variant="warning"
             onClick={() => navigate(-1)}
           >
             cancel
           </Button>
-          <Button className={`${btnStyles.Button} ${btnStyles.Blue}`} type="submit">
+          <Button
+            variant="secondary" 
+            className={`${btnStyles.Button} ${btnStyles.Wide} p-2 me-3 ms-3 fs-6`} 
+            type="submit">
             save
           </Button>
+          </div>
         </>
       );
 
     return (
         <Form onSubmit={handleSubmit}>
-            <Container>
-                <Form.Group>
+            {loading && <FullScreenSpinner />}
+            <Container className={styles.ProfileEditPage}>
+                <Form.Group className="text-center">
                     {image && (
                         <figure>
-                            <img src={image} fluid="true" />
+                            <img src={image} alt="Profile image" className={styles.ProfileImage} fluid="true" />
                         </figure>
                     )}
                     {errors?.image?.map((message, idx) => (
@@ -142,10 +156,10 @@ function ProfileEditForm() {
                     ))}
                     <div>
                         <Form.Label
-                            className={`${btnStyles.Button} ${btnStyles.Blue} btn my-auto`}
+                            className={`${btnStyles.Button} ${btnStyles.Bright} p-2 pe-4 ps-4 mt-3 text-center fs-6`}
                             htmlFor="image-upload"
                         >
-                            Change the image
+                            Change image
                         </Form.Label>
                     </div>
                     <Form.Control
@@ -156,9 +170,8 @@ function ProfileEditForm() {
                         type="file"
                     />
                 </Form.Group>
-                <div className="d-md-none">{textFields}</div>
+                <Container>{textFields}</Container>
             </Container>
-            <Container>{textFields}</Container>
         </Form>
     );
 }

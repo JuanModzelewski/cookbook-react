@@ -4,6 +4,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { useLocation } from "react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
 import Asset from "../../components/Asset";
+import FullScreenSpinner from "../../components/FullScreenSpinner";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import styles from "../../styles/RecipesPage.module.css";
 import { fetchMoreData } from "../../utils/utils";
@@ -13,17 +14,21 @@ function RecipesPage({ message, filter="" }) {
     const [recipes, setRecipe] = useState({ results: [] });
     const [query, setQuery] = useState("");
     const [hasLoaded, setHasLoaded] = useState(false);
+    const [ loading, setLoading ] = useState(false);
     const { pathname } = useLocation();
     const currentUser = useCurrentUser();
 
     useEffect(() => {
         const fetchRecipes = async () => {
+            setLoading(true);
             try {
                 const { data } = await axiosReq.get(`/recipes/?${filter}search=${query}`);
                 setRecipe(data);
                 setHasLoaded(true);
             } catch (error) {
                 console.log(error);
+            } finally {
+                setLoading(false);
             }
         };
         setHasLoaded(false);
@@ -73,9 +78,7 @@ function RecipesPage({ message, filter="" }) {
                     )}
                 </>
             ) : (
-                <Container>
-                    <Asset spinner />
-                </Container>
+                <FullScreenSpinner message={"Loading recipes..."} />
             )}
         </div>
     );

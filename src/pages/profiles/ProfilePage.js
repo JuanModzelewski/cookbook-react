@@ -5,6 +5,7 @@ import { useNavigate, useParams } from "react-router";
 import { axiosReq } from "../../api/axiosDefaults";
 import Asset from "../../components/Asset";
 import { EditDeleteDropdown } from "../../components/EditDeleteDropdown";
+import FullScreenSpinner from "../../components/FullScreenSpinner";
 import StarRating from "../../components/StarRating";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import styles from "../../styles/ProfilePage.module.css";
@@ -19,9 +20,11 @@ function ProfilePage() {
   const currentUser = useCurrentUser();
   const { id } = useParams();
   const navigate = useNavigate();
+  const [ loading, setLoading ] = useState(false); 
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       try {
         const [{ data: pageProfile }, { data: profileRecipes }] = await Promise.all([
           axiosReq.get(`/profiles/${id}/`),
@@ -33,6 +36,8 @@ function ProfilePage() {
         setHasLoaded(true);
       } catch (err) {
         console.log(err);
+      } finally {
+        setLoading(false);
       }
     };
     fetchData();
@@ -40,7 +45,9 @@ function ProfilePage() {
 
   const profile = profileData.results[0];
   const is_owner = currentUser?.username === profile?.owner;
-  const average_rating = (profileRecipes.results.reduce((acc, recipe) => acc + recipe.average_rating, 0) / profileRecipes.results.length).toFixed(2);
+ 
+  const ratedRecipes = profileRecipes.results.filter((recipe) => recipe.average_rating > 0);
+  const average_rating = ratedRecipes.reduce((total, recipe) => total + recipe.average_rating, 0) / ratedRecipes.length;
 
   const mainProfile = (
     <>
@@ -123,7 +130,7 @@ function ProfilePage() {
             </div>
             </>
           ) : (
-            <Asset spinner />
+            <FullScreenSpinner message="Loading profile..." />
           )}
       </Col>
     </Row>

@@ -22,6 +22,7 @@ const RecipeDetails = () => {
     const { id } = useParams();
     const [recipe, setRecipe] = useState(null);
     const [reviews, setReviews] = useState({ results: [], next: null });
+    const owner = recipe?.owner;
     const currentUser = useCurrentUser();
     const is_owner = currentUser?.username === recipe?.owner;
     const paragraphInstructions = recipe?.cooking_instructions ? recipe.cooking_instructions.split('\n') : [];
@@ -67,7 +68,7 @@ const RecipeDetails = () => {
         setRecipe({ ...recipe, ingredients: newIngredients });
     };
 
-    if (!recipe) return <FullScreenSpinner />;
+    if (!recipe) return <FullScreenSpinner message="Loading recipe..." />;
 
     return (
         <Container className={appStyles.Container}>

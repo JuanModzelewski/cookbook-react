@@ -8,7 +8,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: rgba(255, 255, 255, 0.525); /* Semi-transparent background */
+    background-color: rgba(255, 255, 255, 0.689); /* Semi-transparent background */
     z-index: 1050; /* Make sure it's above other elements */
 }
 
