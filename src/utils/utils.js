@@ -17,12 +17,18 @@ export const fetchMoreData = async (resource, setResource) => {
 };
 
 export const setTokenTimestamp = (data) => {
-  const refreshTokenTimestamp = jwtDecode(data?.refresh_token).exp;
-  localStorage.setItem("refreshTokenTimestamp", refreshTokenTimestamp);
+  try {
+    const refreshToken = data?.refresh;
+    const refreshTokenTimestamp = jwtDecode(refreshToken).exp;
+      localStorage.setItem("refreshTokenTimestamp", refreshTokenTimestamp);
+  } catch (error) {
+    console.error("Error decoding token:", error);
+  }
 };
 
 export const shouldRefreshToken = () => {
-  return !!localStorage.getItem("refreshTokenTimestamp");
+  const tokenTimestamp = localStorage.getItem("refreshTokenTimestamp");
+  return !!tokenTimestamp;
 };
 
 export const removeTokenTimestamp = () => {

@@ -29,16 +29,16 @@ const SignInForm = () => {
     };
 
     const handleSubmit = async (event) => {
-        event.preventDefault()
+        event.preventDefault();
         try {
-            const { data } = await axios.post("/dj-rest-auth/login/", signInData)
-            setCurrentUser(data.user)
-            setTokenTimestamp(data)
-            navigate("/")
+          const { data } = await axios.post("/dj-rest-auth/login/", signInData);
+            setCurrentUser(data.user);
+            setTokenTimestamp(data);
+            navigate("/");
         } catch (error) {
-            setErrors(error.response?.data)
+          setErrors(error.response?.data);
         }
-    };
+      };
 
     return (
         <div className={styles.SignInFormCoverImage}>
