@@ -12,7 +12,7 @@ const DeleteConfirmationModal = ({ show, handleClose, handleConfirm, message }) 
                 <Button variant="secondary" onClick={handleClose}>
                     Cancel
                 </Button>
-                <Button variant="danger" onClick={handleConfirm}>
+                <Button variant="danger" onClick={handleConfirm} onTouchStart={handleConfirm}>
                     Delete
                 </Button>
             </Modal.Footer>

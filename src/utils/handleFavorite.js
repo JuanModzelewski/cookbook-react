@@ -1,8 +1,8 @@
 import { axiosRes } from '../api/axiosDefaults';
 
-export const handleFavorite = async (recipeId, isOwner, setRecipe) => {
+export const handleFavorite = async (recipeId, is_owner, setRecipe) => {
     try {
-        if (isOwner) return;
+        if (is_owner) return;
         const { data } = await axiosRes.post(`/favorites/`, { recipe: recipeId });
         setRecipe((prevRecipe) => ({
             ...prevRecipe,

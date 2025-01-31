@@ -90,11 +90,11 @@ const RecipeCard = (props) => {
                             <i className={`${styles.FavoriteIcon} fa-regular fa-heart`}></i>
                         </OverlayTrigger>
                     ) : favorite_id ? (
-                        <span onClick={() => handleRemoveFavorite()}>
+                        <span onClick={() => handleRemoveFavorite() } onTouchStart={() => handleRemoveFavorite()}>
                             <i className={`${styles.FavoriteIcon} fa-solid fa-heart`} />
                         </span>
                     ) : currentUser ? (
-                        <span onClick={() => handleFavorite()}>
+                        <span onClick={() => handleFavorite()} onTouchStart={() => handleFavorite()}>
                             <i className={`${styles.FavoriteIcon} fa-regular fa-heart`}></i>
                         </span>
                     ) : (
