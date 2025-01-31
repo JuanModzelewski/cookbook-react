@@ -5,7 +5,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSetCurrentUser } from "../../contexts/CurrentUserContext";
 import btnStyles from "../../styles/Button.module.css";
 import styles from "../../styles/SignInUpForm.module.css";
-import { storeToken } from "../../utils/utils";
 
 const SignInForm = () => {
     const setCurrentUser = useSetCurrentUser()
@@ -33,13 +32,16 @@ const SignInForm = () => {
         try {
           const { data } = await axios.post("/dj-rest-auth/login/", signInData);
             setCurrentUser(data.user);
-            storeToken(data.access);
+            localStorage.setItem('authToken', data.access);
+            localStorage.setItem('refreshToken', data.refresh);
             navigate("/");
         } catch (error) {
+          console.log(error);
+
           setErrors(error.response?.data);
         }
       };
-
+      
     return (
         <div className={styles.SignInFormCoverImage}>
             <div className={styles.PageContainer}>

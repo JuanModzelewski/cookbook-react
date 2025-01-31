@@ -31,7 +31,7 @@ export const CurrentUserProvider = ({ children }) => {
       // Request Interceptor
       axiosReq.interceptors.request.use(
         async (config) => {
-          const token = localStorage.getItem('access_token');
+          const token = localStorage.getItem('authToken');
           if (token) {
             config.headers.Authorization = `Bearer ${token}`;
           }
@@ -48,10 +48,10 @@ export const CurrentUserProvider = ({ children }) => {
           if (error.response?.status === 401 && !originalRequest._retry && shouldRefreshToken()) {
             originalRequest._retry = true;
             try {
-              const refreshToken = localStorage.getItem('refresh_token');
+              const refreshToken = localStorage.getItem('refreshToken');
               const { data } = await axios.post("/dj-rest-auth/token/refresh/", { refresh: refreshToken });
-              localStorage.setItem('access_token', data.access);
-              localStorage.setItem('refresh_token', data.refresh);
+              localStorage.setItem('authToken', data.access);
+              localStorage.setItem('refreshToken', data.refresh);
               setTokenTimestamp(data);
               axios.defaults.headers.common['Authorization'] = `Bearer ${data.access}`;
               originalRequest.headers['Authorization'] = `Bearer ${data.access}`;
