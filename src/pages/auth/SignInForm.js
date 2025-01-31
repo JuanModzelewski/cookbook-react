@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSetCurrentUser } from "../../contexts/CurrentUserContext";
 import btnStyles from "../../styles/Button.module.css";
 import styles from "../../styles/SignInUpForm.module.css";
+import { setTokenTimestamp } from "../../utils/utils";
 
 const SignInForm = () => {
     const setCurrentUser = useSetCurrentUser()
@@ -33,6 +34,7 @@ const SignInForm = () => {
           const { data } = await axios.post("/dj-rest-auth/login/", signInData);
             setCurrentUser(data.user);
             navigate("/");
+            setTokenTimestamp(data);
         } catch (error) {
           setErrors(error.response?.data);
         }
