@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSetCurrentUser } from "../../contexts/CurrentUserContext";
 import btnStyles from "../../styles/Button.module.css";
 import styles from "../../styles/SignInUpForm.module.css";
-import { setTokenTimestamp, storeToken } from "../../utils/utils";
+import { storeToken } from "../../utils/utils";
 
 const SignInForm = () => {
     const setCurrentUser = useSetCurrentUser()
@@ -35,7 +35,6 @@ const SignInForm = () => {
             setCurrentUser(data.user);
             storeToken(data.access);
             navigate("/");
-            setTokenTimestamp(data);
         } catch (error) {
           setErrors(error.response?.data);
         }
