@@ -28,3 +28,33 @@ export const shouldRefreshToken = () => {
 export const removeTokenTimestamp = () => {
   localStorage.removeItem('refreshTokenTimestamp');
 };
+
+export const storeToken = (token) => {
+  try {
+      localStorage.setItem('authToken', token);
+  } catch (e) {
+      console.error("Failed to store token", e);
+  }
+};
+
+export const getToken = () => {
+  try {
+      return localStorage.getItem('authToken');
+  } catch (e) {
+      console.error("Failed to get token", e);
+      return null;
+  }
+};
+
+export const checkTokenValidity = (navigate) => {
+  const token = getToken();
+  if (!token) {
+      navigate('/login');
+  } else {
+      const decodedToken = jwtDecode(token);
+      const currentTime = Date.now() / 1000;
+      if (decodedToken.exp < currentTime) {
+          navigate('/login');
+      }
+  }
+};
