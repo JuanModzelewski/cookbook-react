@@ -25,6 +25,7 @@ const NavBar = () => {
         url: "dj-rest-auth/logout/"
       });
       localStorage.removeItem("authToken");
+      localStorage.removeItem("refreshToken");
       setCurrentUser(null);
       navigate("/");
       removeTokenTimestamp();
