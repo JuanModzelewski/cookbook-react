@@ -19,3 +19,11 @@
 .DropdownItem:hover {
     color: #ffa600;
 }
+
+.DropdownItem.active,
+.DropdownItem:active,
+.DropdownItem:focus,
+.DropdownItem:hover {
+  background-color: #f0f0f0 !important; 
+}
+

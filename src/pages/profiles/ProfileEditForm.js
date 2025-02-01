@@ -131,7 +131,7 @@ function ProfileEditForm() {
           </Button>
           <Button
             variant="secondary" 
-            className={`${btnStyles.Button} ${btnStyles.Wide} p-2 me-3 ms-3 fs-6`} 
+            className={`${btnStyles.Button} ${btnStyles.Wide} ${btnStyles.Bright} p-2 me-3 ms-3 fs-6`} 
             type="submit">
             save
           </Button>
@@ -156,8 +156,9 @@ function ProfileEditForm() {
                     ))}
                     <div>
                         <Form.Label
-                            className={`${btnStyles.Button} ${btnStyles.Bright} p-2 pe-4 ps-4 mt-3 text-center fs-6`}
+                            className={`${btnStyles.Button} ${btnStyles.Black} p-2 pe-4 ps-4 mt-3 text-center fs-6`}
                             htmlFor="image-upload"
+                            variant="secondary"
                         >
                             Change image
                         </Form.Label>

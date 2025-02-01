@@ -157,8 +157,8 @@ function RecipeCreateForm() {
     const submitFields = (
         <div className="d-flex justify-content-end">
             <Button
-                variant="secondary"
-                className={`${btnStyles.Wide} ${btnStyles.Button}`}
+                variant="warning"
+                className={`${btnStyles.Wide} ${btnStyles.Button} me-3`}
                 onClick={() => navigate(-1)}
             >
                 CANCEL
@@ -231,7 +231,7 @@ function RecipeCreateForm() {
                                     </figure>
                                     <div>
                                         <Form.Label
-                                            className={`${btnStyles.Button} ${btnStyles.Orange} btn`}
+                                            className={`${btnStyles.Button} ${btnStyles.Black} btn`}
                                             htmlFor="image-upload"
                                         >CHANGE THE IMAGE
                                         </Form.Label>

@@ -22,6 +22,7 @@ const RecipeDetails = () => {
     const { id } = useParams();
     const [recipe, setRecipe] = useState(null);
     const [reviews, setReviews] = useState({ results: [], next: null });
+    const [profileData, setProfileData] = useState({ results: [] });
     const owner = recipe?.owner;
     const currentUser = useCurrentUser();
     const is_owner = currentUser?.username === recipe?.owner;
@@ -38,6 +39,10 @@ const RecipeDetails = () => {
                 ]);
                 setRecipe(recipe);
                 setReviews(reviews);
+
+                const { data } = await axiosRes.get(`/profiles/${recipe.profile_id}/`);
+                setProfileData(data);
+
             } catch (err) {
                 console.log(err);
             }
@@ -77,12 +82,12 @@ const RecipeDetails = () => {
                     <AvatarSection
                         profile_id={recipe.profile_id}
                         profile_image={recipe.profile_image}
-                        owner={recipe.owner}
                         updated_at={recipe.updated_at}
                         is_owner={is_owner}
                         handleEdit={handleEdit}
                         handleDelete={handleDelete}
                         recipeDetails
+                        profileData={profileData}
                     />
                 </CardBody>
                 <CardBody>

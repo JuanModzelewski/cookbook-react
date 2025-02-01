@@ -31,6 +31,7 @@ const RecipeCard = (props) => {
     const currentUser = useCurrentUser();
     const is_owner = currentUser?.username === owner;
     const paragraphDescription = description ? description.split('\n') : [];
+    
 
     const handleFavorite = async () => {
         try {

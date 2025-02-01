@@ -1,12 +1,15 @@
 .Button {
     font-size: 0.8rem;
     align-self: center;
+    font-weight: bold;
     border-radius: 10px;
     border-color: transparent;
-    padding: 4px 10px;
-    margin-left: 2px;
-    margin-right: 2px;
     min-width: 75px;
+    letter-spacing: 0.2em;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
 }
 
 .SignInOutText {
@@ -72,5 +75,5 @@
 
 .Bright {
     background-color: #d1e57c;
-    color: #303030;
+    color: #1b1b1b;
 }

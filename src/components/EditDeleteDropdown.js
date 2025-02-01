@@ -15,7 +15,7 @@ const ThreeDots = React.forwardRef(({ onClick }, ref) => (
   />
 ));
 
-export const EditDeleteDropdown = ({handleEdit, handleDelete, id}) => {
+export const EditDeleteDropdown = ({handleEdit, handleDelete, id, editReview}) => {
   const navigate = useNavigate();  
   return (
       <Dropdown className="ml-auto" drop="start">
@@ -29,14 +29,14 @@ export const EditDeleteDropdown = ({handleEdit, handleDelete, id}) => {
             onClick={handleEdit? handleEdit : () => {navigate(`/profiles/${id}/edit`);}}
           >
             <i className={`${styles.DropdownIcon} fas fa-edit me-2`} />
-            Edit Recipe
+            {editReview ? "Edit Review" : "Edit Recipe"}
           </Dropdown.Item>
           <Dropdown.Item
             onClick={handleDelete}
             aria-label="delete"
           >
             <i className={`${styles.DropdownIcon} fas fa-trash-alt me-2`} />
-            Delete Recipe
+            {editReview ? "Delete Review" : "Delete Recipe"}
           </Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
@@ -69,7 +69,6 @@ export const EditDeleteDropdown = ({handleEdit, handleDelete, id}) => {
           <Dropdown.Item
             onClick={() => navigate(`/profiles/${id}/edit/password`)}
             aria-label="edit-password"
-            className={styles.DropdownItem}
           >
             <i className={`${styles.DropdownIcon} fas fa-lock me-2`} />
             Change Password

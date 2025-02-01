@@ -8,6 +8,8 @@ import SignInForm from './pages/auth/SignInForm';
 import SignUpForm from './pages/auth/SignUpForm';
 import ProfileEditForm from './pages/profiles/ProfileEditForm';
 import ProfilePage from './pages/profiles/ProfilePage';
+import UsernameForm from './pages/profiles/UsernameForm';
+import UserPasswordForm from './pages/profiles/UserPasswordForm';
 import RecipeCreateForm from './pages/recipes/RecipeCreateForm';
 import RecipeDetails from './pages/recipes/RecipeDetails';
 import RecipeEditForm from './pages/recipes/RecipeEditForm';
@@ -67,6 +69,16 @@ function App() {
           <Route path="/profiles/:id/edit" element={
             <Container className={styles.Main}>
               <ProfileEditForm />
+            </Container>
+          }/>
+          <Route path="/profiles/:id/edit/username" element={
+            <Container className={styles.Main}>
+              <UsernameForm />
+            </Container>
+          }/>
+          <Route path="/profiles/:id/edit/password" element={
+            <Container className={styles.Main}>
+              <UserPasswordForm />
             </Container>
           }/>
           <Route path="*" element={<h1>Not Found</h1>} />

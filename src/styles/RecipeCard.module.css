@@ -8,16 +8,14 @@
 
 .Owner {
     font-size: 1.25rem;
-    font-weight: lighter;
-    margin-right: 1.5rem;
     text-decoration: none;
     color: #242a3d;
 }
 
 .Date {
     font-size: 1.25rem;
-    font-weight: lighter;
     margin-right: 1.5rem;
+    color: #9d9d9d;
 }
 
 .ImageContainer {

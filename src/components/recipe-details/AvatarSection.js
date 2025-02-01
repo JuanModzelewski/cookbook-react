@@ -9,12 +9,12 @@ const AvatarSection = (props) => {
     const {
         profile_id,
         profile_image,
-        owner,
         updated_at,
         is_owner,
         handleEdit,
         handleDelete,
         recipeDetails,
+        profileData
     } = props;
 
     const [showModal, setShowModal] = useState(false);
@@ -22,10 +22,12 @@ const AvatarSection = (props) => {
     const handleCloseModal = () => setShowModal(false);
 
   return (
-    <div className="d-flex flex-row align-items-center justify-content-between ps-3 pe-3 pt-3">
+    <div className="d-flex flex-row align-items-center justify-content-between ps-3 pe-4 pt-3">
       <Link to={`/profiles/${profile_id}`} className={styles.Owner}>
-        <Avatar src={profile_image} height={65} width={65} />
-        {owner}
+        <Avatar src={profile_image} height={65} width={65}/>
+        <div className='ms-2'>
+          {profileData.name? profileData.name : profileData.username}
+        </div>
       </Link>
       <div className="d-flex align-items-center">
         <span className={styles.Date}>{updated_at}</span>

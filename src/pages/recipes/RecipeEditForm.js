@@ -178,7 +178,7 @@ function RecipeEditForm() {
         <div className="d-flex justify-content-end">
             <Button
                 variant="secondary"
-                className={`${btnStyles.Wide} ${btnStyles.Button}`}
+                className={`${btnStyles.Wide} ${btnStyles.Button} me-3`}
                 onClick={() => navigate(-1)}
             >
                 CANCEL

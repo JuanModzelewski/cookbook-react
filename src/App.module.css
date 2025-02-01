@@ -1,5 +1,6 @@
 .App {
-  font-family: "DM Sans", sans-serif;
+  font-family: "Nunito Sans", serif;
+  font-optical-sizing: auto;
   background-color: #efefef;
   min-height: 100vh;
 }
