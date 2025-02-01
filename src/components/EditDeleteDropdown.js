@@ -22,24 +22,60 @@ export const EditDeleteDropdown = ({handleEdit, handleDelete, id}) => {
         <Dropdown.Toggle as={ThreeDots} className={styles.ThreeDots} />
   
         <Dropdown.Menu
-          className="text-center"
+          className="text-start"
         >
           <Dropdown.Item
-            className={styles.DropdownItem}
             aria-label="edit"
             onClick={handleEdit? handleEdit : () => {navigate(`/profiles/${id}/edit`);}}
           >
-            <i className={`${styles.DropdownIcon} fas fa-edit`} />
+            <i className={`${styles.DropdownIcon} fas fa-edit me-2`} />
+            Edit Recipe
           </Dropdown.Item>
           <Dropdown.Item
-            className={styles.DropdownItem}
             onClick={handleDelete}
             aria-label="delete"
           >
-            <i className={`${styles.DropdownIcon} fas fa-trash-alt`} />
+            <i className={`${styles.DropdownIcon} fas fa-trash-alt me-2`} />
+            Delete Recipe
           </Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
     );
   };
+
+
+  export function ProfileEditDropdown({ id }) {
+    const navigate = useNavigate();
+    return (
+      <Dropdown className="ml-auto" drop="start">
+        <Dropdown.Toggle as={ThreeDots} className={styles.ThreeDots} />
+        <Dropdown.Menu className="text-start">
+          <Dropdown.Item
+            onClick={() => navigate(`/profiles/${id}/edit`)}
+            aria-label="edit-profile"
+            className={styles.DropdownItem}
+          >
+            <i className={`${styles.DropdownIcon} fas fa-edit me-2`}  />
+            Edit Profile
+          </Dropdown.Item>
+          <Dropdown.Item
+            onClick={() => navigate(`/profiles/${id}/edit/username`)}
+            aria-label="edit-username"
+            className={styles.DropdownItem}
+          >
+            <i className={`${styles.DropdownIcon} fas fa-user me-2`} />
+            Change Username
+          </Dropdown.Item>
+          <Dropdown.Item
+            onClick={() => navigate(`/profiles/${id}/edit/password`)}
+            aria-label="edit-password"
+            className={styles.DropdownItem}
+          >
+            <i className={`${styles.DropdownIcon} fas fa-lock me-2`} />
+            Change Password
+          </Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>
+    );
+  }
 

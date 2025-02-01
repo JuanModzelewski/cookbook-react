@@ -1,9 +1,14 @@
 .Container {
     min-height: 350px;
-  }
+}
 
 .Image {
     border-radius: 12px;
+}
+
+.Container img:hover {
+    cursor: pointer;
+    opacity: 0.8
 }
 
 .Ingredient {

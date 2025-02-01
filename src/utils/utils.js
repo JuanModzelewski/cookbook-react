@@ -17,47 +17,14 @@ export const fetchMoreData = async (resource, setResource) => {
 };
 
 export const setTokenTimestamp = (data) => {
-  try {
-    const refreshToken = data?.refresh;
-    if (!refreshToken || typeof refreshToken !== 'string') {
-      throw new Error('Invalid token specified: must be a string');
-    }
-    const refreshTokenTimestamp = jwtDecode(refreshToken).exp;
-    if (refreshTokenTimestamp) {
-      localStorage.setItem('refreshTokenTimestamp', refreshTokenTimestamp);
-      console.log('Refresh token timestamp set:', refreshTokenTimestamp);
-    } else {
-      console.error('Invalid refresh token');
-    }
-  } catch (error) {
-    console.error('Error decoding token:', error);
-  }
+  const refreshTokenTimestamp = jwtDecode(data?.refresh).exp;
+  localStorage.setItem('refreshTokenTimestamp', refreshTokenTimestamp);
 };
 
 export const shouldRefreshToken = () => {
-  const tokenTimestamp = localStorage.getItem('refreshTokenTimestamp');
-  const currentTime = Math.floor(Date.now() / 1000);
-  console.log('Token timestamp:', tokenTimestamp);
-  return tokenTimestamp && currentTime >= tokenTimestamp;
+  return !!localStorage.getItem('refreshTokenTimestamp');
 };
 
 export const removeTokenTimestamp = () => {
   localStorage.removeItem('refreshTokenTimestamp');
-  console.log('Refresh token timestamp removed');
-};
-
-
-export const checkTokenValidity = (token) => {
-  try {
-    const decodedToken = jwtDecode(token);
-    const currentTime = Math.floor(Date.now() / 1000);
-    if (decodedToken.exp < currentTime) {
-      console.log('Token has expired');
-      return false;
-    }
-    return true;
-  } catch (error) {
-    console.error('Error decoding token:', error);
-    return false;
-  }
 };

@@ -17,8 +17,6 @@ import InstructionsSection from '../../components/recipe-details/InstructionsSec
 import ReviewSection from '../../components/recipe-details/ReviewSection';
 import TitleSection from '../../components/recipe-details/TitleSection';
 
-import { checkTokenValidity } from '../../utils/utils';
-
 
 const RecipeDetails = () => {
     const { id } = useParams();
@@ -56,21 +54,13 @@ const RecipeDetails = () => {
     };
 
     const handleDelete = async () => {
-      try {
-        const token = localStorage.getItem('authToken');
-        if (!checkTokenValidity(token)) {
-          console.log('Token is invalid or expired'); // Log invalid token
-          return;
+        try {
+            await axiosRes.delete(`/recipes/${id}/`);
+            navigate(-1);
+        } catch (err) {
+            console.log(err);
         }
-        console.log('Deleting recipe with ID:', id); // Log the recipe ID
-        await axiosRes.delete(`/recipes/${id}/`);
-        console.log('Recipe deleted successfully'); // Log success
-        navigate(-1);
-      } catch (error) {
-        console.error('Error deleting recipe:', error.response?.data || error.message); // Log the error
-      }
     };
-    
 
     const handleCheckboxChange = (index) => {
         const newIngredients = [...recipe.ingredients];

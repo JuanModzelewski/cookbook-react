@@ -4,7 +4,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { useNavigate, useParams } from "react-router";
 import { axiosReq } from "../../api/axiosDefaults";
 import Asset from "../../components/Asset";
-import { EditDeleteDropdown } from "../../components/EditDeleteDropdown";
+import { ProfileEditDropdown } from "../../components/EditDeleteDropdown";
 import FullScreenSpinner from "../../components/FullScreenSpinner";
 import StarRating from "../../components/StarRating";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
@@ -53,9 +53,8 @@ function ProfilePage() {
     <>
     <div className="d-flex flex-row justify-content-end me-4">
       {is_owner && (
-            <EditDeleteDropdown
-              handleEdit={() => navigate(`/profiles/${id}/edit`)}
-              handleDelete={() => { }}
+            <ProfileEditDropdown
+              id={profile?.id}
             />
           )}
       </div>
