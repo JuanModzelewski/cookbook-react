@@ -1,5 +1,5 @@
-import { jwtDecode } from "jwt-decode";
-import { axiosReq } from "../api/axiosDefaults";
+import { jwtDecode } from 'jwt-decode';
+import { axiosReq } from '../api/axiosDefaults';
 
 export const fetchMoreData = async (resource, setResource) => {
   try {
@@ -16,54 +16,32 @@ export const fetchMoreData = async (resource, setResource) => {
   } catch (err) {}
 };
 
-
 export const setTokenTimestamp = (data) => {
   try {
     const refreshToken = data?.refresh;
+    if (!refreshToken || typeof refreshToken !== 'string') {
+      throw new Error('Invalid token specified: must be a string');
+    }
     const refreshTokenTimestamp = jwtDecode(refreshToken).exp;
-      localStorage.setItem("refreshTokenTimestamp", refreshTokenTimestamp);
+    if (refreshTokenTimestamp) {
+      localStorage.setItem('refreshTokenTimestamp', refreshTokenTimestamp);
+      console.log('Refresh token timestamp set:', refreshTokenTimestamp);
+    } else {
+      console.error('Invalid refresh token');
+    }
   } catch (error) {
-      console.log(error);
+    console.error('Error decoding token:', error);
   }
 };
 
 export const shouldRefreshToken = () => {
-  const tokenTimestamp = localStorage.getItem("refreshTokenTimestamp");
+  const tokenTimestamp = localStorage.getItem('refreshTokenTimestamp');
   const currentTime = Math.floor(Date.now() / 1000);
+  console.log('Token timestamp:', tokenTimestamp);
   return tokenTimestamp && currentTime >= tokenTimestamp;
 };
 
 export const removeTokenTimestamp = () => {
-  localStorage.removeItem("refreshTokenTimestamp");
-};
-
-
-export const storeToken = (token) => {
-  try {
-      localStorage.setItem('authToken', token);
-  } catch (e) {
-      console.error("Failed to store token", e);
-  }
-};
-
-export const getToken = () => {
-  try {
-      return localStorage.getItem('authToken');
-  } catch (e) {
-      console.error("Failed to get token", e);
-      return null;
-  }
-};
-
-export const checkTokenValidity = (navigate) => {
-  const token = getToken();
-  if (!token) {
-      navigate('/login');
-  } else {
-      const decodedToken = jwtDecode(token);
-      const currentTime = Date.now() / 1000;
-      if (decodedToken.exp < currentTime) {
-          navigate('/login');
-      }
-  }
+  localStorage.removeItem('refreshTokenTimestamp');
+  console.log('Refresh token timestamp removed');
 };

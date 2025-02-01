@@ -34,11 +34,11 @@ const TitleSection = (props) => {
                                     <i className={`${styles.FavoriteIcon} fa-regular fa-heart`}></i>
                                 </OverlayTrigger>
                             ) : recipe.favorite_id ? (
-                                <span onClick={onRemoveFavorite} onTouchStart={onRemoveFavorite}>
+                                <span onClick={onRemoveFavorite}>
                                     <i className={`${styles.FavoriteIcon} fa-solid fa-heart`} />
                                 </span>
                             ) : currentUser ? (
-                                <span onClick={onFavorite} onTouchStart={onFavorite}>
+                                <span onClick={onFavorite}>
                                     <i className={`${styles.FavoriteIcon} fa-regular fa-heart`}></i>
                                 </span>
                             ) : (

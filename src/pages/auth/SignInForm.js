@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSetCurrentUser } from "../../contexts/CurrentUserContext";
 import btnStyles from "../../styles/Button.module.css";
 import styles from "../../styles/SignInUpForm.module.css";
-import { storeToken } from "../../utils/utils";
+import { setTokenTimestamp } from "../../utils/utils";
 
 const SignInForm = () => {
     const setCurrentUser = useSetCurrentUser()
@@ -28,20 +28,29 @@ const SignInForm = () => {
         });
     };
     
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-          const { data } = await axios.post("/dj-rest-auth/login/", signInData);
+        const { data } = await axios.post('/dj-rest-auth/login/', signInData);
+        console.log("API Response:", data); // Log the API response
+          if (data?.refresh) {
+            console.log("Auth Token:", data.access); // Log the access token
+            console.log("Refresh Token:", data.refresh); // Log the refresh token
             setCurrentUser(data.user);
-            storeToken(data.access);
+            setTokenTimestamp(data);
+            localStorage.setItem('authToken', data.access);
             localStorage.setItem('refreshToken', data.refresh);
-            navigate("/");
+            navigate('/');
+          } else {
+            console.error('No refresh token provided in the response');
+          }
         } catch (error) {
-          console.log(error);
-
+          console.error('Login error:', error);
           setErrors(error.response?.data);
         }
-      };
+      };    
+
       
     return (
         <div className={styles.SignInFormCoverImage}>
