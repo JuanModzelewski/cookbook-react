@@ -45,3 +45,19 @@ export const removeTokenTimestamp = () => {
   localStorage.removeItem('refreshTokenTimestamp');
   console.log('Refresh token timestamp removed');
 };
+
+
+export const checkTokenValidity = (token) => {
+  try {
+    const decodedToken = jwtDecode(token);
+    const currentTime = Math.floor(Date.now() / 1000);
+    if (decodedToken.exp < currentTime) {
+      console.log('Token has expired');
+      return false;
+    }
+    return true;
+  } catch (error) {
+    console.error('Error decoding token:', error);
+    return false;
+  }
+};

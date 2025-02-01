@@ -34,37 +34,46 @@ const RecipeCard = (props) => {
 
     const handleFavorite = async () => {
         try {
-            if (is_owner) return;
-            const { data } = await axiosRes.post(`/favorites/`, { recipe: id });
-            setRecipe((prevRecipe) => ({
-                ...prevRecipe,
-                results: prevRecipe.results.map((recipe) => {
-                    return recipe.id === id
-                        ? { ...recipe, favorite_count: recipe.favorite_count + 1, favorite_id: data.id }
-                        : recipe;
-                }),
-            }));
-        } catch (err) {
-            console.log(err);
+          if (is_owner) {
+            console.log('Cannot favorite your own recipe'); // Log when the user tries to favorite their own recipe
+            return;
+          }
+          const { data } = await axiosRes.post(`/favorites/`, { recipe: id });
+          console.log("Recipe added to favorites:", data); // Log the response
+          setRecipe((prevRecipe) => ({
+            ...prevRecipe,
+            results: prevRecipe.results.map((recipe) => 
+              recipe.id === id 
+                ? { ...recipe, favorite_count: recipe.favorite_count + 1, favorite_id: data.id } 
+                : recipe
+            ),
+          }));
+        } catch (error) {
+          console.error('Error adding recipe to favorites:', error.response?.data || error.message); // Log the error
         }
-    };
+      };
+      
 
-    const handleRemoveFavorite = async () => {
+      const handleRemoveFavorite = async () => {
         try {
-            if (is_owner) return;
-            await axiosRes.delete(`/favorites/${favorite_id}/`);
-            setRecipe((prevRecipe) => ({
-                ...prevRecipe,
-                results: prevRecipe.results.map((recipe) => {
-                    return recipe.id === id
-                        ? { ...recipe, favorite_count: recipe.favorite_count - 1, favorite_id: null }
-                        : recipe;
-                }),
-            }));
-        } catch (err) {
-            console.log(err);
+          if (is_owner) {
+            console.log('Cannot remove favorite from your own recipe'); // Log when the user tries to remove favorite from their own recipe
+            return;
+          }
+          await axiosRes.delete(`/favorites/${favorite_id}/`);
+          console.log("Recipe removed from favorites"); // Log success
+          setRecipe((prevRecipe) => ({
+            ...prevRecipe,
+            results: prevRecipe.results.map((recipe) => 
+              recipe.id === id 
+                ? { ...recipe, favorite_count: recipe.favorite_count - 1, favorite_id: null } 
+                : recipe
+            ),
+          }));
+        } catch (error) {
+          console.error('Error removing recipe from favorites:', error.response?.data || error.message); // Log the error
         }
-    };
+      };
 
     return (
         <Card className={styles.Recipe}>
