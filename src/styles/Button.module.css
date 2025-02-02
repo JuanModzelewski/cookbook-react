@@ -42,8 +42,7 @@
 }
 
 .Orange,
-.OrangeOutline:hover,
-.Bright:hover {
+.OrangeOutline:hover {
     background-color: #ffa600;
     color: #ffffff;
 }
@@ -75,6 +74,12 @@
 
 .Bright {
     background-color: #d1e57c;
+    color: #1b1b1b;
+}
+
+.Bright:hover {
+    background-color: #ebeaea;
+    border: #1b1b1b solid 1px;
     color: #1b1b1b;
 }
 

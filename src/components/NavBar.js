@@ -63,6 +63,7 @@ const NavBar = () => {
         <Navbar.Collapse id="basic-navbar-nav" className='justify-content-end'>
           <Nav className='align-items-end'>
             <NavLink to="/" className={styles.NavLink}><i className="fa-solid fa-book"></i>Browse</NavLink>
+            <NavLink to="/about" className={styles.NavLink}><i className="fa-regular fa-circle-question"></i>About</NavLink>
             {currentUser ? loggedInIcons : loggedOutIcons}
           </Nav>
         </Navbar.Collapse>

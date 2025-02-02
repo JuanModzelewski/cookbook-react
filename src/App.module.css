@@ -46,6 +46,13 @@ figure {
   display: inline-block;
 }
 
+p {
+  font-size: 1.2rem;
+  color: #666;
+  line-height: 1.5;
+  margin-bottom: 0;
+}
+
 /* scrollbar */
 *::-webkit-scrollbar {
   width: 5px;

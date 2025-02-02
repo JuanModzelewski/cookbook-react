@@ -27,6 +27,7 @@ export const EditDeleteDropdown = ({handleEdit, handleDelete, id, editReview}) =
           <Dropdown.Item
             aria-label="edit"
             onClick={handleEdit? handleEdit : () => {navigate(`/profiles/${id}/edit`);}}
+            className={styles.DropdownItem}
           >
             <i className={`${styles.DropdownIcon} fas fa-edit me-2`} />
             {editReview ? "Edit Review" : "Edit Recipe"}
@@ -34,6 +35,7 @@ export const EditDeleteDropdown = ({handleEdit, handleDelete, id, editReview}) =
           <Dropdown.Item
             onClick={handleDelete}
             aria-label="delete"
+            className={styles.DropdownItem}
           >
             <i className={`${styles.DropdownIcon} fas fa-trash-alt me-2`} />
             {editReview ? "Delete Review" : "Delete Recipe"}

@@ -67,6 +67,7 @@ function ProfileEditForm() {
     };
 
     const handleSubmit = async (event) => {
+        setLoading(true);
         event.preventDefault();
         const formData = new FormData();
         formData.append("name", name);
@@ -83,6 +84,8 @@ function ProfileEditForm() {
         } catch (err) {
             console.log(err);
             setErrors(err.response?.data);
+        } finally {
+            setLoading(false);
         }
     };
 

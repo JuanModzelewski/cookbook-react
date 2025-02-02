@@ -105,6 +105,25 @@ body {
     margin-bottom: 2rem;
 }
 
+.SignUpContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 70%;
+    text-align: center;
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 2rem;
+}
+
+.SignUpContainer p {
+    font-size: 1.2rem;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
 .FavoriteIcon {
     color: #ff0000;
 }
@@ -126,11 +145,11 @@ h2 {
     margin-bottom: 1rem;
 }
 
-p {
+.Feature p {
     font-size: 1.2rem;
     color: #666;
     line-height: 1.6;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0;
 }
 
 ul {
@@ -149,4 +168,15 @@ ul {
         min-height: 100vh;
         /* Ensures the container takes at least the full viewport height on smaller screens */
     }
+}
+
+@media screen and (max-width: 876px) {
+    .Feature {
+        width: 100%;
+    }
+
+    .FeatureImageContainer {
+        width: 100%;
+    }
+    
 }

@@ -8,7 +8,7 @@ import styles from "../../styles/ReviewCreateEditForm.module.css";
 function ReviewCreateForm(props) {
   const {
     recipe,
-    profileImage,
+    profile_image,
     profile_id,
     setReviews
   } = props;
@@ -44,7 +44,7 @@ function ReviewCreateForm(props) {
       <Form.Group>
         <InputGroup>
           <Link to={`/profiles/${profile_id}`}>
-            <Avatar src={profileImage} height={55} width={55} />
+            <Avatar src={profile_image} height={55} width={55} />
           </Link>
           <Form.Control
             className={styles.Form}

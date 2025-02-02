@@ -1,10 +1,16 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import Logo from '../../assets/CookBook-Logo.png';
 import FeatureOne from '../../assets/features/add-to-favorites.jpg';
+import FeatureTwo from '../../assets/features/create-recipe.jpg';
+import FeatureFour from '../../assets/features/profile.jpg';
+import FeatureThree from '../../assets/features/reviews.jpg';
 import styles from '../../styles/About.module.css';
+import btnStyles from '../../styles/Button.module.css';
 
 
 const About = () => {
+    const navigate = useNavigate();
     return (
         <div className={`${styles.AboutPage}`}>
             <div className={`${styles.AboutCoverImage}`} >
@@ -34,7 +40,7 @@ const About = () => {
 
                     <div className={styles.FeatureContainer}>
                         <div className={styles.FeatureImageContainer}>
-                            <img src={FeatureOne} alt="add to favorites" className={styles.FeatureImage} />
+                            <img src={FeatureOne} alt="Add to Favorites" className={styles.FeatureImage} />
                         </div>
                         <div className={styles.Feature}>
                             <h2>Add to Favorites</h2>
@@ -43,102 +49,73 @@ const About = () => {
                                 by signing up. With our "Favorites" feature, you can save recipes you
                                 love and access them anytime, anywhere. No more scrolling through endless feeds
                                 or losing track of that mouth-watering dish you wanted to try. Simply hit the
-                                <i className={`${styles.FavoriteIcon} fas fa-heart me-2 ms-2 p-0 fs-3`}></i>icon to add any recipe to your favorites, and enjoy the ease of having your
+                                <i className={`${styles.FavoriteIcon} fas fa-heart me-2 ms-2 p-0 fs-3`}></i>
+                                icon to add any recipe to your favorites, and enjoy the ease of having your
                                 personal cookbook always within reach.
                             </p>
                         </div>
                     </div>
 
                     <div className={styles.FeatureContainer}>
-                        <div className={styles.FeatureImageContainer}>
-                            <img src={FeatureOne} alt="Signup" className={styles.FeatureImage} />
-                        </div>
-                        <div className={styles.Feature}>
-                            <h2>Add to Favorites</h2>
+                    <div className={styles.Feature}>
+                            <h2>Create Your Own Recipes</h2>
                             <p>
-                                Unlock the convenience of having all your favorite recipes at your fingertips
-                                by signing up. With our "Favorites" feature, you can save recipes you
-                                love and access them anytime, anywhere. No more scrolling through endless feeds
-                                or losing track of that mouth-watering dish you wanted to try. Simply hit the
-                                <i className={`${styles.FavoriteIcon} fas fa-heart me-2 ms-2 p-0 fs-3`}></i>icon to add any recipe to your favorites, and enjoy the ease of having your
-                                personal cookbook always within reach.
+                            Showcase your culinary creativity by sharing your own recipes with the community. 
+                            Signing up allows you to upload your recipes, complete with photos, ingredients, 
+                            and step-by-step instructions. Whether it's your grandma's secret pie recipe or 
+                            your latest kitchen experiment, your culinary creations can inspire and delight 
+                            fellow food enthusiasts. Gain feedback, share tips, and become a valued 
+                            contributor in our vibrant community of cooks and food lovers.
                             </p>
+                        </div>
+                        <div className={styles.FeatureImageContainer}>
+                            <img src={FeatureTwo} alt="Create a Recipe" className={styles.FeatureImage} />
                         </div>
                     </div>
 
                     <div className={styles.FeatureContainer}>
                         <div className={styles.FeatureImageContainer}>
-                            <img src={FeatureOne} alt="Signup" className={styles.FeatureImage} />
+                            <img src={FeatureThree} alt="Recipe Reviews" className={styles.FeatureImage} />
                         </div>
                         <div className={styles.Feature}>
-                            <h2>Add to Favorites</h2>
+                            <h2>Review and Comment on Recipes</h2>
                             <p>
-                                Unlock the convenience of having all your favorite recipes at your fingertips
-                                by signing up. With our "Favorites" feature, you can save recipes you
-                                love and access them anytime, anywhere. No more scrolling through endless feeds
-                                or losing track of that mouth-watering dish you wanted to try. Simply hit the
-                                <i className={`${styles.FavoriteIcon} fas fa-heart me-2 ms-2 p-0 fs-3`}></i>icon to add any recipe to your favorites, and enjoy the ease of having your
-                                personal cookbook always within reach.
+                            Engage with the community by reviewing and commenting on others' recipes. Your insights 
+                            and experiences can help others improve their cooking skills, discover new flavors, and 
+                            perfect their dishes. By signing up, you can leave detailed reviews, rate recipes, and 
+                            join lively discussions. Share your tips, ask questions, and celebrate the joy of cooking 
+                            together with fellow food enthusiasts from around the world.
                             </p>
                         </div>
                     </div>
-
                     <div className={styles.FeatureContainer}>
-                        <div className={styles.FeatureImageContainer}>
-                            <img src={FeatureOne} alt="Signup" className={styles.FeatureImage} />
-                        </div>
-                        <div className={styles.Feature}>
-                            <h2>Add to Favorites</h2>
+                    <div className={styles.Feature}>
+                            <h2>View Profiles and Recipes</h2>
                             <p>
-                                Unlock the convenience of having all your favorite recipes at your fingertips
-                                by signing up. With our "Favorites" feature, you can save recipes you
-                                love and access them anytime, anywhere. No more scrolling through endless feeds
-                                or losing track of that mouth-watering dish you wanted to try. Simply hit the
-                                <i className={`${styles.FavoriteIcon} fas fa-heart me-2 ms-2 p-0 fs-3`}></i>icon to add any recipe to your favorites, and enjoy the ease of having your
-                                personal cookbook always within reach.
+                            Explore the culinary masterpieces of fellow food enthusiasts by selecting their profiles. 
+                            By signing up, you can view detailed profiles of other users, showcasing their collection 
+                            of recipes and overall ratings. Discover new and exciting dishes, and get inspired by their 
+                            culinary journey. Each profile offers a glimpse into the user's unique cooking style and expertise, 
+                            complete with recipe ratings and reviews from the community. Whether you're seeking new ideas 
+                            or want to connect with like-minded cooks, our platform provides the perfect space to explore and learn from each other.
                             </p>
                         </div>
-                    </div>
-
-                    <div className={styles.FeatureContainer}>
                         <div className={styles.FeatureImageContainer}>
-                            <img src={FeatureOne} alt="Signup" className={styles.FeatureImage} />
-                        </div>
-                        <div className={styles.Feature}>
-                            <h2>Add to Favorites</h2>
-                            <p>
-                                Unlock the convenience of having all your favorite recipes at your fingertips
-                                by signing up. With our "Favorites" feature, you can save recipes you
-                                love and access them anytime, anywhere. No more scrolling through endless feeds
-                                or losing track of that mouth-watering dish you wanted to try. Simply hit the
-                                <i className={`${styles.FavoriteIcon} fas fa-heart me-2 ms-2 p-0 fs-3`}></i>icon to add any recipe to your favorites, and enjoy the ease of having your
-                                personal cookbook always within reach.
-                            </p>
+                            <img src={FeatureFour} alt="Profile Page" className={styles.FeatureImage} />
                         </div>
                     </div>
-                    <h2>Our Mission</h2>
+                    <hr />
+                    <div className="d-flex flex-row align-items-center justify-content-center w-100 mb-3" >
+                        <div className={styles.SignUpContainer}>
+                        <h2>Sign Up Now</h2>
                     <p>
-                        Our mission is to connect food enthusiasts from around the world and create a vibrant community where users can share their love for cooking. We believe that food brings people together, and our platform is designed to foster connections, creativity, and culinary exploration.
+                    These features make signing up an enriching experience, transforming your cooking 
+                    journey into an interactive and enjoyable adventure. Join our community today and 
+                    start sharing, discovering, and connecting through the love of food.
                     </p>
-                    <h2>Features</h2>
-                    <ul>
-                        <li><strong>Add to Favorites:</strong> Save your favorite recipes for easy access and inspiration.</li>
-                        <li><strong>Upload Your Recipes:</strong> Share your culinary creations with the community and get feedback from fellow food lovers.</li>
-                        <li><strong>Review and Comment:</strong> Engage with other users by reviewing and commenting on their recipes. Share tips, ask questions, and celebrate each other's successes.</li>
-                    </ul>
-                    <h2>Our Team</h2>
-                    <p>
-                        Our team is made up of passionate food enthusiasts, developers, and designers who work tirelessly to make [Your App Name] the best it can be. Meet the team:
-                    </p>
-                    <ul>
-                        <li>Person 1 - Role</li>
-                        <li>Person 2 - Role</li>
-                        <li>Person 3 - Role</li>
-                    </ul>
-                    <h2>Contact Us</h2>
-                    <p>
-                        Have questions, feedback, or just want to say hello? Reach out to us at [Your Contact Information]. We love hearing from our users and are always here to help!
-                    </p>
+                    <button className={`${btnStyles.Button} ${btnStyles.Bright} ps-3 pe-3`} onClick={() => navigate("/signup")}>Sign Up</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
