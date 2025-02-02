@@ -1,7 +1,19 @@
 import React, { useState } from "react";
-import { Alert, Button, Form } from "react-bootstrap";
 import { axiosRes } from "../../api/axiosDefaults";
+// Import Bootstrap Components
+import Alert from "react-bootstrap/Alert";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+// Import custom styles
 import styles from "../../styles/ReviewCreateEditForm.module.css";
+
+/**
+ * ReviewEditForm
+ * The form allows users to edit the rating and comment of an existing review.
+ * It handles form submission by sending a PUT request to update the review on the server.
+ * Upon successful submission, it updates the reviews and recipe state and cancels the edit operation.
+ * If an error occurs, it displays error messages to the user.
+ */
 
 function ReviewEditForm(props) {
     const {
@@ -15,6 +27,13 @@ function ReviewEditForm(props) {
     const [comment, setComment] = useState(review.comment);
     const [errors, setErrors] = useState({});
 
+    /**
+     * Handles the submission of a review edit form. It sends a PUT request to update
+     * the review on the server, and updates the reviews and recipe state if successful.
+     * If an error occurs, it logs the error and sets the error state with the response
+     * data. If the rating is 0, it sets an error message for the rating field.
+     * If the request is successful, it cancels the edit operation.
+     */
     const handleReviewEdit = async (event) => {
         event.preventDefault();
         setErrors({});
@@ -25,7 +44,7 @@ function ReviewEditForm(props) {
             });
             setReviews((prevReviews) => ({
                 ...prevReviews,
-                results: prevReviews.results.map((rev) => 
+                results: prevReviews.results.map((rev) =>
                     rev.id === review.id ? data : rev
                 ),
             }));
@@ -38,6 +57,11 @@ function ReviewEditForm(props) {
             console.log(err);
             if (err.response?.status !== 401) {
                 setErrors(err.response?.data || {});
+            }
+            if (rating === 0) {
+                setErrors({
+                    rating: ["Please select a rating."],
+                });
             }
         }
     };
@@ -58,6 +82,11 @@ function ReviewEditForm(props) {
                 <Alert variant="warning" key={idx}>{message}</Alert>
             ))}
             <Form.Group className="d-flex flex-row align-items-center justify-content-end mt-3">
+                {errors?.rating?.map((message, idx) => (
+                    <Alert variant="warning" className="me-2" key={idx}>
+                        {message}
+                    </Alert>
+                ))}
                 <Form.Control
                     className="w-25 me-2"
                     as="select"
@@ -72,9 +101,6 @@ function ReviewEditForm(props) {
                     <option value={4}>4 Stars</option>
                     <option value={5}>5 Stars</option>
                 </Form.Control>
-                {errors?.rating?.map((message, idx) => (
-                    <Alert variant="warning" key={idx}>{message}</Alert>
-                ))}
                 <div className="d-flex justify-content-end">
                     <Button className={`${styles.Button} btn d-block my-2 me-2`} type="submit">
                         Save

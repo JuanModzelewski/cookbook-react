@@ -1,13 +1,19 @@
 import React from 'react';
-import { CardTitle, Col, Form, Row } from 'react-bootstrap';
+// Import Bootstrap Components
+import CardTitle from 'react-bootstrap/CardTitle';
+import Col from 'react-bootstrap/Col';
+import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
+// Import custom styles
 import styles from '../../styles/IngredientsSection.module.css';
 
 const IngredientList = (props) => {
-    const {
-        ingredients,
-        handleCheckboxChange,
-    } = props;
-    
+  const {
+    ingredients,
+    handleCheckboxChange,
+  } = props;
+
+  // Returns the ingredients in RecipeDetails
   return (
     <div className={styles.IngredientContainer}>
       <CardTitle className={styles.Heading}>Ingredients</CardTitle>

@@ -1,14 +1,30 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Alert, Button, Container, Form } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
-import styles from "../..//styles/ProfileEditForm.module.css";
 import { axiosReq } from "../../api/axiosDefaults";
-import FullScreenSpinner from "../../components/FullScreenSpinner";
-import { useCurrentUser, useSetCurrentUser } from "../../contexts/CurrentUserContext";
+// Import Bootstrap Components
+import Alert from "react-bootstrap/Alert";
+import Button from "react-bootstrap/Button";
+import Container from "react-bootstrap/Container";
+import Form from "react-bootstrap/Form";
+// Import custom styles
+import styles from "../..//styles/ProfileEditForm.module.css";
 import btnStyles from "../../styles/Button.module.css";
+// Import custom components
+import FullScreenSpinner from "../../components/FullScreenSpinner";
+// Import custom contexts
+import { useCurrentUser, useSetCurrentUser } from "../../contexts/CurrentUserContext";
 
 
 
+
+/**
+ * ProfileEditForm
+ * This form lets users update their profile image, name, and bio. It fetches
+ * the user's current profile data upon mounting and pre-fills the form fields.
+ * Users can change their profile image, name and bio which will be previewed in
+ * the form. Upon submission, the form sends the updated data to the server and 
+ * navigates the user back to their profile page.
+ */
 function ProfileEditForm() {
     const currentUser = useCurrentUser();
     const setCurrentUser = useSetCurrentUser();
@@ -28,6 +44,12 @@ function ProfileEditForm() {
     const [errors, setErrors] = useState({});
 
     useEffect(() => {
+        /**
+         * Handles mounting of the ProfileEditForm component. If the user is logged in 
+         * and viewing their own profile, fetches the user's profile data and sets the 
+         * form fields to the user's current profile data. If the user is not logged in
+         * or is viewing someone else's profile, navigates the user to the home page.
+         */
         const handleMount = async () => {
             setLoading(true);
             if (currentUser?.profile_id?.toString() === id) {
@@ -49,6 +71,10 @@ function ProfileEditForm() {
         handleMount();
     }, [currentUser, id, navigate]);
 
+    /**
+     * Handles changes to the form fields.
+     * Updates the profileData state with the new values.
+     */
     const handleChange = (event) => {
         setProfileData({
             ...profileData,
@@ -56,6 +82,11 @@ function ProfileEditForm() {
         });
     };
 
+    /**
+     * Handles the change of the profile image input field.
+     * Updates the profileData state with a URL representing the chosen image file,
+     * allowing for a preview of the new profile image before submission.
+     */
     const handleImageChange = (event) => {
         const file = event.target.files[0];
         if (file) {
@@ -66,6 +97,12 @@ function ProfileEditForm() {
         }
     };
 
+    /**
+     * Handles the submission of the profile edit form.
+     * Updates the current user's profile information by making a PUT request
+     * to the Django REST Framework API, and then redirects the user to their
+     * profile page.
+     */
     const handleSubmit = async (event) => {
         setLoading(true);
         event.preventDefault();
@@ -89,6 +126,10 @@ function ProfileEditForm() {
         }
     };
 
+    /**
+     * Text fields for the profile edit form.
+     * Buttons to Submit or Cancel the form.
+     */
     const textFields = (
         <>
           <Form.Group>
@@ -118,7 +159,6 @@ function ProfileEditForm() {
               className="mb-4"
             />
           </Form.Group>
-    
           {errors?.content?.map((message, idx) => (
             <Alert variant="warning" key={idx}>
               {message}

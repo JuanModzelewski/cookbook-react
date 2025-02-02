@@ -1,10 +1,20 @@
 import React from 'react';
+// Import custom styles
 import reviewStyles from '../styles/Review.module.css';
 import styles from '../styles/StarRating.module.css';
 
-const StarRating = ({ rating, reviewCount, review }) => {
+const StarRating = (props) => {
+  const {
+    rating,
+    review,
+    reviewCount
+  } = props;
+
+  // Holds the Star Rating
   const stars = [];
 
+  // Loop through the rating and add the stars to the array
+  // Add the review count if it is greater than 0
   for (let i = 1; i <= 5; i++) {
     if (i <= rating) {
       stars.push(<i key={i} className={`fas fa-star ${review ? reviewStyles.StarFilled : styles.StarFilled}`} />);
@@ -15,6 +25,7 @@ const StarRating = ({ rating, reviewCount, review }) => {
     }
   }
 
+  // Returns the star rating
   return (
     <div className={review ? reviewStyles.StarRating : styles.StarRating}>
       {stars}
@@ -24,4 +35,3 @@ const StarRating = ({ rating, reviewCount, review }) => {
 };
 
 export default StarRating;
-

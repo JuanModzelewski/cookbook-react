@@ -1,18 +1,25 @@
 import React, { useEffect, useState } from "react";
-
+import { useNavigate, useParams } from "react-router-dom";
+import { axiosRes } from "../../api/axiosDefaults";
+// Import Bootstrap Components
 import Alert from "react-bootstrap/Alert";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
-
-import { useNavigate, useParams } from "react-router-dom";
-import { axiosRes } from "../../api/axiosDefaults";
+// Import custom contexts
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
-
+// Import custom styles
 import btnStyles from "../../styles/Button.module.css";
 import styles from "../../styles/ProfileEditForm.module.css";
 
+/**
+ * UserPasswordForm
+ * This component renders a form for users to change their password. It
+ * authenticates the user, validates the input, and submits the new password
+ * to the server. If successful, it navigates the user to the previous page.
+ * If there are errors, it displays them to the user.
+ */
 const UserPasswordForm = () => {
   const navigate = useNavigate();
   const { id } = useParams();
@@ -26,6 +33,10 @@ const UserPasswordForm = () => {
 
   const [errors, setErrors] = useState({});
 
+  /**
+   * Handles changes to the form fields.
+   * Updates the userData state with the new values.
+   */
   const handleChange = (event) => {
     setUserData({
       ...userData,
@@ -40,6 +51,11 @@ const UserPasswordForm = () => {
     }
   }, [currentUser, navigate, id]);
 
+  /**
+   * Handles form submission, sending a POST request to the change password endpoint
+   * and changing the user's password if successful. If there is an error, it sets the
+   * errors state to the error response.
+   */
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {

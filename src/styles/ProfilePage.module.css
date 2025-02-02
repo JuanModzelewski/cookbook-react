@@ -4,9 +4,6 @@
   width: 175px;
   margin: 4px;
   clip-path: inset(0 0 0 0 round 50%);
-  /* Crop to a square */
-  object-fit: cover;
-  /* Ensure the image covers the clipped area */
 }
 
 .ProfileContainer {
@@ -43,9 +40,7 @@
     width: 170px;
     height: 170px;
     clip-path: inset(0 0 0 0 round 50%);
-    /* Crop to a square */
     object-fit: cover;
-    /* Ensure the image covers the clipped area */
   }
 
   .About {
@@ -57,5 +52,4 @@
   .ProfileInfo {
     align-items: center;
   }
-  
 }

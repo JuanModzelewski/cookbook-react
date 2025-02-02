@@ -1,22 +1,41 @@
 import React, { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { axiosReq } from "../../api/axiosDefaults";
+// Import Bootstrap Components
 import Alert from "react-bootstrap/Alert";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
-import { useNavigate } from "react-router-dom";
-import { axiosReq } from "../../api/axiosDefaults";
+// Import custom styles
 import appStyles from "../../App.module.css";
+import btnStyles from "../../styles/Button.module.css";
+import styles from "../../styles/RecipeCreateEditForm.module.css";
+// Import custom components
 import Upload from "../../assets/upload.png";
 import Asset from "../../components/Asset";
 import FullScreenSpinner from "../../components/FullScreenSpinner";
-import btnStyles from "../../styles/Button.module.css";
-import styles from "../../styles/RecipeCreateEditForm.module.css";
+// Import custom hooks
+import { useRedirect } from "../../hooks/useRedirect";
 
+
+/**
+ * RecipeCreateForm
+ * This component provides a form for creating a new recipe. It manages 
+ * the form state, including the recipe's title, description, cooking 
+ * instructions, ingredients, and an image. The user can dynamically add 
+ * or remove ingredients. The form includes validation error handling and 
+ * displays any error messages to the user. Upon successful submission, 
+ * the form data is sent to the server to create a new recipe, and the 
+ * user is redirected to the new recipe's detail page. If the user is not 
+ * logged in, they are redirected to the login page.
+ */
 function RecipeCreateForm() {
+    useRedirect("loggedOut");
 
     const [errors, setErrors] = useState({});
+    const [customError, setCustomError] = useState('');
 
     const [recipeData, setRecipeData] = useState({
         title: "",
@@ -32,6 +51,10 @@ function RecipeCreateForm() {
     const navigate = useNavigate();
     const [ loading, setLoading ] = useState(false);
 
+    /**
+     * Handles changes to the form fields.
+     * Updates the recipeData state with the new values.
+     */
     const handleChange = (event) => {
         setRecipeData({
             ...recipeData,
@@ -39,6 +62,11 @@ function RecipeCreateForm() {
         });
     };
 
+    /**
+     * Handles changes to the image input field.
+     * Updates the recipeData state with a URL representing the chosen image file,
+     * allowing for a preview of the new image before submission.
+     */
     const handleChangeImage = (event) => {
         if (event.target.files.length) {
             URL.revokeObjectURL(recipe_image);
@@ -49,6 +77,10 @@ function RecipeCreateForm() {
         }
     };
 
+    /**
+     * Handles changes to a specific ingredient's fields in the ingredients list.
+     * Updates the recipeData state with the new ingredient values.
+     */
     const handleIngredientChange = (index, event) => {
         const { name, value } = event.target;
         const newIngredients = [...ingredients];
@@ -56,6 +88,10 @@ function RecipeCreateForm() {
         setRecipeData({ ...recipeData, ingredients: newIngredients });
     };
 
+    /**
+     * Adds a new empty ingredient object to the ingredients list.
+     * Updates the recipeData state with the new ingredients list.
+     */
     const handleAddIngredient = () => {
         setRecipeData({
             ...recipeData,
@@ -63,12 +99,21 @@ function RecipeCreateForm() {
         });
     };
 
+    /**
+     * Removes an ingredient from the ingredients list at the specified index.
+     * Updates the recipeData state with the new ingredients list.
+     */
     const handleRemoveIngredient = (index) => {
         const newIngredients = [...ingredients];
         newIngredients.splice(index, 1);
         setRecipeData({ ...recipeData, ingredients: newIngredients });
     };
 
+    /**
+     * Handles form submission, sending a POST request to the recipes endpoint
+     * and creating a new recipe if successful. If there is an error, it sets the
+     * errors state to the error response.
+     */
     const handleSubmit = async (event) => {
         event.preventDefault();
         setLoading(true);
@@ -91,11 +136,17 @@ function RecipeCreateForm() {
             if (err.response?.status !== 401) {
                 setErrors(err.response?.data);
             }
+            if (!recipe_image) {
+                setCustomError({
+                    recipe_image: ["Please upload a valid image file."],
+                  });
+            }
         } finally {
             setLoading(false);
         }
     };
 
+    // Text fields
     const textFields = (
         <div>
             <Form.Group className={styles.FormGroup}>
@@ -109,12 +160,12 @@ function RecipeCreateForm() {
                     onChange={handleChange}
                 />
             </Form.Group>
-            <hr className={styles.Divider} />
             {errors?.title?.map((message, idx) => (
                 <Alert variant="warning" key={idx}>
                     {message}
                 </Alert>
             ))}
+            <hr className={styles.Divider} />
             <Form.Group className={styles.FormGroup}>
                 <Form.Label className="align-self-start mb-3">
                     Description
@@ -127,12 +178,12 @@ function RecipeCreateForm() {
                     onChange={handleChange}
                 />
             </Form.Group>
-            <hr className={styles.Divider} />
             {errors?.description?.map((message, idx) => (
                 <Alert variant="warning" key={idx}>
                     {message}
                 </Alert>
             ))}
+            <hr className={styles.Divider} />
             <Form.Group className={styles.FormGroup}>
                 <Form.Label className="align-self-start mb-3">
                     Cooking Instructions
@@ -154,6 +205,7 @@ function RecipeCreateForm() {
         </div>
     );
 
+    // Submit Fields
     const submitFields = (
         <div className="d-flex justify-content-end">
             <Button
@@ -172,6 +224,7 @@ function RecipeCreateForm() {
         </div>
     );
 
+    // Ingredients Fields
     const ingredientsFields = (
         <div>
             <Form.Group className={styles.FormGroup}>
@@ -212,6 +265,10 @@ function RecipeCreateForm() {
         </div>
     )
 
+    /**
+     * Returns the form with the text fields, ingredients fields, and submit fields
+     * FullscreenSpinner is rendered if the loading state is true when the form is submitted
+     */
     return (
         <Form onSubmit={handleSubmit}>
             {loading && <FullScreenSpinner message="Creating your recipe..." />}
@@ -257,7 +314,7 @@ function RecipeCreateForm() {
                                 ref={imageInput}
                             />
                         </Form.Group>
-                        {errors?.recipe_image?.map((message, idx) => (
+                        {customError?.recipe_image?.map((message, idx) => (
                             <Alert variant="warning" key={idx}>
                                 {message}
                             </Alert>

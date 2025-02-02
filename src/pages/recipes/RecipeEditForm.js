@@ -1,19 +1,34 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { axiosReq } from "../../api/axiosDefaults";
+// Import Bootstrap Components
 import Alert from "react-bootstrap/Alert";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
-import { useNavigate, useParams } from "react-router-dom";
-import { axiosReq } from "../../api/axiosDefaults";
+// Import custom styles
 import appStyles from "../../App.module.css";
-import Upload from "../../assets/upload.png";
-import Asset from "../../components/Asset";
-import FullScreenSpinner from "../../components/FullScreenSpinner";
 import btnStyles from "../../styles/Button.module.css";
 import styles from "../../styles/RecipeCreateEditForm.module.css";
+// Import custom components
+import Asset from "../../components/Asset";
+import FullScreenSpinner from "../../components/FullScreenSpinner";
+// Import images
+import Upload from "../../assets/upload.png";
 
+
+/**
+ * RecipeEditForm
+ * This component provides a form for editing an existing recipe. It manages
+ * the form state, including the recipe's title, description, cooking instructions,
+ * ingredients, and image. The user can dynamically add or remove ingredients.
+ * The form includes validation error handling and displays any error messages
+ * to the user. Upon successful submission, the updated recipe data is sent to
+ * the server, and the user is redirected to the recipe's detail page. If the
+ * recipe does not belong to the current user, they are redirected to the home page.
+ */
 function RecipeEditForm() {
 
     const [errors, setErrors] = useState({});
@@ -35,6 +50,12 @@ function RecipeEditForm() {
     const [ loading, setLoading ] = useState(false); 
 
     useEffect(() => {
+    /**
+     * Handles mounting of the RecipeEditForm component. Fetches the recipe data
+     * by ID and sets the form fields with the fetched data if the current user 
+     * is the owner of the recipe. If the user is not the owner, navigates to the 
+     * home page. Sets loading state during the fetch operation.
+     */
         const handleMount = async () => {
             setLoading(true);
             try {
@@ -51,6 +72,10 @@ function RecipeEditForm() {
         handleMount();
     }, [id, navigate]);
 
+    /**
+     * Handles changes to the form fields.
+     * Updates the recipeData state with the new values based on the input field's name and value.
+     */
     const handleChange = (event) => {
         setRecipeData({
             ...recipeData,
@@ -58,6 +83,11 @@ function RecipeEditForm() {
         });
     };
 
+    /**
+     * Handles changes to the image input field.
+     * Updates the recipeData state with a URL representing the chosen image file,
+     * allowing for a preview of the new image before submission.
+     */
     const handleChangeImage = (event) => {
         if (event.target.files.length) {
             URL.revokeObjectURL(recipe_image);
@@ -68,6 +98,10 @@ function RecipeEditForm() {
         }
     };
 
+    /**
+     * Handles changes to a specific ingredient's fields in the ingredients list.
+     * Updates the recipeData state with the new ingredient values.
+     */
     const handleIngredientChange = (index, event) => {
         const { name, value } = event.target;
         const newIngredients = [...ingredients];
@@ -75,6 +109,10 @@ function RecipeEditForm() {
         setRecipeData({ ...recipeData, ingredients: newIngredients });
     };
 
+    /**
+     * Adds a new empty ingredient object to the ingredients list.
+     * Updates the recipeData state with the new ingredients list.
+     */
     const handleAddIngredient = () => {
         setRecipeData({
             ...recipeData,
@@ -82,19 +120,28 @@ function RecipeEditForm() {
         });
     };
 
+    /**
+     * Removes an ingredient from the ingredients list at the specified index.
+     * Updates the recipeData state with the new ingredients list.
+     */
     const handleRemoveIngredient = (index) => {
         const newIngredients = [...ingredients];
         newIngredients.splice(index, 1);
         setRecipeData({ ...recipeData, ingredients: newIngredients });
     };
 
+    /**
+     * Handles form submission, sending a PUT request to the recipe endpoint
+     * and updating the recipe if successful. If there is an error, it sets the
+     * errors state to the error response.
+     */
     const handleSubmit = async (event) => {
         event.preventDefault();
         setLoading(true);
         const formData = new FormData(event.target);
+        // Filter out empty ingredients
         const filteredIngredients = ingredients.filter(
             ingredient => ingredient.name.trim() !== '' && ingredient.quantity.trim() !== '');
-
         formData.append("title", title);
         formData.append("description", description);
         formData.append("ingredients", JSON.stringify(filteredIngredients));
@@ -102,7 +149,6 @@ function RecipeEditForm() {
         if (imageInput?.current?.files[0]){
             formData.append("recipe_image", imageInput.current.files[0]);
         }
-
         try {
             await axiosReq.put(`/recipes/${id}/`, formData);
             navigate(`/recipes/${id}`);
@@ -116,6 +162,7 @@ function RecipeEditForm() {
         }
     };
 
+    // Text fields
     const textFields = (
         <div>
             <Form.Group className={styles.FormGroup}>
@@ -129,12 +176,12 @@ function RecipeEditForm() {
                     onChange={handleChange}
                 />
             </Form.Group>
-            <hr className={styles.Divider} />
             {errors?.title?.map((message, idx) => (
                 <Alert variant="warning" key={idx}>
                     {message}
                 </Alert>
             ))}
+            <hr className={styles.Divider} />
             <Form.Group className={styles.FormGroup}>
                 <Form.Label className="align-self-start mb-3">
                     Description
@@ -147,12 +194,12 @@ function RecipeEditForm() {
                     onChange={handleChange}
                 />
             </Form.Group>
-            <hr className={styles.Divider} />
-            {errors?.content?.map((message, idx) => (
+            {errors?.description?.map((message, idx) => (
                 <Alert variant="warning" key={idx}>
                     {message}
                 </Alert>
             ))}
+            <hr className={styles.Divider} />
             <Form.Group className={styles.FormGroup}>
                 <Form.Label className="align-self-start mb-3">
                     Cooking Instructions
@@ -165,15 +212,16 @@ function RecipeEditForm() {
                     onChange={handleChange}
                 />
             </Form.Group>
-            <hr className={styles.Divider} />
-            {errors?.content?.map((message, idx) => (
+            {errors?.cooking_instructions?.map((message, idx) => (
                 <Alert variant="warning" key={idx}>
                     {message}
                 </Alert>
             ))}
+            <hr className={styles.Divider} />
         </div>
     );
 
+    // Submit and cancel buttons
     const submitFields = (
         <div className="d-flex justify-content-end">
             <Button
@@ -192,6 +240,7 @@ function RecipeEditForm() {
         </div>
     );
 
+    // Ingredients fields
     const ingredientsFields = (
         <div>
             <Form.Group className={styles.FormGroup}>
@@ -232,6 +281,11 @@ function RecipeEditForm() {
         </div>
     )
 
+    /**
+     * The form includes the text fields, ingredients fields, and submit and cancel buttons
+     * When the form is submitted, the handleSubmit function is called
+     * loading is set to true to indicate that the form is being submitted
+     */
     return (
         <Form onSubmit={handleSubmit}>
             {loading && <FullScreenSpinner message="Preparing your recipe" />}

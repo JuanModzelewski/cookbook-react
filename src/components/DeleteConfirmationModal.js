@@ -1,7 +1,18 @@
 import React from 'react';
-import { Button, Modal } from 'react-bootstrap';
+// Import Bootstrap Components
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 
-const DeleteConfirmationModal = ({ show, handleClose, handleConfirm, message }) => {
+const DeleteConfirmationModal = (props) => {
+    // Destructure props
+    const {
+        show,
+        handleClose,
+        handleConfirm,
+        message
+    } = props;
+
+    // Modal to confirm deletion
     return (
         <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>

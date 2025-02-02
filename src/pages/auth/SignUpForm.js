@@ -1,11 +1,29 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { Alert, Button, Container, Form } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
+// Import Bootstrap Components
+import Alert from "react-bootstrap/Alert";
+import Button from "react-bootstrap/Button";
+import Container from "react-bootstrap/Container";
+import Form from "react-bootstrap/Form";
+// Import custom hook
+import { useRedirect } from "../../hooks/useRedirect";
+// Import custom styles
 import btnStyles from "../../styles/Button.module.css";
 import styles from "../../styles/SignInUpForm.module.css";
 
+/**
+ * SignUpForm
+ * This component includes a form for users to sign up by providing
+ * a username, password, and password confirmation. It manages form
+ * state, handles input changes, and submits the registration data
+ * to the server. Upon successful registration, the user is navigated
+ * to the sign-in page. Validation errors are displayed to the user
+ * when applicable.
+ */
+
 const SignUpForm = () => {
+    useRedirect("loggedIn");
 
     const [signUpData, setSignUpData] = useState({
         username: "",
@@ -36,6 +54,7 @@ const SignUpForm = () => {
         }
     };
 
+    // Returns the SignUpForm component
     return (
         <div className={styles.PageContainer}>
             <div className={styles.SignUpFormCoverImage}>

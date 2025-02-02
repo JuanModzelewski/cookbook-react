@@ -10,6 +10,17 @@ export const SetCurrentUserContext = createContext();
 export const useCurrentUser = () => useContext(CurrentUserContext);
 export const useSetCurrentUser = () => useContext(SetCurrentUserContext);
 
+/**
+ * Provider for the current user context.
+ * This component is responsible for retrieving the currently logged in user's
+ * information and storing it in the context. It also sets up axios interceptors
+ * to refresh the access token when it is close to expiring, and to handle 401
+ * responses by refreshing the access token and re-sending the request.
+ *
+ * The value in the context is the user object, or null if the user is not
+ * logged in. The set function in the context is a function that takes a user
+ * object and sets the user in the context to that object.
+ */
 export const CurrentUserProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const navigate = useNavigate();

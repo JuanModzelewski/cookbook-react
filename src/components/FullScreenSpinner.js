@@ -1,8 +1,11 @@
 import React from 'react';
-import { Spinner } from 'react-bootstrap';
+// Import Bootstrap Components
+import Spinner from 'react-bootstrap/Spinner';
+// Import custom styles
 import styles from '../styles/FullScreenSpinner.module.css';
 
 const FullScreenSpinner = ({message}) => {
+    // Render a full screen spinner with a loading message prop
     return (
         <div className={styles.SpinnerContainer}>
             <Spinner animation="border" role="status" className={styles.Spinner}>

@@ -1,16 +1,18 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+// Import Images
 import Logo from '../../assets/CookBook-Logo.png';
 import FeatureOne from '../../assets/features/add-to-favorites.jpg';
 import FeatureTwo from '../../assets/features/create-recipe.jpg';
 import FeatureFour from '../../assets/features/profile.jpg';
 import FeatureThree from '../../assets/features/reviews.jpg';
+// Import custom styles
 import styles from '../../styles/About.module.css';
 import btnStyles from '../../styles/Button.module.css';
 
-
 const About = () => {
     const navigate = useNavigate();
+    // Returns the about page with main features
     return (
         <div className={`${styles.AboutPage}`}>
             <div className={`${styles.AboutCoverImage}`} >
@@ -37,7 +39,6 @@ const About = () => {
                         and culinary exploration.
                         </p>
                     </div>
-
                     <div className={styles.FeatureContainer}>
                         <div className={styles.FeatureImageContainer}>
                             <img src={FeatureOne} alt="Add to Favorites" className={styles.FeatureImage} />
@@ -55,7 +56,6 @@ const About = () => {
                             </p>
                         </div>
                     </div>
-
                     <div className={styles.FeatureContainer}>
                     <div className={styles.Feature}>
                             <h2>Create Your Own Recipes</h2>
@@ -72,7 +72,6 @@ const About = () => {
                             <img src={FeatureTwo} alt="Create a Recipe" className={styles.FeatureImage} />
                         </div>
                     </div>
-
                     <div className={styles.FeatureContainer}>
                         <div className={styles.FeatureImageContainer}>
                             <img src={FeatureThree} alt="Recipe Reviews" className={styles.FeatureImage} />

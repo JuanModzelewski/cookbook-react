@@ -1,37 +1,56 @@
 import React, { useEffect, useState } from "react";
-import { Col, Container, Form, Row } from "react-bootstrap";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useLocation } from "react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
+// Import Bootstrap Components
+import Col from "react-bootstrap/Col";
+import Container from "react-bootstrap/Container";
+import Form from "react-bootstrap/Form";
+import Row from "react-bootstrap/Row";
+// Import custom components
 import Asset from "../../components/Asset";
 import FullScreenSpinner from "../../components/FullScreenSpinner";
-import { useCurrentUser } from "../../contexts/CurrentUserContext";
-import styles from "../../styles/RecipesPage.module.css";
-import { fetchMoreData } from "../../utils/utils";
 import RecipeCard from "./RecipeCard";
+// Import custom contexts
+import { useCurrentUser } from "../../contexts/CurrentUserContext";
+// Import custom styles
+import styles from "../../styles/RecipesPage.module.css";
+// Import utils
+import { fetchMoreData } from "../../utils/utils";
 
+
+/**
+ * RecipesPage
+ * The RecipesPage component renders a page that displays a list of recipes.
+ * It fetches the recipes from the server and updates the state whenever 
+ * the user navigates to a new page or changes the search query. It also 
+ * displays a loading message when the recipes are being fetched and an 
+ * error message if there is an error.
+ */
 function RecipesPage({ message, filter="" }) {
     const [recipes, setRecipe] = useState({ results: [] });
     const [query, setQuery] = useState("");
-    const [hasLoaded, setHasLoaded] = useState(false);
     const [ loading, setLoading ] = useState(false);
     const { pathname } = useLocation();
     const currentUser = useCurrentUser();
 
     useEffect(() => {
+    /**
+     * Fetches the recipes from the server, based on the current search query.
+     * If the fetch is successful, sets the recipes state with the fetched data
+     * and sets the hasLoaded state to true. If there is an error, logs the
+     * error to the console. Finally, sets the loading state to false.
+     */
         const fetchRecipes = async () => {
-            setLoading(true);
             try {
                 const { data } = await axiosReq.get(`/recipes/?${filter}search=${query}`);
                 setRecipe(data);
-                setHasLoaded(true);
+                setLoading(true);
             } catch (error) {
                 console.log(error);
-            } finally {
-                setLoading(false);
             }
         };
-        setHasLoaded(false);
+        setLoading(false);
         fetchRecipes();
     }, [filter, query, pathname, currentUser]);
 
@@ -52,7 +71,7 @@ function RecipesPage({ message, filter="" }) {
                     />
                 </Form>
             </div>
-            {hasLoaded ? (
+            {loading? (
                 <>
                     {recipes.results.length ? (
                         <InfiniteScroll

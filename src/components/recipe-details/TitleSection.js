@@ -1,10 +1,15 @@
 import React from 'react';
-import { Card, CardImg, OverlayTrigger, Tooltip } from 'react-bootstrap';
+// Import Bootstrap Components
+import Card from 'react-bootstrap/Card';
+import CardImg from 'react-bootstrap/CardImg';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Tooltip from 'react-bootstrap/Tooltip';
+// Import custom styles
 import styles from '../../styles/TitleSection.module.css';
+// Import custom components
 import StarRating from '../StarRating';
 
 const TitleSection = (props) => {
-
     const {
         recipe,
         is_owner,
@@ -15,16 +20,28 @@ const TitleSection = (props) => {
         paragraphDescription
     } = props;
 
+    // Function to add recipe to favorites
     const onFavorite = () => handleFavorite(recipe.id, is_owner, setRecipe);
+
+    // Function to remove recipe from favorites
     const onRemoveFavorite = () => handleRemoveFavorite(recipe, is_owner, setRecipe);
 
+    /**
+     * Title Section
+     * Returns the title section in RecipeDetails
+     * Manages the favorite icon and the star rating
+     * Components: StarRating
+     */
     return (
         <div className={styles.TitleContainer}>
             <CardImg src={recipe.recipe_image} alt={recipe.title} className={styles.RecipeImage} />
             <div className={styles.RecipeBar}>
                 <div className="d-flex flex-column align-items-start gap-3 w-100">
                     <div className="d-flex flex-row no-wrap align-items-start gap-5 justify-content-between w-100">
-                        {recipe.title && <Card.Title className={styles.Title}>{recipe.title}</Card.Title>}
+                        {recipe.title &&
+                            <Card.Title className={styles.Title}>
+                                {recipe.title}
+                            </Card.Title>}
                         <div className="d-flex flex-row align-items-center gap-3">
                             {is_owner ? (
                                 <OverlayTrigger

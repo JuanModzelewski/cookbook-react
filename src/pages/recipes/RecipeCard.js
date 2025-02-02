@@ -1,16 +1,31 @@
 import React from 'react';
-import { OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import { axiosRes } from '../../api/axiosDefaults';
+// Import Bootstrap Components
 import Card from 'react-bootstrap/Card';
 import CardBody from 'react-bootstrap/CardBody';
 import CardImg from 'react-bootstrap/CardImg';
-import { Link } from 'react-router-dom';
-import { axiosRes } from '../../api/axiosDefaults';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Tooltip from 'react-bootstrap/Tooltip';
+// Import custom components
 import Avatar from '../../components/Avatar';
 import StarRating from '../../components/StarRating';
+// Import custom contexts
 import { useCurrentUser } from '../../contexts/CurrentUserContext';
+// Import custom styles
 import styles from '../../styles/RecipeCard.module.css';
 
 
+/**
+ * RecipeCard
+ * This component renders a card displaying details of a recipe, including
+ * its title, description, image, owner, and average rating. It also handles
+ * actions related to adding or removing the recipe from the user's favorites.
+ * 
+ * The component provides visual feedback and tooltips for adding/removing favorites 
+ * and displays the owner's avatar and username. It conditionally renders interactive 
+ * elements based on the ownership and favorite status of the recipe.
+ */
 const RecipeCard = (props) => {
     const {
         id,
@@ -33,6 +48,14 @@ const RecipeCard = (props) => {
     const paragraphDescription = description ? description.split('\n') : [];
     
 
+    /**
+     * Handles adding a recipe to the user's favorites.
+     * If the user is the recipe's owner, the function returns immediately.
+     * Otherwise, it sends a POST request to the `/favorites/` endpoint
+     * with the recipe's `id` as payload, and updates the recipe's
+     * `favorite_count` and `favorite_id` in the state.
+     * If the request fails, it logs the error to the console.
+     */
     const handleFavorite = async () => {
         try {
             if (is_owner) return;
@@ -50,6 +73,14 @@ const RecipeCard = (props) => {
         }
     };
 
+    /**
+     * Handles removing a recipe from the user's favorites.
+     * If the user is the recipe's owner, the function returns immediately.
+     * Otherwise, it sends a DELETE request to the `/favorites/{favorite_id}/` endpoint
+     * to remove the recipe from favorites, and updates the recipe's
+     * `favorite_count` and `favorite_id` in the state to reflect the change.
+     * If the request fails, it logs the error to the console.
+     */
     const handleRemoveFavorite = async () => {
         try {
             if (is_owner) return;

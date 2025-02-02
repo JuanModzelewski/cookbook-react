@@ -2,8 +2,11 @@ import { Container } from 'react-bootstrap';
 import { Route, Routes } from 'react-router-dom';
 import styles from '../src/App.module.css';
 import './api/axiosDefaults';
+// Import custom components
 import NavBar from './components/NavBar';
+// Import custom contexts
 import { useCurrentUser } from './contexts/CurrentUserContext';
+// Import custom pages
 import About from './pages/about/About';
 import SignInForm from './pages/auth/SignInForm';
 import SignUpForm from './pages/auth/SignUpForm';

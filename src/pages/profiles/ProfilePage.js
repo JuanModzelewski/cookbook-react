@@ -1,28 +1,48 @@
 import React, { useEffect, useState } from "react";
-import { Col, Image, Row } from "react-bootstrap";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { useNavigate, useParams } from "react-router";
+import { useParams } from "react-router";
 import { axiosReq } from "../../api/axiosDefaults";
+// Import Bootstrap Components
+import Col from "react-bootstrap/Col";
+import Image from "react-bootstrap/Image";
+import Row from "react-bootstrap/Row";
+// Import custom components
 import Asset from "../../components/Asset";
 import { ProfileEditDropdown } from "../../components/EditDeleteDropdown";
 import FullScreenSpinner from "../../components/FullScreenSpinner";
 import StarRating from "../../components/StarRating";
-import { useCurrentUser } from "../../contexts/CurrentUserContext";
-import styles from "../../styles/ProfilePage.module.css";
-import { fetchMoreData } from "../../utils/utils";
 import RecipeCard from "../recipes/RecipeCard";
+// Import custom contexts
+import { useCurrentUser } from "../../contexts/CurrentUserContext";
+// Import custom styles
+import styles from "../../styles/ProfilePage.module.css";
+// Import utils
+import { fetchMoreData } from "../../utils/utils";
 
+
+/**
+ * The ProfilePage component renders the main profile page.
+ * It displays the user's name, content, and their recipes.
+ * If the user is the owner of the profile, it also displays
+ * an edit button that allows the user to edit their profile
+ * If the user is not the owner of the profile, it
+ * does not display the edit button.
+ */
 function ProfilePage() {
   const [hasLoaded, setHasLoaded] = useState(false);
+  const [loading, setLoading] = useState(false); 
   const [profileRecipes, setProfileRecipes] = useState({ results: [] });
   const [profileData, setProfileData] = useState({ results: [] });
 
   const currentUser = useCurrentUser();
   const { id } = useParams();
-  const navigate = useNavigate();
-  const [ loading, setLoading ] = useState(false); 
 
   useEffect(() => {
+  /**
+   * Fetches the profile data and associated recipes for the user with the given id.
+   * Sets the profile data and recipes into state and updates the loading and loaded states.
+   * If an error occurs during the fetch, it logs the error and ensures the loading state is reset.
+   */
     const fetchData = async () => {
       setLoading(true);
       try {
@@ -30,7 +50,6 @@ function ProfilePage() {
           axiosReq.get(`/profiles/${id}/`),
           axiosReq.get(`/recipes/?owner__profile=${id}`),
         ]);
-
         setProfileData({ results: [pageProfile] });
         setProfileRecipes(profileRecipes);
         setHasLoaded(true);
@@ -43,12 +62,16 @@ function ProfilePage() {
     fetchData();
   }, [id]);
 
+  // Gets the current profile
   const profile = profileData.results[0];
+  // Checks if the current user is the owner of the profile
   const is_owner = currentUser?.username === profile?.owner;
- 
+  // Gets recipes with ratings
   const ratedRecipes = profileRecipes.results.filter((recipe) => recipe.average_rating > 0);
+  // Gets average rating of the current users recipes
   const average_rating = ratedRecipes.reduce((total, recipe) => total + recipe.average_rating, 0) / ratedRecipes.length;
 
+  // Main Profile Content
   const mainProfile = (
     <>
     <div className="d-flex flex-row justify-content-end me-4">
@@ -69,12 +92,12 @@ function ProfilePage() {
         </div>
         <div className={styles.ProfileInfo}>
         <h3 className="text-center fw-bold mb-3">{profile?.name || profile?.owner}</h3>
-            <div className="d-flex flex-row flex-wrap align-self-start">
+            <div className="d-flex flex-row flex-wrap align-items-center align-self-start">
               <div className="pe-3 fs-5">Recipes:</div>
               <div className="fs-4">{profile?.recipes_count}</div>
             </div>
-            <div className="d-flex flex-row flex-wrap align-self-start">
-              <div className="pe-3 fs-5 mb-1">Average Rating:</div>
+            <div className="d-flex flex-row flex-wrap align-items-center align-self-start">
+              <div className="pe-3 fs-5">Average Rating:</div>
               <StarRating rating={average_rating}/>
             </div>
         </div>
@@ -88,6 +111,7 @@ function ProfilePage() {
     </>
   );
 
+  // Recipe Content
   const mainProfileRecipes = (
     <>
       <hr />
@@ -117,11 +141,11 @@ function ProfilePage() {
     </>
   );
   
-
+  // When the page has loaded, display the content
   return (
     <Row>
       <Col className="ps-3 pe-3">
-          {hasLoaded ? (
+          {hasLoaded && !loading ? (
             <>
             <div className={styles.Content}>
               {mainProfile}

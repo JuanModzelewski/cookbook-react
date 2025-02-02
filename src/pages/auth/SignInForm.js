@@ -1,14 +1,32 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { Alert, Button, Container, Form } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
+// Import custom hook
+import { useRedirect } from "../../hooks/useRedirect";
+// Import Bootstrap Components
+import Alert from "react-bootstrap/Alert";
+import Button from "react-bootstrap/Button";
+import Container from "react-bootstrap/Container";
+import Form from "react-bootstrap/Form";
+// Import custom context
 import { useSetCurrentUser } from "../../contexts/CurrentUserContext";
+// Import utils
+import { setTokenTimestamp } from "../../utils/utils";
+// Import custom styles
 import btnStyles from "../../styles/Button.module.css";
 import styles from "../../styles/SignInUpForm.module.css";
-import { setTokenTimestamp } from "../../utils/utils";
 
+
+/**
+ * SignInForm
+ * This component renders a sign in form with username and password fields and
+ * a submit button. When the form is submitted, it attempts to log in the user
+ * and redirects them to the homepage if successful. It also displays any
+ * errors that occur during the login process.
+ */
 const SignInForm = () => {
     const setCurrentUser = useSetCurrentUser()
+    useRedirect("loggedIn");
 
     const [signInData, setSignInData] = useState({
         username: "",
@@ -29,6 +47,11 @@ const SignInForm = () => {
     };
     
 
+    /**
+     * Handles form submission, sending a POST request to the login endpoint
+     * and logging the user in if successful. If there is an error, it sets the
+     * errors state to the error response.
+     */
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
