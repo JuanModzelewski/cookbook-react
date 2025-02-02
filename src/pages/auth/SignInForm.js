@@ -33,18 +33,11 @@ const SignInForm = () => {
         event.preventDefault();
         try {
         const { data } = await axios.post('/dj-rest-auth/login/', signInData);
-        console.log("API Response:", data); // Log the API response
-          if (data?.refresh) {
-            console.log("Auth Token:", data.access); // Log the access token
-            console.log("Refresh Token:", data.refresh); // Log the refresh token
             setCurrentUser(data.user);
             setTokenTimestamp(data);
             localStorage.setItem('authToken', data.access);
             localStorage.setItem('refreshToken', data.refresh);
             navigate('/');
-          } else {
-            console.error('No refresh token provided in the response');
-          }
         } catch (error) {
           console.error('Login error:', error);
           setErrors(error.response?.data);

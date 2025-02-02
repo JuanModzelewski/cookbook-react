@@ -1,8 +1,11 @@
 .App {
+  display: flex;
+  flex-direction: column;
   font-family: "Nunito Sans", serif;
   font-optical-sizing: auto;
   background-color: #efefef;
   min-height: 100vh;
+  height: 100%;
 }
 
 .Main {
@@ -11,6 +14,10 @@
 }
 
 .SignInUpContainer {
+  margin-top: 127px;
+}
+
+.AboutPageContainer {
   margin-top: 127px;
 }
 

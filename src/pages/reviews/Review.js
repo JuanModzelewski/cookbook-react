@@ -60,7 +60,6 @@ const Review = (props) => {
           <EditDeleteDropdown
             handleEdit={() => handleEditClick(id)}
             handleDelete={handleShowModal}
-            editReview
           />}
           <DeleteConfirmationModal
               show={showModal}

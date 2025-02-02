@@ -17,7 +17,6 @@ import InstructionsSection from '../../components/recipe-details/InstructionsSec
 import ReviewSection from '../../components/recipe-details/ReviewSection';
 import TitleSection from '../../components/recipe-details/TitleSection';
 
-
 const RecipeDetails = () => {
     const { id } = useParams();
     const [recipe, setRecipe] = useState(null);
@@ -42,7 +41,6 @@ const RecipeDetails = () => {
 
                 const { data } = await axiosRes.get(`/profiles/${recipe.profile_id}/`);
                 setProfileData(data);
-
             } catch (err) {
                 console.log(err);
             }
