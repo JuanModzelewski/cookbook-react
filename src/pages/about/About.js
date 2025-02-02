@@ -1,5 +1,5 @@
 import React from 'react';
-import Logo from '../../assets/cookbook-logo.png';
+import Logo from '../../assets/CookBook-Logo.png';
 import FeatureOne from '../../assets/features/add-to-favorites.jpg';
 import styles from '../../styles/About.module.css';
 

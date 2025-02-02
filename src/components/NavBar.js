@@ -4,7 +4,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { NavLink, useNavigate } from 'react-router-dom';
-import Logo from '../assets/cookbook-logo.png';
+import Logo from '../assets/CookBook-Logo.png';
 import { useCurrentUser, useSetCurrentUser } from '../contexts/CurrentUserContext';
 import useClickOutsideToggle from '../hooks/useClickOutsideToggle';
 import styles from '../styles/NavBar.module.css';
