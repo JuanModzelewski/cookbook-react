@@ -87,7 +87,11 @@ function App() {
               <About />
             </Container>
         } />
-        <Route path="*" element={<h1>Not Found</h1>} />
+        <Route path="*" element={
+          <Container className={styles.Main}>
+          <h1>Not Found</h1>
+          </Container>
+        }/>
       </Routes>
     </div>
   );
