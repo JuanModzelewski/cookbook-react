@@ -1,8 +1,10 @@
 import axios from "axios";
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import PropTypes from 'prop-types';
+import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router";
 import { axiosReq, axiosRes } from "../api/axiosDefaults";
 import { removeTokenTimestamp, shouldRefreshToken } from "../utils/utils";
+
 
 export const CurrentUserContext = createContext();
 export const SetCurrentUserContext = createContext();
@@ -92,3 +94,7 @@ export const CurrentUserProvider = ({ children }) => {
     </CurrentUserContext.Provider>
   );
 };
+
+CurrentUserProvider.propTypes = {
+  children: PropTypes.node
+}

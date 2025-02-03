@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 // Import Bootstrap Components
 import Button from 'react-bootstrap/Button';
@@ -29,6 +30,13 @@ const DeleteConfirmationModal = (props) => {
             </Modal.Footer>
         </Modal>
     );
+};
+
+DeleteConfirmationModal.propTypes = {
+    show: PropTypes.bool.isRequired,
+    handleClose: PropTypes.func.isRequired,
+    handleConfirm: PropTypes.func.isRequired,
+    message: PropTypes.string.isRequired,
 };
 
 export default DeleteConfirmationModal;

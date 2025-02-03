@@ -1,8 +1,8 @@
+import PropTypes from 'prop-types';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 // Import Bootstrap Components
 import Dropdown from 'react-bootstrap/Dropdown';
-
-import { useNavigate } from 'react-router-dom';
 // Import custom styles
 import styles from '../styles/EditDeleteDropdown.module.css';
 
@@ -18,11 +18,17 @@ const ThreeDots = React.forwardRef(({ onClick }, ref) => (
   />
 ));
 
+ThreeDots.displayName = 'ThreeDots';
+
+ThreeDots.propTypes = {
+  onClick: PropTypes.func.isRequired,
+};
+
+
 export const EditDeleteDropdown = (props) => {
   const {
     handleEdit,
     handleDelete,
-    id,
     editReview
   } = props;
 
@@ -52,6 +58,13 @@ export const EditDeleteDropdown = (props) => {
         </Dropdown.Menu>
       </Dropdown>
     );
+  };
+
+  EditDeleteDropdown.propTypes = {
+    handleEdit: PropTypes.func.isRequired,
+    handleDelete: PropTypes.func.isRequired,
+    id: PropTypes.number.isRequired,
+    editReview: PropTypes.bool
   };
 
 
@@ -91,4 +104,8 @@ export const EditDeleteDropdown = (props) => {
         </Dropdown.Menu>
       </Dropdown>
     );
+  };
+
+  ProfileEditDropdown.propTypes = {
+    id: PropTypes.number.isRequired
   };

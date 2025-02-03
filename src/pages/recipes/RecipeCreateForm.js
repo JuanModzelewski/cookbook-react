@@ -150,7 +150,7 @@ function RecipeCreateForm() {
     const textFields = (
         <div>
             <Form.Group className={styles.FormGroup}>
-                <Form.Label className="align-self-start mb-3">
+                <Form.Label htmlFor="title" className="align-self-start mb-3">
                     Title
                 </Form.Label>
                 <Form.Control
@@ -158,6 +158,7 @@ function RecipeCreateForm() {
                     name="title"
                     value={title}
                     onChange={handleChange}
+                    aria-labelledby="title"
                 />
             </Form.Group>
             {errors?.title?.map((message, idx) => (
@@ -167,7 +168,7 @@ function RecipeCreateForm() {
             ))}
             <hr className={styles.Divider} />
             <Form.Group className={styles.FormGroup}>
-                <Form.Label className="align-self-start mb-3">
+                <Form.Label htmlFor="description" className="align-self-start mb-3">
                     Description
                 </Form.Label>
                 <Form.Control
@@ -176,6 +177,7 @@ function RecipeCreateForm() {
                     name="description"
                     value={description}
                     onChange={handleChange}
+                    aria-labelledby="description"
                 />
             </Form.Group>
             {errors?.description?.map((message, idx) => (
@@ -185,7 +187,7 @@ function RecipeCreateForm() {
             ))}
             <hr className={styles.Divider} />
             <Form.Group className={styles.FormGroup}>
-                <Form.Label className="align-self-start mb-3">
+                <Form.Label htmlFor="cooking_instructions" className="align-self-start mb-3" >
                     Cooking Instructions
                 </Form.Label>
                 <Form.Control
@@ -194,6 +196,7 @@ function RecipeCreateForm() {
                     name="cooking_instructions"
                     value={cooking_instructions}
                     onChange={handleChange}
+                    aria-labelledby="cooking_instructions"
                 />
             </Form.Group>
             {errors?.cooking_instructions?.map((message, idx) => (

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { axiosRes } from '../../api/axiosDefaults';
@@ -38,7 +39,6 @@ const RecipeCard = (props) => {
         profile_image,
         updated_at,
         review_count,
-        favorite_count,
         favorite_id,
         average_rating,
     } = props;
@@ -117,7 +117,7 @@ const RecipeCard = (props) => {
                     {is_owner ? (
                         <OverlayTrigger
                             placement="top"
-                            overlay={<Tooltip>You can't add your own recipe to your favorites!</Tooltip>}
+                            overlay={<Tooltip>You can&apos;t add your own recipe to your favorites!</Tooltip>}
                         >
                             <i className={`${styles.FavoriteIcon} fa-regular fa-heart`}></i>
                         </OverlayTrigger>
@@ -154,6 +154,22 @@ const RecipeCard = (props) => {
             </CardBody>
         </Card>
     );
+};
+
+RecipeCard.propTypes = {
+    id: PropTypes.number,
+    title: PropTypes.string,
+    description: PropTypes.string,
+    average_rating: PropTypes.number,
+    review_count: PropTypes.number,
+    profile_id: PropTypes.number,
+    profile_image: PropTypes.string,
+    owner: PropTypes.string,
+    updated_at: PropTypes.string,
+    recipe_image: PropTypes.string,
+    is_owner: PropTypes.bool,
+    favorite_id: PropTypes.number,
+    setRecipe: PropTypes.func,
 };
 
 export default RecipeCard;

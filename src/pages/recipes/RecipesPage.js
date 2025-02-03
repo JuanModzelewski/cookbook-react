@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useLocation } from "react-router-dom";
@@ -73,34 +74,38 @@ function RecipesPage({ message, filter="" }) {
             </div>
             {loading? (
                 <>
-                    {recipes.results.length ? (
-                        <InfiniteScroll
-                            children={
-                                <Row className="gx-3">  {/* Adjust gutters to fit container */}
-                                    {recipes.results.map((recipe) => (
-                                        <Col md={12} lg={6} className="p-2" key={recipe.id}>
-                                            <RecipeCard {...recipe} setRecipe={setRecipe} />
-                                        </Col>
-                                    ))}
-                                </Row>
-                            }
-                            dataLength={recipes.results.length}
-                            loader={<Asset spinner />}
-                            hasMore={recipes.next}
-                            next={() => fetchMoreData(recipes, setRecipe)}
-                            className="p-2"
-                        />
-                    ) : (
-                        <Container>
-                            <Asset message={message} />
-                        </Container>
-                    )}
-                </>
+                {recipes.results.length ? (
+                  <InfiniteScroll
+                    dataLength={recipes.results.length}
+                    loader={<Asset spinner />}
+                    hasMore={recipes.next}
+                    next={() => fetchMoreData(recipes, setRecipe)}
+                    className="p-2"
+                  >
+                    <Row className="gx-3">
+                      {recipes.results.map((recipe) => (
+                        <Col md={12} lg={6} className="p-2" key={recipe.id}>
+                          <RecipeCard {...recipe} setRecipe={setRecipe} />
+                        </Col>
+                      ))}
+                    </Row>
+                  </InfiniteScroll>
+                ) : (
+                  <Container>
+                    <Asset message={message} />
+                  </Container>
+                )}
+              </>
             ) : (
                 <FullScreenSpinner message={"Loading recipes..."} />
             )}
         </div>
     );
 }
+
+RecipesPage.propTypes = {
+    message: PropTypes.string,
+    filter: PropTypes.string
+};
 
 export default RecipesPage;

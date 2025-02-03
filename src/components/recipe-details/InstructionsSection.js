@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 // Import Bootstrap Components
 import CardTitle from 'react-bootstrap/CardTitle';
@@ -17,6 +18,10 @@ const InstructionsSection = ({ paragraphInstructions }) => {
       </div>
     </div>
   );
+};
+
+InstructionsSection.propTypes = {
+  paragraphInstructions: PropTypes.array.isRequired,
 };
 
 export default InstructionsSection;

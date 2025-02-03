@@ -88,6 +88,7 @@ function ProfilePage() {
             className={styles.ProfileImage}
             roundedCircle
             src={profile?.image}
+            alt={profile?.owner}
           />
         </div>
         <div className={styles.ProfileInfo}>
@@ -115,24 +116,25 @@ function ProfilePage() {
   const mainProfileRecipes = (
     <>
       <hr />
-      <div className="text-center fs-4">{currentUser?.username === profile?.owner ? 'Your' : profile?.owner + "'s"} recipes</div>
+      <div className="text-center fs-4">
+        {currentUser?.username === profile?.owner ? 'Your' : profile?.owner + "'s"} recipes
+      </div>
       <hr />
       {profileRecipes.results.length ? (
         <InfiniteScroll
-          children={
-            <Row className="gx-0">
-              {profileRecipes.results.map((recipe, index) => (
-                <Col md={6} sm={12} className="p-2" key={recipe.id}>
-                  <RecipeCard key={recipe.id} {...recipe} setRecipes={setProfileRecipes} />
-                </Col>
-              ))}
-            </Row>
-          }
           dataLength={profileRecipes.results.length}
           loader={<Asset spinner />}
           hasMore={!!profileRecipes.next}
           next={() => fetchMoreData(profileRecipes, setProfileRecipes)}
-        />
+        >
+          <Row className="gx-0">
+            {profileRecipes.results.map((recipe) => (
+              <Col md={6} sm={12} className="p-2" key={recipe.id}>
+                <RecipeCard key={recipe.id} {...recipe} setRecipes={setProfileRecipes} />
+              </Col>
+            ))}
+          </Row>
+        </InfiniteScroll>
       ) : (
         <Asset
           message={`No results found, ${profile?.owner} hasn't added any recipes yet.`}

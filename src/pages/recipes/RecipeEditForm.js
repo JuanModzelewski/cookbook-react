@@ -166,7 +166,7 @@ function RecipeEditForm() {
     const textFields = (
         <div>
             <Form.Group className={styles.FormGroup}>
-                <Form.Label className="align-self-start mb-3">
+                <Form.Label htmlFor="title" className="align-self-start mb-3">
                     Title
                 </Form.Label>
                 <Form.Control
@@ -174,6 +174,7 @@ function RecipeEditForm() {
                     name="title"
                     value={title}
                     onChange={handleChange}
+                    aria-labelledby="title"
                 />
             </Form.Group>
             {errors?.title?.map((message, idx) => (
@@ -183,7 +184,7 @@ function RecipeEditForm() {
             ))}
             <hr className={styles.Divider} />
             <Form.Group className={styles.FormGroup}>
-                <Form.Label className="align-self-start mb-3">
+                <Form.Label htmlFor="description" className="align-self-start mb-3">
                     Description
                 </Form.Label>
                 <Form.Control
@@ -192,6 +193,7 @@ function RecipeEditForm() {
                     name="description"
                     value={description}
                     onChange={handleChange}
+                    aria-labelledby="description"
                 />
             </Form.Group>
             {errors?.description?.map((message, idx) => (
@@ -201,7 +203,7 @@ function RecipeEditForm() {
             ))}
             <hr className={styles.Divider} />
             <Form.Group className={styles.FormGroup}>
-                <Form.Label className="align-self-start mb-3">
+                <Form.Label htmlFor="cooking_instructions" className="align-self-start mb-3">
                     Cooking Instructions
                 </Form.Label>
                 <Form.Control
@@ -210,6 +212,7 @@ function RecipeEditForm() {
                     name="cooking_instructions"
                     value={cooking_instructions}
                     onChange={handleChange}
+                    aria-labelledby="cooking_instructions"
                 />
             </Form.Group>
             {errors?.cooking_instructions?.map((message, idx) => (
@@ -247,19 +250,23 @@ function RecipeEditForm() {
                 <Form.Label className="align-self-start mb-3">Ingredients</Form.Label>
                 {ingredients.map((ingredient, index) => (
                     <div key={index} className={styles.Ingredient}>
+                        <Form.Label htmlFor={`ingredient-name-${index}`}></Form.Label>
                         <Form.Control
                             type="text"
                             name="name"
                             value={ingredient.name}
                             onChange={(event) => handleIngredientChange(index, event)}
                             placeholder="Ingredient"
+                            aria-labelledby={`ingredient-name-${index}`}
                         />
+                        <Form.Label htmlFor={`ingredient-quantity-${index}`}></Form.Label>
                         <Form.Control
                             type="text"
                             name="quantity"
                             value={ingredient.quantity}
                             onChange={(event) => handleIngredientChange(index, event)}
                             placeholder="Quantity"
+                            aria-labelledby={`ingredient-quantity-${index}`}
                         />
                         {ingredients.length > 1 && (
                             <div
@@ -305,7 +312,7 @@ function RecipeEditForm() {
                                     </figure>
                                     <div>
                                         <Form.Label
-                                            className={`${btnStyles.Button} ${btnStyles.Orange} btn`}
+                                            className={`${btnStyles.Button} ${btnStyles.Black} btn`}
                                             htmlFor="image-upload"
                                         >CHANGE THE IMAGE
                                         </Form.Label>

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { axiosRes } from "../../api/axiosDefaults";
@@ -94,6 +95,18 @@ const Review = (props) => {
       <hr className={styles.Divider} />
     </div>
   );
+};
+
+Review.propTypes = {
+  profile_id: PropTypes.number,
+  profile_image: PropTypes.string,
+  owner: PropTypes.string,
+  updated_at: PropTypes.string,
+  comment: PropTypes.string,
+  rating: PropTypes.number,
+  id: PropTypes.number,
+  setReviews: PropTypes.func,
+  handleEditClick: PropTypes.func,
 };
 
 export default Review;

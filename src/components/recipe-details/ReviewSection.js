@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 // Import Bootstrap Components
 import CardTitle from 'react-bootstrap/CardTitle';
@@ -74,31 +75,32 @@ const ReviewSection = (props) => {
       )}
       {reviews.results.length ? (
         <InfiniteScroll
-          children={reviews.results.map((review) => (
-            editingReviewId === review.id ? (
-              <ReviewEditForm
-                key={review.id}
-                review={review}
-                handleCancelEdit={handleCancelEdit}
-                setRecipe={setRecipe}
-                setReviews={setReviews}
-              />
-            ) : (
-              <Review
-                key={review.id}
-                {...review}
-                setRecipe={setRecipe}
-                setReviews={setReviews}
-                handleEditClick={handleEditClick}
-                profile_id={review.profile_id}
-              />
-            )
-          ))}
-          dataLength={reviews.results.length}
-          loader={<Asset spinner />}
-          hasMore={!!reviews.next}
-          next={() => fetchMoreData(reviews, setReviews)}
-        />
+        dataLength={reviews.results.length}
+        loader={<Asset spinner />}
+        hasMore={!!reviews.next}
+        next={() => fetchMoreData(reviews, setReviews)}
+      >
+        {reviews.results.map((review) => (
+          editingReviewId === review.id ? (
+            <ReviewEditForm
+              key={review.id}
+              review={review}
+              handleCancelEdit={handleCancelEdit}
+              setRecipe={setRecipe}
+              setReviews={setReviews}
+            />
+          ) : (
+            <Review
+              key={review.id}
+              {...review}
+              setRecipe={setRecipe}
+              setReviews={setReviews}
+              handleEditClick={handleEditClick}
+              profile_id={review.profile_id}
+            />
+          )
+        ))}
+      </InfiniteScroll>
       ) : currentUser ? (
         <div className="text-muted m-3 me-auto">No reviews yet, be the first to leave a review!</div>
       ) : (
@@ -106,6 +108,14 @@ const ReviewSection = (props) => {
       )}
     </Container>
   );
+};
+
+ReviewSection.propTypes = {
+  currentUser: PropTypes.object,
+  reviews: PropTypes.object,
+  setRecipe: PropTypes.func,
+  setReviews: PropTypes.func,
+  recipe: PropTypes.object,
 };
 
 export default ReviewSection;

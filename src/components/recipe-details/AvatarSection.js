@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 // Import custom styles
@@ -53,6 +54,17 @@ const AvatarSection = (props) => {
       </div>
     </div>
   );
+};
+
+AvatarSection.propTypes = {
+  profile_id: PropTypes.number,
+  profile_image: PropTypes.string,
+  updated_at: PropTypes.string,
+  is_owner: PropTypes.bool,
+  handleEdit: PropTypes.func,
+  handleDelete: PropTypes.func,
+  recipeDetails: PropTypes.bool,
+  profileData: PropTypes.object,
 };
 
 export default AvatarSection;

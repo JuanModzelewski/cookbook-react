@@ -26,7 +26,7 @@ const About = () => {
                     <div className="d-flex flex-column align-items-center">
                         <p className={styles.AboutText}>
                             Your go-to social media platform for all things culinary!<br />
-                            Whether you're a seasoned chef or a kitchen novice, our community is here to inspire,
+                            Whether you&apos;re a seasoned chef or a kitchen novice, our community is here to inspire,
                             connect, share, and celebrate the joy of cooking.
                         </p>
                     </div>
@@ -47,7 +47,7 @@ const About = () => {
                             <h2>Add to Favorites</h2>
                             <p>
                                 Unlock the convenience of having all your favorite recipes at your fingertips
-                                by signing up. With our "Favorites" feature, you can save recipes you
+                                by signing up. With our &quot;Favorites&quot; feature, you can save recipes you
                                 love and access them anytime, anywhere. No more scrolling through endless feeds
                                 or losing track of that mouth-watering dish you wanted to try. Simply hit the
                                 <i className={`${styles.FavoriteIcon} fas fa-heart me-2 ms-2 p-0 fs-3`}></i>
@@ -62,7 +62,7 @@ const About = () => {
                             <p>
                             Showcase your culinary creativity by sharing your own recipes with the community. 
                             Signing up allows you to upload your recipes, complete with photos, ingredients, 
-                            and step-by-step instructions. Whether it's your grandma's secret pie recipe or 
+                            and step-by-step instructions. Whether it&apos;s your grandma&apos;s secret pie recipe or 
                             your latest kitchen experiment, your culinary creations can inspire and delight 
                             fellow food enthusiasts. Gain feedback, share tips, and become a valued 
                             contributor in our vibrant community of cooks and food lovers.
@@ -79,7 +79,7 @@ const About = () => {
                         <div className={styles.Feature}>
                             <h2>Review and Comment on Recipes</h2>
                             <p>
-                            Engage with the community by reviewing and commenting on others' recipes. Your insights 
+                            Engage with the community by reviewing and commenting on others&apos; recipes. Your insights 
                             and experiences can help others improve their cooking skills, discover new flavors, and 
                             perfect their dishes. By signing up, you can leave detailed reviews, rate recipes, and 
                             join lively discussions. Share your tips, ask questions, and celebrate the joy of cooking 
@@ -94,8 +94,8 @@ const About = () => {
                             Explore the culinary masterpieces of fellow food enthusiasts by selecting their profiles. 
                             By signing up, you can view detailed profiles of other users, showcasing their collection 
                             of recipes and overall ratings. Discover new and exciting dishes, and get inspired by their 
-                            culinary journey. Each profile offers a glimpse into the user's unique cooking style and expertise, 
-                            complete with recipe ratings and reviews from the community. Whether you're seeking new ideas 
+                            culinary journey. Each profile offers a glimpse into the user&apos;s unique cooking style and expertise, 
+                            complete with recipe ratings and reviews from the community. Whether you&apos;re seeking new ideas 
                             or want to connect with like-minded cooks, our platform provides the perfect space to explore and learn from each other.
                             </p>
                         </div>

@@ -119,7 +119,7 @@ const SignInForm = () => {
             </Container>
             <Container className={`${styles.Content}`}>
                 <Link className={styles.Link} to="/signup">
-                    Don't have an account? <span>Sign up</span>
+                    Don&apos;t have an account? <span>Sign up</span>
                 </Link>
             </Container>
         </div>

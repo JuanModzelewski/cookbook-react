@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 // Import Bootstrap Components
 import Spinner from 'react-bootstrap/Spinner';
@@ -14,6 +15,10 @@ const FullScreenSpinner = ({message}) => {
             <div className={styles.LoadingText}>{message}</div>
         </div>
     );
+};
+
+FullScreenSpinner.propTypes = {
+    message: PropTypes.string.isRequired,
 };
 
 export default FullScreenSpinner;

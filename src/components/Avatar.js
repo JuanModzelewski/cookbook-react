@@ -1,5 +1,6 @@
-import React from 'react'
-import styles from '../styles/Avatar.module.css'
+import PropTypes from 'prop-types';
+import React from 'react';
+import styles from '../styles/Avatar.module.css';
 
 const Avatar = (props) => {
   const {
@@ -16,6 +17,13 @@ const Avatar = (props) => {
         {text}
     </span>
   )
+}
+
+Avatar.propTypes = {
+  src: PropTypes.string,
+  text: PropTypes.string,
+  height: PropTypes.number,
+  width: PropTypes.number
 }
 
 export default Avatar

@@ -189,7 +189,7 @@ function ProfileEditForm() {
                 <Form.Group className="text-center">
                     {image && (
                         <figure>
-                            <img src={image} alt="Profile image" className={styles.ProfileImage} fluid="true" />
+                            <img src={image} alt="Profile image" className={styles.ProfileImage} />
                         </figure>
                     )}
                     {errors?.image?.map((message, idx) => (

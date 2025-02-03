@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { useState } from "react";
 import { axiosRes } from "../../api/axiosDefaults";
 // Import Bootstrap Components
@@ -113,5 +114,12 @@ function ReviewEditForm(props) {
         </Form>
     );
 }
+
+ReviewEditForm.propTypes = {
+    review: PropTypes.object.isRequired,
+    handleCancelEdit: PropTypes.func.isRequired,
+    setReviews: PropTypes.func.isRequired,
+    setRecipe: PropTypes.func.isRequired,
+};
 
 export default ReviewEditForm;

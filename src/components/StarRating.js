@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 // Import custom styles
 import reviewStyles from '../styles/Review.module.css';
@@ -32,6 +33,12 @@ const StarRating = (props) => {
       {reviewCount > 0 && <span className={styles.ReviewCount}>({reviewCount})</span>}
     </div>
   );
+};
+
+StarRating.propTypes = {
+  rating: PropTypes.number.isRequired,
+  review: PropTypes.bool,
+  reviewCount: PropTypes.number
 };
 
 export default StarRating;

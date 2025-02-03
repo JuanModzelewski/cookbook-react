@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { axiosRes } from "../../api/axiosDefaults";
@@ -117,5 +118,12 @@ function ReviewCreateForm(props) {
     </Form>
   );
 }
+
+ReviewCreateForm.propTypes = {
+  recipe: PropTypes.object,
+  profile_image: PropTypes.string,
+  profile_id: PropTypes.number,
+  setReviews: PropTypes.func,
+};
 
 export default ReviewCreateForm;

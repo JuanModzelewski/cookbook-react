@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 // Import Bootstrap Components
 import Card from 'react-bootstrap/Card';
@@ -46,7 +47,7 @@ const TitleSection = (props) => {
                             {is_owner ? (
                                 <OverlayTrigger
                                     placement="top"
-                                    overlay={<Tooltip>You can't add your own recipe to your favorites!</Tooltip>}
+                                    overlay={<Tooltip>You can&apos;t add your own recipe to your favorites!</Tooltip>}
                                 >
                                     <i className={`${styles.FavoriteIcon} fa-regular fa-heart`}></i>
                                 </OverlayTrigger>
@@ -91,6 +92,16 @@ const TitleSection = (props) => {
             </div>
         </div>
     );
+};
+
+TitleSection.propTypes = {
+    recipe: PropTypes.object,
+    is_owner: PropTypes.bool,
+    handleFavorite: PropTypes.func,
+    handleRemoveFavorite: PropTypes.func,
+    currentUser: PropTypes.object,
+    setRecipe: PropTypes.func,
+    paragraphDescription: PropTypes.array
 };
 
 export default TitleSection
